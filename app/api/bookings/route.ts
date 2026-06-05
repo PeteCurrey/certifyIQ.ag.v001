@@ -105,7 +105,7 @@ export async function POST(request: Request) {
     // 3. Generate Booking Reference
     const today = new Date().toISOString().slice(0, 10).replace(/-/g, '')
     const randStr = Math.random().toString(36).substring(2, 6).toUpperCase()
-    const bookingRef = `CIQ-${today}-${randStr}`
+    const bookingRef = `AVR-${today}-${randStr}`
 
     // 4. Create Booking
     const bookingPayload: any = {

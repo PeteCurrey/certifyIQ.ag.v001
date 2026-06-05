@@ -43,8 +43,10 @@ export default function Footer() {
             <h4>Resources</h4>
             <Link href="/blog">Blog</Link>
             <Link href="/faq">FAQ</Link>
-            <Link href="/blog/epc-ratings-for-landlords-2028">Landlord Guide</Link>
-            <Link href="/blog">Agent Guide</Link>
+            <Link href="/glossary">Glossary</Link>
+            <Link href="/for/landlords">For Landlords</Link>
+            <Link href="/for/agents">For Agents</Link>
+            <Link href="/for/developers">For Developers</Link>
           </div>
         </div>
         <div className={styles.bottom}>

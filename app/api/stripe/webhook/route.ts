@@ -93,10 +93,10 @@ async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
 
     if (propErr || !newProperty) throw new Error(`Failed to create property: ${propErr?.message}`)
 
-    // 3. Generate Booking Reference (CIQ-YYYYMMDD-XXXX)
+    // 3. Generate Booking Reference (AVR-YYYYMMDD-XXXX)
     const today = new Date().toISOString().slice(0, 10).replace(/-/g, '')
     const randStr = Math.random().toString(36).substring(2, 6).toUpperCase()
-    const bookingRef = `CIQ-${today}-${randStr}`
+    const bookingRef = `AVR-${today}-${randStr}`
 
     // 4. Create Booking
     const { data: newBooking, error: bookErr } = await supabase
@@ -131,8 +131,17 @@ async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
 
     console.log(`Successfully processed booking ${bookingRef} for payment intent ${paymentIntent.id}`)
 
-    // 6. Optional: Send email with Resend
-    // We will build Resend templates in a separate file.
+    // 6. Send email with Resend
+    const { sendBookingConfirmation } = require('@/lib/email')
+    await sendBookingConfirmation({
+      toEmail: metadata.email,
+      customerName: metadata.fullName,
+      bookingRef,
+      propertyAddress: `${metadata.addressLine1}, ${metadata.town}`,
+      preferredDate: metadata.preferredDate,
+      price: parseFloat(metadata.priceGbp),
+      serviceType: metadata.serviceType || 'Domestic EPC',
+    })
   } catch (error) {
     console.error('Error handling payment success database sync:', error)
   }

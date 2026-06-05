@@ -1,0 +1,133 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 7rem 2rem 5rem;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-lime);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid rgba(15,118,110,0.3);
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 580px;
+  margin: 0 auto 2rem;
+}
+
+.searchWrap { max-width: 420px; margin: 0 auto; }
+
+.searchInput {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.875rem 1.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+.searchInput:focus { outline: none; border-color: var(--accent-lime); }
+
+/* ─── A–Z nav ─── */
+.azNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding: 1.25rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.azLink {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+.azLink:hover { background: rgba(15,118,110,0.1); color: var(--accent-lime); }
+
+/* ─── Terms ─── */
+.terms { display: flex; flex-direction: column; gap: 2.5rem; }
+
+.letterGroup { }
+
+.letterHeading {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-lime);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-lime);
+  display: inline-block;
+}
+
+.termCard {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.termCard:last-child { border-bottom: none; }
+
+.termName {
+  font-family: var(--font-headings);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+}
+
+.termDef {
+  color: var(--text-secondary);
+  font-size: 0.925rem;
+  line-height: 1.65;
+  margin: 0 0 8px;
+}
+
+.termLink {
+  font-size: 0.8rem;
+  color: var(--accent-lime);
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.termLink:hover { opacity: 0.75; }
+
+.noResults { text-align: center; padding: 3rem; color: var(--text-secondary); }
+.clearBtn {
+  background: none; border: none; color: var(--accent-lime);
+  cursor: pointer; font-size: 0.9rem; text-decoration: underline; margin-top: 0.5rem;
+}

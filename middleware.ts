@@ -31,8 +31,8 @@ export async function middleware(request: NextRequest) {
   }
 
   // Protect admin routes
-  if (pathname.startsWith('/admin') && !user) {
-    return NextResponse.redirect(new URL('/login', request.url))
+  if (pathname.startsWith('/admin') && pathname !== '/admin/login' && !user) {
+    return NextResponse.redirect(new URL('/admin/login', request.url))
   }
 
   return supabaseResponse
