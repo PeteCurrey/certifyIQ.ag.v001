@@ -3,6 +3,7 @@ const { Client } = require('pg');
 const DB_URL = 'postgresql://postgres:Vivaro2104!!@db.oramerurfzpwonchnmka.supabase.co:5432/postgres';
 
 const LOCATIONS = [
+  // Derbyshire
   { name: 'Chesterfield', county: 'Derbyshire', code: 'S40', landmark: 'Crooked Spire' },
   { name: 'Derby', county: 'Derbyshire', code: 'DE1', landmark: 'Pride Park' },
   { name: 'Matlock', county: 'Derbyshire', code: 'DE4', landmark: 'Heights of Abraham' },
@@ -17,7 +18,25 @@ const LOCATIONS = [
   { name: 'Long Eaton', county: 'Derbyshire', code: 'NG10', landmark: 'West Park' },
   { name: 'Heanor', county: 'Derbyshire', code: 'DE75', landmark: 'Shipley Country Park' },
   { name: 'Bakewell', county: 'Derbyshire', code: 'DE45', landmark: 'Chatsworth House' },
-  { name: 'Dronfield', county: 'Derbyshire', code: 'S18', landmark: 'Dronfield Manor' }
+  { name: 'Dronfield', county: 'Derbyshire', code: 'S18', landmark: 'Dronfield Manor' },
+  
+  // Nottinghamshire
+  { name: 'Nottingham', county: 'Nottinghamshire', code: 'NG1', landmark: 'Nottingham Castle' },
+  { name: 'Mansfield', county: 'Nottinghamshire', code: 'NG18', landmark: 'Mansfield Market' },
+  { name: 'Worksop', county: 'Nottinghamshire', code: 'S80', landmark: 'Mr Straws House' },
+  { name: 'Newark', county: 'Nottinghamshire', code: 'NG24', landmark: 'Newark Castle' },
+  { name: 'Retford', county: 'Nottinghamshire', code: 'DN22', landmark: 'Retford Market Square' },
+  { name: 'Southwell', county: 'Nottinghamshire', code: 'NG25', landmark: 'Southwell Minster' },
+  { name: 'Beeston', county: 'Nottinghamshire', code: 'NG9', landmark: 'Beeston Marina' },
+  { name: 'West Bridgford', county: 'Nottinghamshire', code: 'NG2', landmark: 'Trent Bridge' },
+
+  // South Yorkshire
+  { name: 'Sheffield', county: 'South Yorkshire', code: 'S1', landmark: 'Winter Garden' },
+  { name: 'Rotherham', county: 'South Yorkshire', code: 'S60', landmark: 'Rotherham Minster' },
+  { name: 'Doncaster', county: 'South Yorkshire', code: 'DN1', landmark: 'Doncaster Minster' },
+  { name: 'Barnsley', county: 'South Yorkshire', code: 'S70', landmark: 'Barnsley Town Hall' },
+  { name: 'Wombwell', county: 'South Yorkshire', code: 'S73', landmark: 'Wombwell Woods' },
+  { name: 'Penistone', county: 'South Yorkshire', code: 'S36', landmark: 'Penistone Viaduct' }
 ];
 
 const SERVICES = [
@@ -34,11 +53,11 @@ async function main() {
   const client = new Client({ connectionString: DB_URL, ssl: { rejectUnauthorized: false } });
   await client.connect();
 
-  console.log('✨ Seed generating 100+ dynamic SEO Landing Pages...');
+  console.log('✨ Seed generating dynamic SEO Landing Pages for Derbyshire, Nottinghamshire, and South Yorkshire...');
 
   for (const loc of LOCATIONS) {
     for (const srv of SERVICES) {
-      const slug = `${loc.name.toLowerCase()}-${srv.id}`;
+      const slug = `${loc.name.toLowerCase().replace(/ /g, '-')}-${srv.id}`;
       const title = `${srv.label} ${loc.name} | CertifyIQ`;
       const description = `Get a certified ${srv.label} in ${loc.name}, ${loc.county}. Fast 24-hour delivery, accredited RdSAP 10 energy assessors. Book online today.`;
       
@@ -58,7 +77,7 @@ async function main() {
     }
   }
 
-  console.log('✅ 100+ custom location pages successfully generated in database.');
+  console.log('✅ Custom location pages successfully generated in database.');
   await client.end();
 }
 
