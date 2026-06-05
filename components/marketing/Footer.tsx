@@ -20,17 +20,17 @@ export default function Footer() {
           </div>
           <div className={styles.col}>
             <h4>Services</h4>
-            <Link href="/book">Domestic EPC</Link>
-            <Link href="/book">Commercial EPC</Link>
-            <Link href="/book">Desktop Review</Link>
-            <Link href="/book">Bulk Ordering</Link>
+            <Link href="/book?service=domestic">Domestic EPC</Link>
+            <Link href="/services/commercial-epc">Commercial EPC</Link>
+            <Link href="/services/new-build-epc">New Build EPC & SAP</Link>
+            <Link href="/services/air-tightness">Air Tightness Testing</Link>
           </div>
           <div className={styles.col}>
             <h4>Tools</h4>
             <Link href="/estimate">AI Estimator</Link>
             <Link href="/improve">Improvement Advisor</Link>
             <Link href="/lookup">EPC Lookup</Link>
-            <Link href="/prices">Pricing</Link>
+            <Link href="/tools/sap-checker">SAP Checker</Link>
           </div>
           <div className={styles.col}>
             <h4>Resources</h4>
