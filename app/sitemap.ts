@@ -9,26 +9,54 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   const supabase = createClient(DB_URL, DB_KEY)
   
-  const { data: pages } = await supabase
+  const baseUrl = 'https://certifyiq.co.uk'
+
+  // Core static routes
+  const routes = [
+    '',
+    '/estimate',
+    '/improve',
+    '/epc-register',
+    '/landlord-compliance',
+    '/prices',
+    '/book',
+    '/faq',
+    '/glossary',
+    '/blog',
+    '/services',
+    '/tools',
+  ].map(route => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: route === '' ? 1 : route === '/landlord-compliance' || route === '/epc-register' ? 0.9 : 0.8,
+  }))
+
+  // Location EPC SEO pages
+  const { data: epcPages } = await supabase
     .from('location_seo_pages')
     .select('slug, created_at')
     .eq('is_live', true)
 
-  const baseUrl = 'https://certifyiq.co.uk'
-
-  const routes = ['', '/estimate', '/improve', '/lookup', '/prices', '/book'].map(route => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : 0.8,
-  }))
-
-  const seoRoutes = (pages || []).map(page => ({
+  const epcRoutes = (epcPages || []).map((page: { slug: string; created_at: string }) => ({
     url: `${baseUrl}/locations/${page.slug}`,
     lastModified: page.created_at ? new Date(page.created_at) : new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }))
 
-  return [...routes, ...seoRoutes]
+  // Landlord Compliance location SEO pages
+  const { data: compliancePages } = await supabase
+    .from('landlord_compliance_seo_pages')
+    .select('slug, created_at')
+    .eq('is_live', true)
+
+  const complianceRoutes = (compliancePages || []).map((page: { slug: string; created_at: string }) => ({
+    url: `${baseUrl}/landlord-compliance/${page.slug}`,
+    lastModified: page.created_at ? new Date(page.created_at) : new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [...routes, ...epcRoutes, ...complianceRoutes]
 }

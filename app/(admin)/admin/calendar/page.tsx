@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import Link from 'next/link'
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, User, ShieldAlert } from 'lucide-react'
 import styles from '../admin.module.css'
 

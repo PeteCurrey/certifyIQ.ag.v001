@@ -30,6 +30,7 @@ interface Booking {
   service_type: string
   status: string
   preferred_date: string
+  preferred_time_slot: string
   confirmed_datetime: string
   price_gbp: number
   properties: Property

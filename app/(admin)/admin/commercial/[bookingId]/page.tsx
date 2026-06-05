@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
-import { Shield, Mail, Calendar, PoundSign } from 'lucide-react'
+import { Shield, Mail, Calendar, Banknote } from 'lucide-react'
 import styles from './commercial.module.css'
 
 export default function CommercialEPCQuotePage() {

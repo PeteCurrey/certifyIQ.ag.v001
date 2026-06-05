@@ -4,7 +4,7 @@ import Link from 'next/link'
 import StatusBadge from '@/components/ui/StatusBadge'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
 import { createClient } from '@/lib/supabase/client'
-import { Calendar, ClipboardList, DollarSign, Eye, Play, Plus, User } from 'lucide-react'
+import { Calendar, ClipboardList, DollarSign, Eye, Play, Plus, ShieldCheck, ShieldAlert, TriangleAlert } from 'lucide-react'
 import styles from './admin.module.css'
 
 interface Booking {
@@ -13,7 +13,9 @@ interface Booking {
   service_type: string
   status: string
   preferred_date: string
+  preferred_time_slot: string
   confirmed_datetime: string
+  created_at: string
   price_gbp: number
   special_instructions: string
   customers: {
@@ -30,8 +32,17 @@ interface Booking {
   }
 }
 
+interface ComplianceStats {
+  total: number
+  nonCompliant: number
+  atRisk: number
+  compliant: number
+  recentReports: Array<{ id: string; address: string; postcode: string; overall_score: string; current_rating: string; created_at: string }>
+}
+
 export default function AdminDashboard() {
   const [bookings, setBookings] = useState<Booking[]>([])
+  const [complianceStats, setComplianceStats] = useState<ComplianceStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [isSuperAdmin, setIsSuperAdmin] = useState(false)
@@ -66,6 +77,22 @@ export default function AdminDashboard() {
         }
 
         setBookings(data || [])
+
+        // Fetch compliance report stats
+        const { data: complianceData } = await supabase
+          .from('compliance_reports')
+          .select('id, address, postcode, overall_score, current_rating, created_at')
+          .order('created_at', { ascending: false })
+          .limit(50)
+
+        if (complianceData) {
+          const total = complianceData.length
+          const nonCompliant = complianceData.filter((r: any) => r.overall_score === 'NON COMPLIANT').length
+          const atRisk = complianceData.filter((r: any) => ['AT RISK', 'HIGH RISK'].includes(r.overall_score || '')).length
+          const compliant = total - nonCompliant - atRisk
+          setComplianceStats({ total, nonCompliant, atRisk, compliant, recentReports: complianceData.slice(0, 5) })
+        }
+
       } catch (err: any) {
         console.error('Admin dashboard load error:', err)
         setErrorMsg(err.message || 'An error occurred loading admin console.')
@@ -147,6 +174,115 @@ export default function AdminDashboard() {
           <p className={styles.metricLabel}>Excluding cancelled orders</p>
         </div>
       </div>
+
+      {/* Landlord Compliance Section */}
+      {complianceStats && (
+        <div className={styles.jobsCard} style={{ marginTop: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <h3 className={styles.sectionTitle} style={{ marginBottom: 0 }}>Landlord Compliance Reports</h3>
+            <Link
+              href="/landlord-compliance"
+              style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none', fontFamily: 'var(--font-mono)' }}
+            >
+              → Open Checker
+            </Link>
+          </div>
+
+          <div className={styles.metricsRow} style={{ marginBottom: '1.5rem' }}>
+            <div className={styles.metricCard}>
+              <div className={styles.metricHeader}>
+                <ShieldCheck className={styles.metricIcon} style={{ color: 'var(--accent-lime)' }} />
+                <span>Total Checks Run</span>
+              </div>
+              <div className={styles.metricValue}>{complianceStats.total}</div>
+              <p className={styles.metricLabel}>Compliance assessments submitted</p>
+            </div>
+            <div className={styles.metricCard}>
+              <div className={styles.metricHeader}>
+                <TriangleAlert className={styles.metricIcon} style={{ color: '#FF5C5C' }} />
+                <span>Non-Compliant (F/G)</span>
+              </div>
+              <div className={styles.metricValue} style={{ color: '#FF5C5C' }}>{complianceStats.nonCompliant}</div>
+              <p className={styles.metricLabel}>Illegal to rent — warm leads</p>
+            </div>
+            <div className={styles.metricCard}>
+              <div className={styles.metricHeader}>
+                <ShieldAlert className={styles.metricIcon} style={{ color: '#F5A623' }} />
+                <span>At Risk (D/E gap)</span>
+              </div>
+              <div className={styles.metricValue} style={{ color: '#F5A623' }}>{complianceStats.atRisk}</div>
+              <p className={styles.metricLabel}>Band C upgrade required</p>
+            </div>
+          </div>
+
+          {complianceStats.recentReports.length > 0 && (
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Current EPC</th>
+                    <th>Compliance Status</th>
+                    <th>Assessed</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {complianceStats.recentReports.map((r) => (
+                    <tr key={r.id}>
+                      <td>
+                        <div className={styles.propCell}>
+                          <strong>{r.address}</strong>
+                          <span>{r.postcode}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span style={{
+                          display: 'inline-block',
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: '4px',
+                          fontFamily: 'var(--font-mono)',
+                          fontWeight: 700,
+                          fontSize: '0.85rem',
+                          background: ['A','B','C'].includes(r.current_rating) ? 'rgba(155,255,89,0.1)' : ['F','G'].includes(r.current_rating) ? 'rgba(255,92,92,0.1)' : 'rgba(245,166,35,0.1)',
+                          color: ['A','B','C'].includes(r.current_rating) ? 'var(--accent-lime)' : ['F','G'].includes(r.current_rating) ? '#FF5C5C' : '#F5A623',
+                        }}>
+                          Band {r.current_rating}
+                        </span>
+                      </td>
+                      <td>
+                        <span style={{
+                          display: 'inline-block',
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: '4px',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          background: r.overall_score === 'NON COMPLIANT' ? 'rgba(255,92,92,0.1)' : r.overall_score?.includes('RISK') ? 'rgba(245,166,35,0.1)' : 'rgba(155,255,89,0.1)',
+                          color: r.overall_score === 'NON COMPLIANT' ? '#FF5C5C' : r.overall_score?.includes('RISK') ? '#F5A623' : 'var(--accent-lime)',
+                        }}>
+                          {r.overall_score}
+                        </span>
+                      </td>
+                      <td style={{ fontSize: '0.8rem', color: '#8BA3BF', fontFamily: 'var(--font-mono)' }}>
+                        {new Date(r.created_at).toLocaleDateString('en-GB')}
+                      </td>
+                      <td>
+                        <Link
+                          href={`/landlord-compliance/report/${r.id}`}
+                          style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none' }}
+                        >
+                          View Report →
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Jobs Tables */}
       <div className={styles.jobsCard}>
