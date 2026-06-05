@@ -634,3 +634,117 @@
   align-items: center;
   justify-content: center;
 }
+
+/* ─── Checkbox Label ────────────────────────────────────────────────────── */
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkboxLabel input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent-lime);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ─── Step 6: Review Card ───────────────────────────────────────────────── */
+.reviewCard {
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.reviewTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.reviewRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.625rem;
+}
+
+.reviewRow strong {
+  color: var(--text-primary);
+  text-align: right;
+  max-width: 55%;
+  word-break: break-word;
+}
+
+.reviewDivider {
+  height: 1px;
+  background-color: var(--border-subtle);
+  margin: 1rem 0 0.75rem;
+}
+
+.reviewTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.reviewPrice {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--accent-lime);
+}
+
+/* ─── Pay Button ────────────────────────────────────────────────────────── */
+.payButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--accent-lime);
+  color: var(--bg-obsidian);
+  border: none;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s;
+  margin-bottom: 1rem;
+}
+
+.payButton:hover:not(:disabled) {
+  background-color: #aaff6b;
+  transform: translateY(-1px);
+}
+
+.payButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Secure Note ───────────────────────────────────────────────────────── */
+.secureNote {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}

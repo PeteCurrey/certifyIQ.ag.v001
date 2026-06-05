@@ -20,13 +20,26 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 })
   }
 
+  // Primary event: Stripe Checkout Session completed (one-time payment)
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object as any
+    if (session.payment_status === 'paid') {
+      await handleCheckoutComplete(session)
+    }
+  }
+
+  // Also handle payment_intent.succeeded for any direct PI flows
   if (event.type === 'payment_intent.succeeded') {
     const paymentIntent = event.data.object as any
-    await handlePaymentSuccess(paymentIntent)
-  } else if (event.type === 'payment_intent.payment_failed') {
+    await handlePaymentIntentSuccess(paymentIntent)
+  }
+
+  if (event.type === 'payment_intent.payment_failed') {
     const paymentIntent = event.data.object as any
     await handlePaymentFailed(paymentIntent)
-  } else if (event.type === 'charge.refunded') {
+  }
+
+  if (event.type === 'charge.refunded') {
     const charge = event.data.object as any
     await handleRefund(charge)
   }
@@ -34,84 +47,79 @@ export async function POST(request: Request) {
   return NextResponse.json({ received: true })
 }
 
-async function handlePaymentSuccess(paymentIntent: any) {
-  const metadata = paymentIntent.metadata
-  if (!metadata?.email) {
-    console.error('Payment succeeded but missing customer metadata:', paymentIntent.id)
-    return
+async function handleCheckoutComplete(session: any) {
+  const metadata = session.metadata || {}
+  const supabase = createAdminClient()
+
+  try {
+    const bookingId = metadata.bookingId
+    const bookingRef = metadata.bookingRef
+
+    if (!bookingId && !bookingRef) {
+      console.error('checkout.session.completed: no bookingId or bookingRef in metadata', session.id)
+      return
+    }
+
+    // Update booking status to paid
+    const updateQuery = bookingId
+      ? supabase.from('bookings').update({ status: 'paid', stripe_payment_status: 'succeeded', stripe_payment_intent_id: session.payment_intent || session.id }).eq('id', bookingId)
+      : supabase.from('bookings').update({ status: 'paid', stripe_payment_status: 'succeeded', stripe_payment_intent_id: session.payment_intent || session.id }).eq('booking_ref', bookingRef)
+
+    const { error: updateErr } = await updateQuery
+    if (updateErr) {
+      console.error('Failed to update booking status:', updateErr.message)
+    }
+
+    // Create lead in CRM
+    if (metadata.email) {
+      await supabase.from('leads').upsert({
+        source: 'booking',
+        status: 'converted',
+        name: metadata.fullName || '',
+        email: metadata.email,
+        phone: metadata.phone || '',
+        service_interest: metadata.serviceType || 'domestic-epc',
+        estimated_value_gbp: parseFloat(metadata.priceGbp || '0'),
+      }, { onConflict: 'email' })
+    }
+
+    // Send confirmation email
+    if (metadata.email && metadata.fullName) {
+      try {
+        const { sendBookingConfirmation } = await import('@/lib/email')
+        await sendBookingConfirmation({
+          toEmail: metadata.email,
+          customerName: metadata.fullName,
+          bookingRef: bookingRef || '',
+          propertyAddress: `${metadata.addressLine1 || ''}, ${metadata.town || ''}`,
+          preferredDate: metadata.preferredDate || '',
+          price: parseFloat(metadata.priceGbp || '0'),
+          serviceType: metadata.serviceType || 'Domestic EPC',
+        })
+      } catch (emailErr) {
+        console.error('Failed to send confirmation email:', emailErr)
+      }
+    }
+
+    console.log(`✅ Booking ${bookingRef || bookingId} confirmed via Stripe session ${session.id}`)
+  } catch (err) {
+    console.error('Error in handleCheckoutComplete:', err)
   }
+}
+
+async function handlePaymentIntentSuccess(paymentIntent: any) {
+  const metadata = paymentIntent.metadata || {}
+  if (!metadata?.email) return
 
   const supabase = createAdminClient()
   try {
-    // 1. Get or Create Customer
-    let customerId: string
-    const { data: existingCustomer } = await supabase
-      .from('customers').select('id').eq('email', metadata.email).maybeSingle()
-
-    if (existingCustomer) {
-      customerId = existingCustomer.id
-    } else {
-      const { data: newCustomer, error: custErr } = await supabase
-        .from('customers')
-        .insert({
-          full_name: metadata.fullName,
-          email: metadata.email,
-          phone: metadata.phone,
-          customer_type: metadata.customerType || 'homeowner',
-          company_name: metadata.companyName || null,
-        })
-        .select('id').single()
-      if (custErr || !newCustomer) throw new Error(`Failed to create customer: ${custErr?.message}`)
-      customerId = newCustomer.id
-    }
-
-    // 2. Create Property
-    const { data: newProperty, error: propErr } = await supabase
-      .from('properties')
-      .insert({
-        customer_id: customerId,
-        address_line_1: metadata.addressLine1,
-        address_line_2: metadata.addressLine2 || '',
-        town: metadata.town,
-        county: metadata.county || '',
-        postcode: metadata.postcode,
-        property_type: metadata.propertyType,
-        bed_count: parseInt(metadata.bedCount || '3', 10),
-      })
-      .select('id').single()
-    if (propErr || !newProperty) throw new Error(`Failed to create property: ${propErr?.message}`)
-
-    // 3. Update booking status to paid
     await supabase.from('bookings')
       .update({ status: 'paid', stripe_payment_status: 'succeeded' })
       .eq('stripe_payment_intent_id', paymentIntent.id)
 
-    // 4. Also create leads record for CRM
-    await supabase.from('leads').insert({
-      source: 'booking',
-      status: 'converted',
-      name: metadata.fullName,
-      email: metadata.email,
-      phone: metadata.phone,
-      service_interest: metadata.serviceType || 'domestic-epc',
-      estimated_value_gbp: parseFloat(metadata.priceGbp || '0'),
-    }).single()
-
-    // 5. Send email with Resend
-    const { sendBookingConfirmation } = await import('@/lib/email')
-    await sendBookingConfirmation({
-      toEmail: metadata.email,
-      customerName: metadata.fullName,
-      bookingRef: metadata.bookingRef,
-      propertyAddress: `${metadata.addressLine1}, ${metadata.town}`,
-      preferredDate: metadata.preferredDate,
-      price: parseFloat(metadata.priceGbp || '0'),
-      serviceType: metadata.serviceType || 'Domestic EPC',
-    })
-
-    console.log(`Successfully processed booking ${metadata.bookingRef} for PI ${paymentIntent.id}`)
+    console.log(`✅ Payment intent ${paymentIntent.id} succeeded`)
   } catch (error) {
-    console.error('Error handling payment success:', error)
+    console.error('Error handling payment_intent.succeeded:', error)
   }
 }
 

@@ -113,12 +113,12 @@ export async function POST(request: Request) {
       property_id: newProperty.id,
       customer_id: customerId,
       service_type: finalServiceType,
-      status: quoteRequired ? 'quote_requested' : (paymentMethod === 'sandbox' ? 'paid' : 'pending_payment'),
+      status: quoteRequired ? 'quote_requested' : 'pending_payment',
       preferred_date: preferredDate || null,
       preferred_time_slot: preferredTimeSlot || 'any',
       price_gbp: priceGbp ? parseFloat(priceGbp) : null,
-      stripe_payment_intent_id: paymentMethod === 'sandbox' ? 'mock_intent_sandbox' : null,
-      stripe_payment_status: paymentMethod === 'sandbox' ? 'succeeded' : (quoteRequired ? null : 'pending'),
+      stripe_payment_intent_id: null,
+      stripe_payment_status: quoteRequired ? null : 'pending',
       special_instructions: specialInstructions || '',
       
       // additional fields
