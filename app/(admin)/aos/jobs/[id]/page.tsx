@@ -27,13 +27,13 @@ export default function JobRedirectPage() {
         const serviceType = data.service_type || 'domestic'
 
         if (serviceType.startsWith('on_construction_')) {
-          router.replace(`/admin/sap/${id}`)
+          router.replace(`/aos/sap/${id}`)
         } else if (serviceType.startsWith('air_tightness_')) {
-          router.replace(`/admin/airtest/${id}`)
+          router.replace(`/aos/airtest/${id}`)
         } else if (serviceType.startsWith('commercial_')) {
-          router.replace(`/admin/commercial/${id}`)
+          router.replace(`/aos/commercial/${id}`)
         } else {
-          router.replace(`/admin/assess/${id}`)
+          router.replace(`/aos/assess/${id}`)
         }
       } catch (err: any) {
         setErrorMsg(err.message || 'Error loading job details')

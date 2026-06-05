@@ -45,7 +45,7 @@ export default function LoginPage() {
             setLoading(false)
             return
           }
-          router.push('/admin')
+          router.push('/aos')
         } else {
           // Customer login
           router.push('/portal')

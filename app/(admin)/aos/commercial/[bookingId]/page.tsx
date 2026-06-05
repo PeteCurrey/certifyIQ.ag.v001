@@ -99,7 +99,7 @@ export default function CommercialEPCQuotePage() {
         console.log('API email handler called')
       })
 
-      router.push('/admin')
+      router.push('/aos')
     } catch (err: any) {
       setErrorMsg(err.message || 'Failed to submit quote')
     } finally {

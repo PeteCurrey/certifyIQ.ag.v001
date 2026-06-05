@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
-import { Info } from 'lucide-react'
+import { Info, AlertTriangle } from 'lucide-react'
 import styles from './assess.module.css'
 
 // ── Section definitions ──────────────────────────────────────────────────────
@@ -271,7 +271,7 @@ export default function LiveAssessmentPage() {
         body: JSON.stringify({ bookingId })
       })
       if (!response.ok) throw new Error('Failed to complete assessment')
-      router.push('/admin')
+      router.push('/aos')
     } catch (err: any) {
       setErrorMsg(`Complete failed: ${err.message}`)
       setSaving(false)
@@ -848,6 +848,69 @@ export default function LiveAssessmentPage() {
                       <span className={styles.summaryVal}>{item.val || '—'}</span>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              {/* AI Audit Panel */}
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'var(--bg-surface-elevated)', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <div>
+                    <h4 style={{ margin: '0 0 0.25rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-primary)' }}>
+                      <AlertTriangle size={18} color="var(--accent-amber)" /> AI Quality Audit
+                    </h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                      Run an automated check on your survey data before completion to catch missing evidence or inconsistencies.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      setSaving(true)
+                      try {
+                        const res = await fetch('/api/ai/audit-checker', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            surveyData: form,
+                            photoTags: [], // Placeholder since photo upload UI is separate
+                            photoNotes: [],
+                            bookingRef: booking?.booking_ref,
+                            serviceType: booking?.service_type
+                          })
+                        })
+                        const result = await res.json()
+                        
+                        // Save audit result to DB
+                        await supabase.from('audit_log').insert({
+                          booking_id: bookingId,
+                          assessor_id: booking?.assessor_id,
+                          audit_result: result,
+                          overall_status: result.overall_status || 'pass_with_warnings'
+                        })
+
+                        alert(result.summary || 'Audit completed. Check QA Alerts dashboard for details.')
+                      } catch (err: any) {
+                        alert('Audit failed: ' + err.message)
+                      } finally {
+                        setSaving(false)
+                      }
+                    }}
+                    disabled={saving}
+                    style={{
+                      background: 'var(--accent-lime)',
+                      color: 'var(--bg-obsidian)',
+                      border: 'none',
+                      padding: '0.6rem 1.25rem',
+                      borderRadius: '8px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem'
+                    }}
+                  >
+                    {saving ? <LoadingSpinner size={16} /> : 'Run AI Audit'}
+                  </button>
                 </div>
               </div>
 

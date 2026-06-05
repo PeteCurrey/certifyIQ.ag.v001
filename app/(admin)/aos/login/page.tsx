@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
         throw new Error('Access Denied: Your assessor account is inactive.')
       }
 
-      router.replace('/admin')
+      router.replace('/aos')
       router.refresh()
     } catch (err: any) {
       setErrorMsg(err.message || 'Authentication failed')

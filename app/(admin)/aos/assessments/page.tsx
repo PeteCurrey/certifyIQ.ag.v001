@@ -57,7 +57,7 @@ export default function AdminAssessmentsPage() {
                   <td style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{a.started_at ? new Date(a.started_at).toLocaleString('en-GB') : '—'}</td>
                   <td>
                     {a.status !== 'complete' && a.status !== 'exported' ? (
-                      <Link href={`/admin/assess/${a.booking_id}`} className={styles.actionBtn}>Open Form</Link>
+                      <Link href={`/aos/assess/${a.booking_id}`} className={styles.actionBtn}>Open Form</Link>
                     ) : (
                       <span className={styles.completeTag}>Complete</span>
                     )}

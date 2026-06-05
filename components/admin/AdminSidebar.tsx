@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3 } from 'lucide-react'
+import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3, MapPin, AlertTriangle } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import styles from './AdminSidebar.module.css'
 
@@ -36,16 +36,17 @@ export default function AdminSidebar() {
   }
 
   const menuItems = [
-    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { name: 'Job Schedule', href: '/admin/schedule', icon: Calendar },
-    { name: 'Assessments', href: '/admin/assessments', icon: ClipboardList },
-    { name: 'Settings', href: '/admin/settings', icon: Settings },
+    { name: 'Dashboard', href: '/aos', icon: LayoutDashboard },
+    { name: 'Job Schedule', href: '/aos/schedule', icon: Calendar },
+    { name: 'Assessments', href: '/aos/assessments', icon: ClipboardList },
+    { name: 'Settings', href: '/aos/settings', icon: Settings },
   ]
 
   if (isSuperAdmin) {
-    // Insert after Assessments or keep order
-    menuItems.splice(3, 0, { name: 'Team Directory', href: '/admin/team', icon: Users })
-    menuItems.splice(4, 0, { name: 'Revenue', href: '/admin/revenue', icon: BarChart3 })
+    menuItems.splice(1, 0, { name: 'Central Dispatch', href: '/aos/dispatch', icon: MapPin })
+    menuItems.splice(4, 0, { name: 'QA Alerts (AI)', href: '/aos/qa-alerts', icon: AlertTriangle })
+    menuItems.splice(5, 0, { name: 'Team Directory', href: '/aos/team', icon: Users })
+    menuItems.splice(6, 0, { name: 'Revenue', href: '/aos/revenue', icon: BarChart3 })
   }
 
   return (
@@ -55,7 +56,7 @@ export default function AdminSidebar() {
 
           <span className={styles.logoText}>Avorria<span style={{ color: 'var(--accent-lime)' }}>.</span></span>
         </Link>
-        <span className={styles.portalBadge}>Assessor Portal</span>
+        <span className={styles.portalBadge}>Avorria Operating System</span>
       </div>
 
       <nav className={styles.nav}>

@@ -464,7 +464,7 @@ export default function AdminDashboard() {
                         <div className={styles.actions}>
                           {isInspectable ? (
                             <Link 
-                              href={`/admin/jobs/${booking.id}`} 
+                              href={`/aos/jobs/${booking.id}`} 
                               className={styles.actionButtonStart}
                               title="Start/Resume Assessment Form"
                             >

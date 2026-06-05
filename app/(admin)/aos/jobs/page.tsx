@@ -299,7 +299,7 @@ export default function JobsPage() {
                       </td>
                       <td>
                         <div className={styles.actions}>
-                          <Link href={`/admin/jobs/${job.id}`} className={styles.actionButtonStart}>
+                          <Link href={`/aos/jobs/${job.id}`} className={styles.actionButtonStart}>
                             <span>Manage</span>
                           </Link>
                         </div>

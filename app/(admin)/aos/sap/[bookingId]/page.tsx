@@ -391,7 +391,7 @@ export default function SAPAssessmentPage() {
       setForm(prev => ({ ...prev, pea_ref: peaRefNum }))
 
       // Notify user via router refresh or navigate to next tab
-      router.push(`/admin/sap/${bookingId}?stage=as_built`)
+      router.push(`/aos/sap/${bookingId}?stage=as_built`)
     } catch (err: any) {
       setErrorMsg(err.message)
     } finally {
@@ -424,7 +424,7 @@ export default function SAPAssessmentPage() {
 
       setEpcDocUrl(mockPdfUrl)
       setForm(prev => ({ ...prev, epc_ref: epcRefNum }))
-      router.push('/admin')
+      router.push('/aos')
     } catch (err: any) {
       setErrorMsg(err.message)
     } finally {
@@ -477,7 +477,7 @@ export default function SAPAssessmentPage() {
           onClick={() => {
             setStage('design')
             setActiveSection('project')
-            router.push(`/admin/sap/${bookingId}?stage=design`)
+            router.push(`/aos/sap/${bookingId}?stage=design`)
           }}
           className={`${styles.tabBtn} ${stage === 'design' ? styles.tabBtnActive : ''}`}
         >
@@ -487,7 +487,7 @@ export default function SAPAssessmentPage() {
           onClick={() => {
             setStage('as_built')
             setActiveSection('variations')
-            router.push(`/admin/sap/${bookingId}?stage=as_built`)
+            router.push(`/aos/sap/${bookingId}?stage=as_built`)
           }}
           className={`${styles.tabBtn} ${stage === 'as_built' ? styles.tabBtnActive : ''}`}
         >

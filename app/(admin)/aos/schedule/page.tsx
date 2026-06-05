@@ -63,7 +63,7 @@ export default function AdminSchedulePage() {
                     <span>{b.customers?.email}</span>
                   </div>
                   <div className={styles.actions}>
-                    <Link href={`/admin/assess/${b.id}`} className={styles.assessBtn}>Start Assessment →</Link>
+                    <Link href={`/aos/assess/${b.id}`} className={styles.assessBtn}>Start Assessment →</Link>
                   </div>
                 </div>
               ))}

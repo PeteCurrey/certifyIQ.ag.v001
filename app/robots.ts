@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/admin/', '/portal/'],
+      disallow: ['/aos/', '/portal/'],
     },
     sitemap: 'https://certifyiq.co.uk/sitemap.xml',
   }

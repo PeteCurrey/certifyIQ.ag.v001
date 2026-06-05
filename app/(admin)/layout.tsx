@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const isLoginPage = pathname === '/admin/login'
+  const isLoginPage = pathname === '/aos/login'
 
   if (isLoginPage) {
     return (

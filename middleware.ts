@@ -31,8 +31,8 @@ export async function middleware(request: NextRequest) {
   }
 
   // Protect admin routes
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login' && !user) {
-    return NextResponse.redirect(new URL('/admin/login', request.url))
+  if (pathname.startsWith('/aos') && pathname !== '/aos/login' && !user) {
+    return NextResponse.redirect(new URL('/aos/login', request.url))
   }
 
   // Protect master compliance dashboard
@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
 
   // Protect AOS routes
   if (pathname.startsWith('/aos') && !user) {
-    return NextResponse.redirect(new URL('/admin/login', request.url))
+    return NextResponse.redirect(new URL('/aos/login', request.url))
   }
 
   // Protect agency portal

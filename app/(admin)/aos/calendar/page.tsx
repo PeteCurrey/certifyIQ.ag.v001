@@ -314,7 +314,7 @@ export default function CalendarPage() {
                     <span style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', padding: '0.25rem 0.5rem', borderRadius: '4px', color: 'var(--text-secondary)' }}>
                       Status: {ev.status}
                     </span>
-                    <Link href={`/admin/jobs/${ev.id}`} style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none', fontWeight: 600 }}>
+                    <Link href={`/aos/jobs/${ev.id}`} style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none', fontWeight: 600 }}>
                       Manage Job →
                     </Link>
                   </div>

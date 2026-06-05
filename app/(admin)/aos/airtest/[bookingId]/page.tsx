@@ -299,7 +299,7 @@ export default function AirTightnessTestPage() {
       }
 
       // Simulate sending email to customer
-      router.push('/admin')
+      router.push('/aos')
     } catch (err: any) {
       setErrorMsg(err.message)
     } finally {
