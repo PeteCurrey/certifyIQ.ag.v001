@@ -11,7 +11,7 @@ export default function Footer() {
           <div className={styles.col}>
             <div className={styles.brand}>
 
-              <span className={styles.logoText}>Avorria</span>
+              <span className={styles.logoText}>Avorria<span style={{ color: 'var(--accent-lime)' }}>.</span></span>
             </div>
             <p className={styles.tagline}>RdSAP 10 certified EPCs for homeowners, landlords and agents across Chesterfield & Derbyshire.</p>
             <div className={styles.contact}>

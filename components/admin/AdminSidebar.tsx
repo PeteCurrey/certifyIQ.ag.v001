@@ -29,7 +29,7 @@ export default function AdminSidebar() {
       <div className={styles.brand}>
         <Link href="/" className={styles.logo}>
 
-          <span className={styles.logoText}>Avorria</span>
+          <span className={styles.logoText}>Avorria<span style={{ color: 'var(--accent-lime)' }}>.</span></span>
         </Link>
         <span className={styles.portalBadge}>Assessor Portal</span>
       </div>

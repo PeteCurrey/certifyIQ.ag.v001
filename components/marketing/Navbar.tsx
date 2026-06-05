@@ -73,7 +73,7 @@ export default function Navbar() {
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} onClick={closeAll}>
 
-          <span className={styles.logoText}>Avorria</span>
+          <span className={styles.logoText}>Avorria<span style={{ color: 'var(--accent-lime)' }}>.</span></span>
         </Link>
         
         {/* Desktop Links */}
