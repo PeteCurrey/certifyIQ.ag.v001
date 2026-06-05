@@ -1,0 +1,14 @@
+.container { max-width: 760px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+.backLink { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 2rem; display: inline-block; }
+.backLink:hover { color: var(--accent-lime); }
+.article { margin-bottom: 4rem; }
+.meta { margin-bottom: 1rem; }
+.date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+.title { font-family: var(--font-headings); font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--text-primary); line-height: 1.15; margin-bottom: 2rem; }
+.content { color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
+.content h1,.content h2,.content h3 { font-family: var(--font-headings); color: var(--text-primary); margin: 2rem 0 1rem; }
+.content p { margin-bottom: 1.25rem; }
+.cta { background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2.5rem; text-align: center; }
+.cta h3 { font-family: var(--font-headings); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+.cta p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+.ctaBtn { display: inline-block; background-color: var(--accent-lime); color: var(--bg-obsidian); font-weight: 700; padding: 0.875rem 2rem; border-radius: 10px; }

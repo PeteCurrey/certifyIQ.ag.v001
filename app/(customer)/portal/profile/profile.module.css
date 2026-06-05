@@ -1,0 +1,12 @@
+.container { max-width: 600px; }
+.title { font-family: var(--font-headings); font-size: 1.75rem; color: var(--text-primary); margin-bottom: 2rem; }
+.card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2rem; }
+.form { display: flex; flex-direction: column; gap: 1.5rem; }
+.field { display: flex; flex-direction: column; gap: 0.5rem; }
+.label { font-size: 0.8rem; font-weight: 500; color: var(--text-secondary); }
+.input { background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); color: var(--text-primary); border-radius: 8px; padding: 0.75rem 1rem; font-family: inherit; font-size: 0.95rem; transition: border-color 0.2s; }
+.input:focus { outline: none; border-color: var(--accent-lime); }
+.staticField { padding: 0.75rem 1rem; background: var(--bg-obsidian); border: 1px solid var(--border-subtle); border-radius: 8px; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem; }
+.saveBtn { background: var(--accent-lime); color: var(--bg-obsidian); font-family: inherit; font-weight: 700; font-size: 0.95rem; padding: 0.75rem; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+.saveBtn:hover { background: #aaff6b; }
+.saveBtn:disabled { opacity: 0.6; cursor: not-allowed; }

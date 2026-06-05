@@ -1,0 +1,136 @@
+.footer {
+  background: #0F1628;
+  border-top: 1px solid #1E2D4A;
+  padding: 4rem 0 0;
+  margin-top: 6rem;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.logoMark {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  background: #9BFF59;
+  color: #080D18;
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.logoText {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #E8F4FF;
+}
+
+.tagline {
+  color: #4A6280;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact a {
+  color: #8BA3BF;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact a:hover { color: #9BFF59; }
+
+.col h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #E8F4FF;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.col a {
+  display: block;
+  color: #4A6280;
+  font-size: 0.875rem;
+  text-decoration: none;
+  margin-bottom: 0.625rem;
+  transition: color 0.2s;
+}
+
+.col a:hover { color: #9BFF59; }
+
+.bottom {
+  border-top: 1px solid #1E2D4A;
+  padding: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.bottom p {
+  color: #4A6280;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.bottomLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.bottomLinks a {
+  color: #4A6280;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.bottomLinks a:hover { color: #E8F4FF; }
+
+.accreditation {
+  color: #4A6280;
+  font-size: 0.75rem;
+  font-family: 'DM Mono', monospace;
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .bottom { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,54 @@
+import React from 'react'
+import Link from 'next/link'
+import styles from './Footer.module.css'
+
+export default function Footer() {
+  return (
+    <footer className={styles.footer}>
+      <div className={styles.inner}>
+        <div className={styles.grid}>
+          <div className={styles.col}>
+            <div className={styles.brand}>
+              <span className={styles.logoMark}>C</span>
+              <span className={styles.logoText}>CertifyIQ</span>
+            </div>
+            <p className={styles.tagline}>RdSAP 10 certified EPCs for homeowners, landlords and agents across Chesterfield & Derbyshire.</p>
+            <div className={styles.contact}>
+              <a href="tel:01246000000">📞 01246 000 000</a>
+              <a href="mailto:info@certifyiq.co.uk">✉ info@certifyiq.co.uk</a>
+            </div>
+          </div>
+          <div className={styles.col}>
+            <h4>Services</h4>
+            <Link href="/book">Domestic EPC</Link>
+            <Link href="/book">Commercial EPC</Link>
+            <Link href="/book">Desktop Review</Link>
+            <Link href="/book">Bulk Ordering</Link>
+          </div>
+          <div className={styles.col}>
+            <h4>Tools</h4>
+            <Link href="/estimate">AI Estimator</Link>
+            <Link href="/improve">Improvement Advisor</Link>
+            <Link href="/lookup">EPC Lookup</Link>
+            <Link href="/prices">Pricing</Link>
+          </div>
+          <div className={styles.col}>
+            <h4>Resources</h4>
+            <Link href="/blog">Blog</Link>
+            <Link href="/faq">FAQ</Link>
+            <Link href="/blog/epc-ratings-for-landlords-2028">Landlord Guide</Link>
+            <Link href="/blog">Agent Guide</Link>
+          </div>
+        </div>
+        <div className={styles.bottom}>
+          <p>© {new Date().getFullYear()} CertifyIQ Ltd. All rights reserved.</p>
+          <div className={styles.bottomLinks}>
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms">Terms of Service</Link>
+            <span className={styles.accreditation}>Elmhurst Energy Accredited · RdSAP 10 · ICO Registered</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

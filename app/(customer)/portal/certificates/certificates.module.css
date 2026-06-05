@@ -1,0 +1,21 @@
+.container { max-width: 900px; margin: 0 auto; }
+.header { margin-bottom: 2rem; }
+.header h2 { font-family: var(--font-headings); font-size: 1.75rem; color: var(--text-primary); margin: 0 0 0.5rem; }
+.header p { color: var(--text-secondary); margin: 0; }
+.empty { background: var(--bg-surface); border: 1px dashed var(--border-subtle); border-radius: 12px; padding: 4rem; text-align: center; color: var(--text-secondary); }
+.list { display: flex; flex-direction: column; gap: 1.5rem; }
+.card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.cardTop { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+.ref { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem; }
+.cardTop h3 { font-size: 1.1rem; color: var(--text-primary); margin: 0 0 0.25rem; }
+.postcode { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+.cardMeta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; background: var(--bg-surface-elevated); padding: 1rem; border-radius: 8px; }
+@media (max-width: 600px) { .cardMeta { grid-template-columns: 1fr; } }
+.cardMeta div { display: flex; flex-direction: column; gap: 0.2rem; }
+.cardMeta span { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+.cardMeta strong { font-size: 0.9rem; color: var(--text-primary); }
+.actions { display: flex; gap: 1rem; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem; }
+.downloadBtn { background: var(--accent-lime); color: var(--bg-obsidian); font-weight: 700; padding: 0.5rem 1.25rem; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+.downloadBtn:hover { background: #aaff6b; }
+.viewBtn { background: rgba(155,255,89,0.1); color: var(--accent-lime); font-weight: 700; padding: 0.5rem 1.25rem; border: 1px solid rgba(155,255,89,0.2); border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+.viewBtn:hover { background: rgba(155,255,89,0.2); }

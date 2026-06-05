@@ -1,0 +1,315 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8rem 2rem 6rem;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-lime);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid rgba(155, 255, 89, 0.2);
+  border-radius: 9999px;
+  background: rgba(155, 255, 89, 0.05);
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.05;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.section {
+  margin-bottom: 5rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-headings);
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.5rem;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+}
+
+.priceCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.priceCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(155, 255, 89, 0.3);
+}
+
+.priceCardTop {}
+
+.priceType {
+  font-family: var(--font-headings);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.priceNote {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.priceAmount {
+  font-family: var(--font-mono);
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: var(--accent-lime);
+  line-height: 1;
+}
+
+.bookBtn {
+  display: block;
+  background-color: rgba(155, 255, 89, 0.1);
+  border: 1px solid rgba(155, 255, 89, 0.3);
+  color: var(--accent-lime);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.65rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.bookBtn:hover {
+  background-color: var(--accent-lime);
+  color: var(--bg-obsidian);
+}
+
+/* Commercial Banner */
+.commercialBanner {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(15, 22, 40, 0.5) 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 5rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .commercialBanner { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.commercialContent h2 {
+  font-family: var(--font-headings);
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.commercialContent p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.contactCta {
+  background-color: var(--accent-lime);
+  color: var(--bg-obsidian);
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+}
+
+.contactCta:hover {
+  background-color: #aaff6b;
+}
+
+.commercialNote {
+  border-left: 3px solid var(--accent-amber);
+  padding-left: 1.5rem;
+}
+
+.commercialTag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.commercialNote p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Included Grid */
+.includedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.includedCard {
+  display: flex;
+  gap: 1rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  align-items: flex-start;
+}
+
+.checkMark {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background-color: rgba(155, 255, 89, 0.15);
+  border: 1px solid rgba(155, 255, 89, 0.3);
+  color: var(--accent-lime);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.includedCard h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.375rem;
+}
+
+.includedCard p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* FAQ */
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faqItem {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.faqItem[open] {
+  border-color: rgba(155, 255, 89, 0.2);
+}
+
+.faqQuestion {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faqQuestion::after {
+  content: '+';
+  font-size: 1.25rem;
+  color: var(--accent-lime);
+  font-weight: 400;
+}
+
+.faqItem[open] .faqQuestion::after {
+  content: '−';
+}
+
+.faqAnswer {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 1rem 0 0;
+}
+
+/* Bottom CTA */
+.bottomCta {
+  background: linear-gradient(135deg, rgba(15, 22, 40, 0.8) 0%, rgba(9, 26, 18, 0.6) 100%);
+  border: 1px solid rgba(155, 255, 89, 0.15);
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.bottomCta h2 {
+  font-family: var(--font-headings);
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.bottomCta p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.bottomCtaBtn {
+  display: inline-block;
+  background-color: var(--accent-lime);
+  color: var(--bg-obsidian);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.bottomCtaBtn:hover {
+  background-color: #aaff6b;
+}

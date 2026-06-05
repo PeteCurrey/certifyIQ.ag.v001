@@ -1,0 +1,14 @@
+.container { max-width: 860px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+.hero { text-align: center; margin-bottom: 4rem; }
+.eyebrow { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-lime); letter-spacing: 0.08em; text-transform: uppercase; display: inline-block; padding: 0.25rem 0.75rem; border: 1px solid rgba(155,255,89,0.2); border-radius: 9999px; background: rgba(155,255,89,0.05); margin-bottom: 0.75rem; }
+.title { font-family: var(--font-headings); font-size: clamp(2rem, 4vw, 2.75rem); color: var(--text-primary); margin-bottom: 1rem; }
+.subtitle { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+.section { margin-bottom: 3.5rem; }
+.catTitle { font-family: var(--font-headings); font-size: 1.35rem; color: var(--text-primary); margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-subtle); }
+.faqList { display: flex; flex-direction: column; gap: 0.875rem; }
+.faqItem { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.25rem 1.5rem; }
+.faqItem[open] { border-color: rgba(155,255,89,0.2); }
+.faqQ { font-size: 1rem; font-weight: 600; color: var(--text-primary); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.faqQ::after { content: '+'; font-size: 1.25rem; color: var(--accent-lime); font-weight: 400; }
+.faqItem[open] .faqQ::after { content: '−'; }
+.faqA { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; margin: 1rem 0 0; }

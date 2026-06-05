@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CertifyIQ — UK EPC Assessments
 
-## Getting Started
+Fast, transparent, fully accredited Energy Performance Certificates for homeowners, landlords and estate agents in Chesterfield & Derbyshire.
 
-First, run the development server:
+## Core Services
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Domestic EPCs (RdSAP 10)
+- Commercial EPCs (Level 3, 4, 5)
+- New Build SAP Calculations & OC-EPCs
+- Part L Air Tightness Testing
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technical Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js 15 App Router
+- Supabase (PostgreSQL, Auth, Storage, RLS)
+- Stripe Payments Integration
+- Resend for transactional emails
+- Vercel for deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Assessor Accreditation Notes
 
-## Learn More
+All assessors operating on this platform must hold valid, up-to-date accreditation:
 
-To learn more about Next.js, take a look at the following resources:
+- **Domestic/Commercial EPCs**: Must hold active Elmhurst Energy or Stroma RdSAP/NDEA accreditation.
+- **SAP / OC-EPCs**: Must be registered as an On-Construction Domestic Energy Assessor (OCDEA).
+- **Air Tightness Testing**: Assessors must be ATTMA registered (Level 1 for Domestic, Level 2 for Commercial).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*When onboarding new assessors in the Supabase `assessors` table, ensure the `attma_registration` (boolean) and `attma_level` (integer) columns are populated appropriately to permit them to lodge Air Tests.*
