@@ -1,5 +1,6 @@
 .section {
   padding: 6rem 0;
+  background-color: var(--bg-obsidian);
 }
 
 .inner {
@@ -9,18 +10,18 @@
 }
 
 .eyebrow {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: #9BFF59;
+  color: var(--accent-lime);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
 
 .h2 {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-headings);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
-  color: #E8F4FF;
+  color: var(--text-primary);
   margin-bottom: 3.5rem;
 }
 
@@ -32,64 +33,69 @@
 }
 
 .step {
-  background: #0F1628;
-  border: 1px solid #1E2D4A;
-  border-left: 3px solid #9BFF59;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-lime);
   border-radius: 12px;
   padding: 2rem;
   position: relative;
   transition: transform 0.2s ease, border-color 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .step:hover {
   transform: translateY(-4px);
-  border-left-color: #9BFF59;
+  border-left-color: var(--accent-lime);
 }
 
 .stepIcon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: var(--accent-lime);
 }
 
 .stepContent {}
 
 .stepNum {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: #4A6280;
+  color: var(--text-muted);
   letter-spacing: 0.1em;
   display: block;
   margin-bottom: 0.5rem;
 }
 
 .stepTitle {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-headings);
   font-size: 1.25rem;
-  color: #E8F4FF;
+  color: var(--text-primary);
   margin-bottom: 0.75rem;
 }
 
 .stepDesc {
-  color: #8BA3BF;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.7;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .stepNote {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: #9BFF59;
+  color: var(--accent-lime);
   padding: 0.25rem 0.625rem;
-  border: 1px solid rgba(155,255,89,0.3);
+  border: 1px solid rgba(15, 118, 110, 0.2);
   border-radius: 9999px;
-  background: rgba(155,255,89,0.05);
-}
-
-.connector {
-  display: none;
+  background: rgba(15, 118, 110, 0.05);
 }
 
 @media (max-width: 768px) {
-  .steps { grid-template-columns: 1fr; gap: 1.5rem; }
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }

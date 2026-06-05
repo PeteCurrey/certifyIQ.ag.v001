@@ -3,7 +3,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #080D18 0%, #0D1A30 60%, #091A12 100%);
+  background: var(--gradient-hero);
   overflow: hidden;
   padding-top: 80px;
 }
@@ -32,29 +32,29 @@
 
 .eyebrow {
   display: inline-block;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: #9BFF59;
+  color: var(--accent-lime);
   letter-spacing: 0.05em;
   margin-bottom: 1.5rem;
   padding: 0.375rem 0.875rem;
-  border: 1px solid rgba(155,255,89,0.3);
+  border: 1px solid rgba(15, 118, 110, 0.2);
   border-radius: 9999px;
-  background: rgba(155,255,89,0.05);
+  background: rgba(15, 118, 110, 0.05);
 }
 
 .h1 {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-headings);
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 700;
-  color: #E8F4FF;
+  color: var(--text-primary);
   line-height: 1.05;
   margin-bottom: 1.5rem;
 }
 
 .sub {
   font-size: 1.125rem;
-  color: #8BA3BF;
+  color: var(--text-secondary);
   line-height: 1.7;
   margin-bottom: 2.5rem;
   max-width: 540px;
@@ -68,8 +68,8 @@
 }
 
 .ctaPrimary {
-  background: #9BFF59;
-  color: #080D18;
+  background: var(--accent-lime);
+  color: var(--bg-surface);
   font-weight: 700;
   padding: 0.875rem 1.75rem;
   border-radius: 10px;
@@ -79,24 +79,24 @@
 }
 
 .ctaPrimary:hover {
-  background: #aaff6b;
+  background: #115E59;
   transform: translateY(-1px);
 }
 
 .ctaGhost {
   background: transparent;
-  color: #9BFF59;
+  color: var(--accent-lime);
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 10px;
   text-decoration: none;
   font-size: 1rem;
-  border: 1px solid #9BFF59;
+  border: 1px solid var(--accent-lime);
   transition: background 0.2s, transform 0.2s;
 }
 
 .ctaGhost:hover {
-  background: rgba(155,255,89,0.1);
+  background: rgba(15, 118, 110, 0.08);
   transform: translateY(-1px);
 }
 
@@ -106,21 +106,22 @@
   gap: 1rem 1.5rem;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #8BA3BF;
+  color: var(--text-secondary);
 }
 
 /* Price Calculator Card */
 .calcCard {
-  background: #0F1628;
-  border: 1px solid #1E2D4A;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
   padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
 }
 
 .calcTitle {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
-  color: #9BFF59;
+  color: var(--accent-lime);
   margin-bottom: 1.5rem;
   letter-spacing: 0.02em;
 }
@@ -132,7 +133,7 @@
 .fieldLabel {
   display: block;
   font-size: 0.8rem;
-  color: #8BA3BF;
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
@@ -143,12 +144,12 @@
 
 .postcodeInput {
   width: 100%;
-  background: #162036;
-  border: 1px solid #1E2D4A;
-  color: #E8F4FF;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
   border-radius: 8px;
   padding: 0.65rem 2.5rem 0.65rem 0.875rem;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
   text-transform: uppercase;
   transition: border-color 0.2s;
@@ -156,18 +157,18 @@
 
 .postcodeInput:focus {
   outline: none;
-  border-color: #9BFF59;
+  border-color: var(--accent-lime);
 }
 
-.postcodeInput.valid { border-color: #9BFF59; }
-.postcodeInput.invalid { border-color: #FF5C5C; }
+.postcodeInput.valid { border-color: var(--accent-lime); }
+.postcodeInput.invalid { border-color: var(--accent-red); }
 
 .validMark {
   position: absolute;
   right: 0.875rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #9BFF59;
+  color: var(--accent-lime);
   font-size: 1rem;
 }
 
@@ -176,7 +177,7 @@
   right: 0.875rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #FF5C5C;
+  color: var(--accent-red);
   font-size: 1rem;
 }
 
@@ -187,9 +188,9 @@
 }
 
 .pill {
-  background: #162036;
-  border: 1px solid #1E2D4A;
-  color: #8BA3BF;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
   border-radius: 9999px;
   padding: 0.375rem 0.875rem;
   font-size: 0.8rem;
@@ -200,14 +201,14 @@
 }
 
 .pill:hover {
-  border-color: #8BA3BF;
-  color: #E8F4FF;
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .pillActive {
-  background: rgba(155,255,89,0.15);
-  border-color: #9BFF59;
-  color: #9BFF59;
+  background: rgba(15, 118, 110, 0.1);
+  border-color: var(--accent-lime);
+  color: var(--accent-lime);
 }
 
 .priceResult {
@@ -216,34 +217,34 @@
   gap: 0.75rem;
   margin: 1.5rem 0 0.5rem;
   padding: 1rem;
-  background: rgba(155,255,89,0.05);
-  border: 1px solid rgba(155,255,89,0.2);
+  background: rgba(15, 118, 110, 0.05);
+  border: 1px solid rgba(15, 118, 110, 0.15);
   border-radius: 10px;
 }
 
 .priceLabel {
   font-size: 0.875rem;
-  color: #8BA3BF;
+  color: var(--text-secondary);
 }
 
 .price {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 2rem;
   font-weight: 500;
-  color: #9BFF59;
+  color: var(--accent-lime);
 }
 
 .priceSubtext {
   font-size: 0.75rem;
-  color: #4A6280;
+  color: var(--text-muted);
   margin-bottom: 1.25rem;
 }
 
 .calcCta {
   display: block;
   width: 100%;
-  background: #9BFF59;
-  color: #080D18;
+  background: var(--accent-lime);
+  color: var(--bg-surface);
   font-weight: 700;
   padding: 0.875rem;
   border-radius: 10px;
@@ -254,12 +255,12 @@
   margin-bottom: 0.75rem;
 }
 
-.calcCta:hover { background: #aaff6b; }
+.calcCta:hover { background: #115E59; }
 
 .noHidden {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: #4A6280;
+  color: var(--text-muted);
   text-align: center;
   margin: 0;
 }

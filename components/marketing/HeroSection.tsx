@@ -36,7 +36,7 @@ function ParticleCanvas() {
         if (p.y > canvas.height) p.y = 0
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(155,255,89,0.08)'
+        ctx.fillStyle = 'rgba(15, 118, 110, 0.15)'
         ctx.fill()
       })
       animId = requestAnimationFrame(draw)

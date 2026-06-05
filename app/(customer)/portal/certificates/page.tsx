@@ -81,12 +81,12 @@ export default function CustomerCertificatesPage() {
                 <div style={{
                   marginTop: '1rem',
                   paddingTop: '1rem',
-                  borderTop: '1px solid #1E2D4A',
+                  borderTop: '1px solid var(--border-subtle)',
                 }}>
                   <p style={{
                     fontFamily: 'var(--font-mono, DM Mono, monospace)',
                     fontSize: '0.75rem',
-                    color: '#E8F4FF',
+                    color: 'var(--text-primary)',
                     margin: '0 0 0.15rem 0',
                   }}>
                     Assessor: {a.booking.assessors.full_name}
@@ -95,7 +95,7 @@ export default function CustomerCertificatesPage() {
                     <p style={{
                       fontFamily: 'var(--font-mono, DM Mono, monospace)',
                       fontSize: '0.75rem',
-                      color: '#8BA3BF',
+                      color: 'var(--text-secondary)',
                       margin: '0 0 0.15rem 0',
                     }}>
                       Accreditation No: {a.booking.assessors.accreditation_number}
@@ -104,7 +104,7 @@ export default function CustomerCertificatesPage() {
                   <p style={{
                     fontFamily: 'var(--font-mono, DM Mono, monospace)',
                     fontSize: '0.72rem',
-                    color: '#4A6280',
+                    color: 'var(--text-muted)',
                     margin: '0',
                   }}>
                     Accredited by Elmhurst Energy · elmhurstenergy.co.uk

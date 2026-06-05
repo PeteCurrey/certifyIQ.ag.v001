@@ -9,8 +9,8 @@ export default function ElmhurstBadge() {
           display: inline-flex;
           align-items: center;
           gap: 1.25rem;
-          background: #0F1628;
-          border: 1.5px solid #9BFF59;
+          background: var(--bg-surface);
+          border: 1.5px solid var(--accent-lime);
           border-radius: 12px;
           padding: 1.25rem 1.75rem;
           text-decoration: none;
@@ -18,34 +18,34 @@ export default function ElmhurstBadge() {
           cursor: pointer;
           text-align: left;
           max-width: 100%;
-          box-shadow: 0 4px 12px rgba(8, 13, 24, 0.5);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
         .elmhurst-badge-container:hover {
           transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(155, 255, 89, 0.15);
-          border-color: #aaff6b;
+          box-shadow: 0 6px 20px rgba(15, 118, 110, 0.08);
+          border-color: #115E59;
         }
         .elmhurst-badge-icon-wrap {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(155, 255, 89, 0.1);
+          background: rgba(15, 118, 110, 0.1);
           border-radius: 50%;
           padding: 0.75rem;
           flex-shrink: 0;
         }
         .elmhurst-badge-title {
-          font-family: 'Syne', sans-serif;
+          font-family: var(--font-headings, sans-serif);
           font-weight: 700;
           font-size: 1.25rem;
-          color: #E8F4FF;
+          color: var(--text-primary);
           margin: 0;
           line-height: 1.2;
         }
         .elmhurst-badge-sub {
-          font-family: 'DM Mono', monospace;
+          font-family: var(--font-mono, monospace);
           font-size: 0.75rem;
-          color: #8BA3BF;
+          color: var(--text-secondary);
           margin: 0.25rem 0 0 0;
           line-height: 1.3;
         }
@@ -57,7 +57,7 @@ export default function ElmhurstBadge() {
         className="elmhurst-badge-container"
       >
         <div className="elmhurst-badge-icon-wrap">
-          <ShieldCheck size={28} color="#9BFF59" />
+          <ShieldCheck size={28} color="var(--accent-lime)" />
         </div>
         <div>
           <h4 className="elmhurst-badge-title">Elmhurst Energy</h4>

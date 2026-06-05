@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { Phone, Mail } from 'lucide-react'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -14,8 +15,14 @@ export default function Footer() {
             </div>
             <p className={styles.tagline}>RdSAP 10 certified EPCs for homeowners, landlords and agents across Chesterfield & Derbyshire.</p>
             <div className={styles.contact}>
-              <a href="tel:01246000000">📞 01246 000 000</a>
-              <a href="mailto:info@certifyiq.co.uk">✉ info@certifyiq.co.uk</a>
+              <a href="tel:01246000000" className={styles.contactItem}>
+                <Phone size={16} className={styles.icon} />
+                <span>01246 000 000</span>
+              </a>
+              <a href="mailto:info@certifyiq.co.uk" className={styles.contactItem}>
+                <Mail size={16} className={styles.icon} />
+                <span>info@certifyiq.co.uk</span>
+              </a>
             </div>
           </div>
           <div className={styles.col}>

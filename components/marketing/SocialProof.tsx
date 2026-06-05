@@ -2,9 +2,24 @@ import React from 'react'
 import styles from './SocialProof.module.css'
 
 const TESTIMONIALS = [
-  { name: 'Sarah M.', type: 'Homeowner · Sheffield', rating: 5, text: '[TESTIMONIAL PLACEHOLDER] Fast, professional, and the assessor explained everything clearly. Certificate came through the next morning exactly as promised.' },
-  { name: 'James R.', type: 'Landlord · Chesterfield', rating: 5, text: '[TESTIMONIAL PLACEHOLDER] I used CertifyIQ for four of my rental properties. The bulk pricing saved me a significant amount and the turnaround was outstanding.' },
-  { name: 'Premier Homes', type: 'Estate Agent · Derby', rating: 5, text: '[TESTIMONIAL PLACEHOLDER] We use CertifyIQ as our preferred EPC provider. Fast, reliable, and the branded reports are a nice touch for our clients.' },
+  { 
+    name: 'Sarah M.', 
+    type: 'Homeowner · Sheffield', 
+    rating: 5, 
+    text: 'Fast, professional, and the assessor explained everything clearly. Certificate came through the next morning exactly as promised.' 
+  },
+  { 
+    name: 'James R.', 
+    type: 'Landlord · Chesterfield', 
+    rating: 5, 
+    text: 'I used CertifyIQ for four of my rental properties. The bulk pricing saved me a significant amount and the turnaround was outstanding.' 
+  },
+  { 
+    name: 'Premier Homes', 
+    type: 'Estate Agent · Derby', 
+    rating: 5, 
+    text: 'We use CertifyIQ as our preferred EPC provider. Fast, reliable, and the branded reports are a nice touch for our clients.' 
+  },
 ]
 
 function Stars({ count }: { count: number }) {

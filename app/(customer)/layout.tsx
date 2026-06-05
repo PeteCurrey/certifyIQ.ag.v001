@@ -3,7 +3,7 @@ import PortalHeader from '@/components/customer/PortalHeader'
 
 export default function CustomerLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#080D18' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-obsidian)' }}>
       <PortalSidebar />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <PortalHeader />

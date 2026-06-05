@@ -1,12 +1,80 @@
-.section { padding: 6rem 0; background: rgba(15,22,40,0.5); }
-.inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; text-align: center; }
-.eyebrow { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: #9BFF59; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
-.h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.75rem, 3vw, 2.5rem); color: #E8F4FF; margin-bottom: 1rem; }
-.body { color: #8BA3BF; font-size: 1rem; max-width: 600px; margin: 0 auto 3rem; }
-.badges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-.badge { background: #0F1628; border: 1px solid #1E2D4A; border-radius: 12px; padding: 2rem 1.5rem; }
-.badgeIcon { font-size: 1.5rem; color: #9BFF59; margin-bottom: 1rem; }
-.badgeName { font-family: 'Syne', sans-serif; font-weight: 700; color: #E8F4FF; font-size: 0.95rem; margin-bottom: 0.25rem; }
-.badgeDesc { font-size: 0.8rem; color: #4A6280; margin: 0; }
-@media (max-width: 768px) { .badges { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .badges { grid-template-columns: 1fr; } }
+.section {
+  padding: 6rem 0;
+  background: var(--bg-surface-elevated);
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-lime);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.h2 {
+  font-family: var(--font-headings);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.body {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.badges {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.badge {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+}
+
+.badgeIcon {
+  font-size: 1.5rem;
+  color: var(--accent-lime);
+  margin-bottom: 1rem;
+}
+
+.badgeName {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.badgeDesc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .badges {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .badges {
+    grid-template-columns: 1fr;
+  }
+}

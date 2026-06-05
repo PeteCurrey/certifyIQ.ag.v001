@@ -9,13 +9,13 @@ interface RatingBadgeProps {
 }
 
 const ratingColors: Record<string, string> = {
-  A: '#9BFF59',
-  B: '#7ED321',
-  C: '#B8E000',
-  D: '#F5A623',
-  E: '#E07020',
-  F: '#D04020',
-  G: '#A01010',
+  A: 'var(--epc-a)',
+  B: 'var(--epc-b)',
+  C: 'var(--epc-c)',
+  D: 'var(--epc-d)',
+  E: 'var(--epc-e)',
+  F: 'var(--epc-f)',
+  G: 'var(--epc-g)',
 }
 
 const sizes = {
@@ -26,7 +26,7 @@ const sizes = {
 
 export default function RatingBadge({ rating, size = 'md', className }: RatingBadgeProps) {
   const letter = (rating || 'G').toUpperCase()
-  const bg = ratingColors[letter] || '#4A6280'
+  const bg = ratingColors[letter] || 'var(--text-secondary)'
   const dim = sizes[size]
   return (
     <span
@@ -36,7 +36,7 @@ export default function RatingBadge({ rating, size = 'md', className }: RatingBa
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: '9999px',
-        fontFamily: 'DM Mono, monospace',
+        fontFamily: 'var(--font-mono, monospace)',
         fontWeight: 500,
         color: '#000',
         background: bg,

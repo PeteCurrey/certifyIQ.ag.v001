@@ -2,30 +2,30 @@
 
 :root {
   /* Palette */
-  --bg-obsidian: #080D18;
-  --bg-surface: #0F1628;
-  --bg-surface-elevated: #162036;
-  --border-subtle: #1E2D4A;
+  --bg-obsidian: #FAFAFA;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #F4F4F5;
+  --border-subtle: #E4E4E7;
   
-  --text-primary: #E8F4FF;
-  --text-secondary: #8BA3BF;
-  --text-muted: #4A6280;
+  --text-primary: #18181B;
+  --text-secondary: #52525B;
+  --text-muted: #A1A1AA;
   
-  --accent-lime: #9BFF59;
-  --accent-amber: #F5A623;
-  --accent-red: #FF5C5C;
+  --accent-lime: #0F766E; /* Now Deep Teal */
+  --accent-amber: #D97706; /* Muted Gold */
+  --accent-red: #DC2626; /* Softer Red */
 
   /* EPC Rating Colors */
-  --epc-a: #9BFF59;
-  --epc-b: #7ED321;
-  --epc-c: #B8E000;
-  --epc-d: #F5A623;
-  --epc-e: #E07020;
-  --epc-f: #D04020;
-  --epc-g: #A01010;
+  --epc-a: #0F766E; /* Replacing lime green with teal for A rating */
+  --epc-b: #14B8A6;
+  --epc-c: #84CC16;
+  --epc-d: #F59E0B;
+  --epc-e: #F97316;
+  --epc-f: #EF4444;
+  --epc-g: #B91C1C;
   
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #080D18 0%, #0D1A30 60%, #091A12 100%);
+  --gradient-hero: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
   
   /* Typography */
   --font-headings: 'Syne', sans-serif;
@@ -106,7 +106,7 @@ a {
 }
 
 .button-primary:hover {
-  background-color: #aaff6b;
+  background-color: #115E59; /* Slightly darker teal */
 }
 
 .button-ghost {
@@ -116,7 +116,7 @@ a {
 }
 
 .button-ghost:hover {
-  background-color: rgba(155, 255, 89, 0.1);
+  background-color: rgba(15, 118, 110, 0.1);
 }
 
 .rating-badge {

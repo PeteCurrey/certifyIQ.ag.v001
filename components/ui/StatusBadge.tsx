@@ -1,18 +1,18 @@
 import React from 'react'
 
 const STATUS_CONFIG: Record<string, { label: string; bg: string; color: string }> = {
-  pending_payment:      { label: 'Pending Payment',   bg: '#1E2D4A', color: '#8BA3BF' },
-  paid:                 { label: 'Paid',               bg: '#091A12', color: '#9BFF59' },
-  scheduled:            { label: 'Scheduled',          bg: '#0D1A30', color: '#60A5FA' },
-  in_progress:          { label: 'In Progress',        bg: '#1A1200', color: '#F5A623' },
-  assessment_complete:  { label: 'Assessed',           bg: '#0A1A10', color: '#7ED321' },
-  certificate_issued:   { label: 'Certificate Issued', bg: '#091A12', color: '#9BFF59' },
-  cancelled:            { label: 'Cancelled',          bg: '#1A0808', color: '#FF5C5C' },
-  refunded:             { label: 'Refunded',           bg: '#1A0808', color: '#FF5C5C' },
+  pending_payment:      { label: 'Pending Payment',   bg: 'rgba(161, 161, 170, 0.12)', color: 'var(--text-secondary)' },
+  paid:                 { label: 'Paid',               bg: 'rgba(15, 118, 110, 0.12)', color: 'var(--accent-lime)' },
+  scheduled:            { label: 'Scheduled',          bg: 'rgba(59, 130, 246, 0.12)', color: '#2563EB' },
+  in_progress:          { label: 'In Progress',        bg: 'rgba(217, 119, 6, 0.12)', color: 'var(--accent-amber)' },
+  assessment_complete:  { label: 'Assessed',           bg: 'rgba(20, 184, 166, 0.12)', color: '#0D9488' },
+  certificate_issued:   { label: 'Certificate Issued', bg: 'rgba(15, 118, 110, 0.12)', color: 'var(--accent-lime)' },
+  cancelled:            { label: 'Cancelled',          bg: 'rgba(220, 38, 38, 0.12)', color: 'var(--accent-red)' },
+  refunded:             { label: 'Refunded',           bg: 'rgba(220, 38, 38, 0.12)', color: 'var(--accent-red)' },
 }
 
 export default function StatusBadge({ status }: { status: string }) {
-  const cfg = STATUS_CONFIG[status] || { label: status, bg: '#1E2D4A', color: '#8BA3BF' }
+  const cfg = STATUS_CONFIG[status] || { label: status, bg: 'rgba(161, 161, 170, 0.12)', color: 'var(--text-secondary)' }
   return (
     <span style={{
       display: 'inline-flex',
@@ -22,9 +22,10 @@ export default function StatusBadge({ status }: { status: string }) {
       background: cfg.bg,
       color: cfg.color,
       fontSize: '0.75rem',
-      fontFamily: 'DM Mono, monospace',
+      fontFamily: 'var(--font-mono, monospace)',
       fontWeight: 500,
       whiteSpace: 'nowrap',
+      border: `1px solid ${cfg.color}15`,
     }}>
       {cfg.label}
     </span>

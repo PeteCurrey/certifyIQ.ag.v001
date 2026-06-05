@@ -853,9 +853,9 @@ export default function LiveAssessmentPage() {
                   style={{
                     flex: 1,
                     minWidth: '200px',
-                    backgroundColor: '#1E2D4A',
-                    color: '#E8F4FF',
-                    border: '1.5px solid #1E2D4A',
+                    backgroundColor: 'var(--bg-surface-elevated)',
+                    color: 'var(--text-primary)',
+                    border: '1.5px solid var(--border-subtle)',
                     fontFamily: 'inherit',
                     fontSize: '0.9rem',
                     fontWeight: 600,
@@ -869,30 +869,30 @@ export default function LiveAssessmentPage() {
                     gap: '0.5rem',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#9BFF59'
-                    e.currentTarget.style.color = '#9BFF59'
+                    e.currentTarget.style.borderColor = 'var(--accent-lime)'
+                    e.currentTarget.style.color = 'var(--accent-lime)'
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#1E2D4A'
-                    e.currentTarget.style.color = '#E8F4FF'
+                    e.currentTarget.style.borderColor = 'var(--border-subtle)'
+                    e.currentTarget.style.color = 'var(--text-primary)'
                   }}
                 >
-                  📥 Export RdSAP 10 Data
+                  Export RdSAP 10 Data
                 </button>
               </div>
 
               {/* Elmhurst lodgement info card */}
               <div style={{
                 marginTop: '1.5rem',
-                background: '#0F1628',
-                border: '1px solid #1E2D4A',
+                background: 'var(--bg-surface)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '10px',
                 padding: '1.25rem',
                 display: 'flex',
                 gap: '1rem',
                 alignItems: 'flex-start',
               }}>
-                <div style={{ color: '#9BFF59', flexShrink: 0, marginTop: '2px' }}>
+                <div style={{ color: 'var(--accent-lime)', flexShrink: 0, marginTop: '2px' }}>
                   <Info size={20} />
                 </div>
                 <div>
@@ -900,7 +900,7 @@ export default function LiveAssessmentPage() {
                     fontFamily: 'var(--font-headings, Syne, sans-serif)',
                     fontWeight: 700,
                     fontSize: '1rem',
-                    color: '#E8F4FF',
+                    color: 'var(--text-primary)',
                     margin: '0 0 0.25rem 0',
                     lineHeight: 1.2,
                   }}>
@@ -908,13 +908,13 @@ export default function LiveAssessmentPage() {
                   </h5>
                   <p style={{
                     fontSize: '0.85rem',
-                    color: '#8BA3BF',
+                    color: 'var(--text-secondary)',
                     margin: '0 0 0.75rem 0',
                     lineHeight: 1.4,
                     textAlign: 'left',
                   }}>
                     Lodge this assessment via your Elmhurst member portal at{' '}
-                    <a href="https://www.elmhurstenergy.co.uk" target="_blank" rel="noopener noreferrer" style={{ color: '#9BFF59', textDecoration: 'underline' }}>elmhurstenergy.co.uk</a>{' '}
+                    <a href="https://www.elmhurstenergy.co.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-lime)', textDecoration: 'underline' }}>elmhurstenergy.co.uk</a>{' '}
                     or the RdSAP Go mobile app. Your Elmhurst accreditation number is auto-included in the export data.
                   </p>
                   <a
@@ -924,7 +924,7 @@ export default function LiveAssessmentPage() {
                     style={{
                       fontFamily: 'var(--font-mono, DM Mono, monospace)',
                       fontSize: '0.8rem',
-                      color: '#9BFF59',
+                      color: 'var(--accent-lime)',
                       textDecoration: 'none',
                       fontWeight: 500,
                     }}
