@@ -1,0 +1,119 @@
+.page { max-width: 1400px; margin: 0 auto; }
+
+.pageHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.pageTitle {
+  font-family: 'Syne', sans-serif; font-size: 2rem;
+  font-weight: 700; color: #E8F4FF; margin: 0 0 0.25rem;
+}
+
+.pageSub { color: #4A6280; font-size: 0.9rem; margin: 0; }
+
+.headerStats { display: flex; gap: 2rem; }
+
+.headerStat { display: flex; flex-direction: column; align-items: center; }
+
+.hsValue { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; }
+.hsLabel { font-size: 0.75rem; color: #4A6280; }
+
+.summaryBanner {
+  background: #0F1628; border: 1px solid #1E2D4A; border-radius: 12px;
+  padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.bannerLeft { display: flex; align-items: center; gap: 1rem; flex: 1; }
+
+.bannerTitle { font-weight: 600; color: #E8F4FF; margin: 0 0 0.2rem; }
+.bannerSub { font-size: 0.8rem; color: #4A6280; margin: 0; }
+
+.bannerCost {
+  font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700;
+  color: #F87171;
+}
+
+.bannerCta {
+  background: #9BFF59; color: #080D18; padding: 0.75rem 1.5rem;
+  border-radius: 8px; font-weight: 700; font-size: 0.9rem;
+  text-decoration: none; transition: all 0.2s; white-space: nowrap;
+}
+.bannerCta:hover { background: #aaff6b; }
+
+.riskList { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.riskCard {
+  background: #0F1628; border: 1px solid #1E2D4A; border-radius: 12px;
+  border-left-width: 4px; overflow: hidden; transition: border-color 0.2s;
+}
+.riskCard:hover { border-color: inherit; }
+
+.riskHeader {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.25rem 1.5rem; cursor: pointer;
+}
+
+.riskScore {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 2px solid; display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace; font-weight: 700; font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.riskInfo { flex: 1; }
+.riskAddress { font-size: 0.95rem; font-weight: 500; color: #E8F4FF; margin: 0 0 0.2rem; }
+.riskType { font-size: 0.8rem; color: #4A6280; margin: 0; }
+
+.riskBadge {
+  padding: 0.3rem 0.875rem; border-radius: 9999px;
+  font-size: 0.8rem; font-weight: 600; border: 1px solid;
+  white-space: nowrap;
+}
+
+.riskCost {
+  font-family: 'DM Mono', monospace; font-size: 1rem;
+  font-weight: 700; color: #E8F4FF; white-space: nowrap;
+}
+
+.expandBtn {
+  background: none; border: none; color: #4A6280;
+  cursor: pointer; font-size: 0.75rem; padding: 0.5rem;
+  transition: color 0.2s;
+}
+.expandBtn:hover { color: #E8F4FF; }
+
+.riskDetails {
+  padding: 0 1.5rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;
+}
+
+.issueCard {
+  border-radius: 8px; padding: 1rem 1.25rem;
+  border: 1px solid;
+}
+
+.sev_critical { background: rgba(248,113,113,0.05); border-color: rgba(248,113,113,0.2); }
+.sev_high { background: rgba(251,146,60,0.05); border-color: rgba(251,146,60,0.2); }
+.sev_medium { background: rgba(245,158,11,0.05); border-color: rgba(245,158,11,0.2); }
+
+.issueHeader {
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;
+}
+
+.issueCert { font-size: 0.9rem; color: #E8F4FF; }
+.issueDetail { font-size: 0.8rem; color: #8BA3BF; }
+
+.issueAction {
+  display: flex; align-items: flex-start; gap: 0.4rem;
+  font-size: 0.85rem; color: #8BA3BF; margin: 0 0 0.75rem; line-height: 1.5;
+}
+
+.issueActions {}
+
+.bookIssueBtn {
+  background: #9BFF59; color: #080D18; padding: 0.5rem 1.25rem;
+  border-radius: 6px; font-weight: 700; font-size: 0.85rem;
+  text-decoration: none; display: inline-block; transition: all 0.2s;
+}
+.bookIssueBtn:hover { background: #aaff6b; }

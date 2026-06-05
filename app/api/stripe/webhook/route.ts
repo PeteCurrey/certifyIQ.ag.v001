@@ -1,60 +1,52 @@
 import { NextResponse } from 'next/server'
-import Stripe from 'stripe'
+import { stripe } from '@/lib/stripe'
 import { createAdminClient } from '@/lib/supabase/admin'
 
-const stripe = process.env.STRIPE_SECRET_KEY
-  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' as any })
-  : null
+export const config = { api: { bodyParser: false } }
 
 export async function POST(request: Request) {
   const payload = await request.text()
   const sig = request.headers.get('stripe-signature')
 
-  let event: Stripe.Event
-
-  if (!stripe) {
-    // Return early if Stripe isn't configured
-    return NextResponse.json({ received: true, info: 'Stripe webhook received but ignored (no secret key)' })
+  if (!sig || !process.env.STRIPE_WEBHOOK_SECRET) {
+    return NextResponse.json({ error: 'Missing webhook signature or secret' }, { status: 400 })
   }
 
+  let event
   try {
-    event = stripe.webhooks.constructEvent(
-      payload,
-      sig!,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    )
+    event = stripe.webhooks.constructEvent(payload, sig, process.env.STRIPE_WEBHOOK_SECRET)
   } catch (err: any) {
     console.error('Webhook signature verification failed:', err.message)
     return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 })
   }
 
-  // Handle the event
   if (event.type === 'payment_intent.succeeded') {
-    const paymentIntent = event.data.object as Stripe.PaymentIntent
+    const paymentIntent = event.data.object as any
     await handlePaymentSuccess(paymentIntent)
+  } else if (event.type === 'payment_intent.payment_failed') {
+    const paymentIntent = event.data.object as any
+    await handlePaymentFailed(paymentIntent)
+  } else if (event.type === 'charge.refunded') {
+    const charge = event.data.object as any
+    await handleRefund(charge)
   }
 
   return NextResponse.json({ received: true })
 }
 
-async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
+async function handlePaymentSuccess(paymentIntent: any) {
   const metadata = paymentIntent.metadata
-  if (!metadata || !metadata.email) {
+  if (!metadata?.email) {
     console.error('Payment succeeded but missing customer metadata:', paymentIntent.id)
     return
   }
 
   const supabase = createAdminClient()
-
   try {
     // 1. Get or Create Customer
     let customerId: string
-
     const { data: existingCustomer } = await supabase
-      .from('customers')
-      .select('id')
-      .eq('email', metadata.email)
-      .maybeSingle()
+      .from('customers').select('id').eq('email', metadata.email).maybeSingle()
 
     if (existingCustomer) {
       customerId = existingCustomer.id
@@ -68,9 +60,7 @@ async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
           customer_type: metadata.customerType || 'homeowner',
           company_name: metadata.companyName || null,
         })
-        .select('id')
-        .single()
-
+        .select('id').single()
       if (custErr || !newCustomer) throw new Error(`Failed to create customer: ${custErr?.message}`)
       customerId = newCustomer.id
     }
@@ -88,61 +78,53 @@ async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {
         property_type: metadata.propertyType,
         bed_count: parseInt(metadata.bedCount || '3', 10),
       })
-      .select('id')
-      .single()
-
+      .select('id').single()
     if (propErr || !newProperty) throw new Error(`Failed to create property: ${propErr?.message}`)
 
-    // 3. Generate Booking Reference (AVR-YYYYMMDD-XXXX)
-    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '')
-    const randStr = Math.random().toString(36).substring(2, 6).toUpperCase()
-    const bookingRef = `AVR-${today}-${randStr}`
+    // 3. Update booking status to paid
+    await supabase.from('bookings')
+      .update({ status: 'paid', stripe_payment_status: 'succeeded' })
+      .eq('stripe_payment_intent_id', paymentIntent.id)
 
-    // 4. Create Booking
-    const { data: newBooking, error: bookErr } = await supabase
-      .from('bookings')
-      .insert({
-        booking_ref: bookingRef,
-        property_id: newProperty.id,
-        customer_id: customerId,
-        service_type: metadata.serviceType || 'domestic',
-        status: 'paid',
-        preferred_date: metadata.preferredDate,
-        preferred_time_slot: metadata.preferredTimeSlot || 'any',
-        price_gbp: parseFloat(metadata.priceGbp),
-        stripe_payment_intent_id: paymentIntent.id,
-        stripe_payment_status: 'succeeded',
-        special_instructions: metadata.specialInstructions || '',
-      })
-      .select('id')
-      .single()
+    // 4. Also create leads record for CRM
+    await supabase.from('leads').insert({
+      source: 'booking',
+      status: 'converted',
+      name: metadata.fullName,
+      email: metadata.email,
+      phone: metadata.phone,
+      service_interest: metadata.serviceType || 'domestic-epc',
+      estimated_value_gbp: parseFloat(metadata.priceGbp || '0'),
+    }).single()
 
-    if (bookErr || !newBooking) throw new Error(`Failed to create booking: ${bookErr?.message}`)
-
-    // 5. Initialize Assessment
-    const { error: assessErr } = await supabase
-      .from('assessments')
-      .insert({
-        booking_id: newBooking.id,
-        status: 'not_started',
-      })
-
-    if (assessErr) throw new Error(`Failed to initialize assessment: ${assessErr.message}`)
-
-    console.log(`Successfully processed booking ${bookingRef} for payment intent ${paymentIntent.id}`)
-
-    // 6. Send email with Resend
-    const { sendBookingConfirmation } = require('@/lib/email')
+    // 5. Send email with Resend
+    const { sendBookingConfirmation } = await import('@/lib/email')
     await sendBookingConfirmation({
       toEmail: metadata.email,
       customerName: metadata.fullName,
-      bookingRef,
+      bookingRef: metadata.bookingRef,
       propertyAddress: `${metadata.addressLine1}, ${metadata.town}`,
       preferredDate: metadata.preferredDate,
-      price: parseFloat(metadata.priceGbp),
+      price: parseFloat(metadata.priceGbp || '0'),
       serviceType: metadata.serviceType || 'Domestic EPC',
     })
+
+    console.log(`Successfully processed booking ${metadata.bookingRef} for PI ${paymentIntent.id}`)
   } catch (error) {
-    console.error('Error handling payment success database sync:', error)
+    console.error('Error handling payment success:', error)
   }
+}
+
+async function handlePaymentFailed(paymentIntent: any) {
+  const supabase = createAdminClient()
+  await supabase.from('bookings')
+    .update({ status: 'payment_failed', stripe_payment_status: 'failed' })
+    .eq('stripe_payment_intent_id', paymentIntent.id)
+}
+
+async function handleRefund(charge: any) {
+  const supabase = createAdminClient()
+  await supabase.from('bookings')
+    .update({ status: 'refunded', stripe_payment_status: 'refunded' })
+    .eq('stripe_payment_intent_id', charge.payment_intent)
 }

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     .eq('slug', slug)
     .single()
   return {
-    title: data?.seo_title || 'Blog Post | CertifyIQ',
+    title: data?.seo_title || 'Blog Post | Avorria',
     description: data?.seo_description || '',
   }
 }

@@ -1,44 +1,59 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
-
-// Initialize Stripe if key is present
-const stripe = process.env.STRIPE_SECRET_KEY 
-  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' as any })
-  : null
+import { createClient } from '@/lib/supabase/server'
 
 export async function POST(request: Request) {
   try {
-    const { amount, metadata } = await request.json()
+    const { priceId, tierId } = await request.json()
+    const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
 
-    if (!amount) {
-      return NextResponse.json({ error: 'Amount is required' }, { status: 400 })
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!stripe) {
-      // Mock Stripe response for development when API key is missing
-      return NextResponse.json({
-        clientSecret: 'mock_client_secret_' + Math.random().toString(36).substring(7),
-        warning: 'Running in sandbox mode with mock Stripe intent.'
-      })
+    // MOCK CHECKOUT FLOW
+    // In a real app, we'd call stripe.checkout.sessions.create(...)
+    
+    // Check if they already have an org
+    const { data: orgs } = await supabase.from('organizations').select('id').eq('owner_id', user.id).limit(1)
+    let orgId = orgs?.[0]?.id
+
+    if (!orgId) {
+       // Create a default org if they don't have one
+       const { data: newOrg } = await supabase.from('organizations').insert({
+         owner_id: user.id,
+         name: 'My Organization',
+         type: tierId === 'agency' ? 'agency' : tierId === 'aos' ? 'assessor' : 'landlord'
+       }).select('id').single()
+       orgId = newOrg?.id
     }
 
-    // Create a PaymentIntent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100), // Stripe expects amounts in cents/pence
-      currency: 'gbp',
-      automatic_payment_methods: {
-        enabled: true,
-      },
-      metadata: {
-        ...metadata,
-      }
+    // Insert mock subscription
+    const { error: subErr } = await supabase.from('subscriptions').insert({
+      user_id: user.id,
+      org_id: orgId,
+      stripe_customer_id: 'cus_mock_' + user.id.substring(0,6),
+      stripe_subscription_id: 'sub_mock_' + Date.now(),
+      plan_id: priceId,
+      status: 'active',
+      current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days
     })
 
-    return NextResponse.json({
-      clientSecret: paymentIntent.client_secret,
-    })
+    if (subErr) {
+      console.error('Mock sub err:', subErr)
+      return NextResponse.json({ error: 'Database error applying subscription' }, { status: 500 })
+    }
+
+    // Redirect mapping based on tier
+    let redirectUrl = '/dashboard'
+    if (tierId === 'agency') redirectUrl = '/agency'
+    if (tierId === 'aos') redirectUrl = '/aos'
+
+    return NextResponse.json({ url: redirectUrl })
+
   } catch (error: any) {
-    console.error('Error creating Stripe payment intent:', error)
-    return NextResponse.json({ error: error.message || 'Stripe error' }, { status: 500 })
+    console.error('Stripe Checkout Error:', error)
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }

@@ -9,7 +9,7 @@ import LandlordBand from '@/components/marketing/LandlordBand'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'CertifyIQ — UK EPC Assessments | Chesterfield & Derbyshire',
+  title: 'Avorria — UK EPC Assessments | Chesterfield & Derbyshire',
   description: 'Fast, transparent, fully accredited Energy Performance Certificates. Book online from £65. Certificate issued within 24 hours.',
 }
 

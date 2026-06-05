@@ -1,0 +1,23 @@
+{
+  "name": "Avorria AOS",
+  "short_name": "AOS",
+  "description": "Avorria Assessor Operating System — field survey app",
+  "start_url": "/aos/mobile",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050810",
+  "theme_color": "#0d9488",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
+  ],
+  "categories": ["productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Today's Jobs",
+      "url": "/aos/mobile?tab=jobs",
+      "description": "View today's job queue"
+    }
+  ]
+}

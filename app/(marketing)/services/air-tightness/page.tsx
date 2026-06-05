@@ -65,22 +65,27 @@ export default function AirTightnessPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ padding: 0, maxWidth: 'none' }}>
       {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <span className={styles.eyebrow}>ATTMA Accredited Engineers</span>
-          <h1 className={styles.h1}>Air Tightness Testing (Part L)</h1>
-          <p className={styles.sub}>
+      <section 
+        className={styles.heroFullScreen}
+        style={{ backgroundImage: 'url(/hero_air_tightness.png)' }}
+      >
+        <div className={styles.heroFullScreenInner}>
+          <span className={styles.eyebrow} style={{ color: '#9BFF59' }}>ATTMA Accredited Engineers</span>
+          <h1 className={styles.h1} style={{ color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,0.5)' }}>Air Tightness Testing (Part L)</h1>
+          <p className={styles.sub} style={{ color: '#E8F4FF', fontSize: '1.25rem', textShadow: '0 2px 12px rgba(0,0,0,0.5)' }}>
             Accredited air permeability testing to satisfy Building Regulations Approved Document L. Same-day retests and certification for builders and self-builders.
           </p>
-          <div style={{ marginTop: '32px' }}>
-            <a href="#calculator" className={styles.btnPrimary} style={{ width: 'auto', display: 'inline-block', padding: '14px 32px' }}>
+          <div style={{ marginTop: '40px' }}>
+            <a href="#calculator" className={styles.btnPrimary} style={{ fontSize: '1.1rem', padding: '16px 40px' }}>
               Calculate Testing Fee
             </a>
           </div>
         </div>
       </section>
+
+      <div className={styles.inner}>
 
       {/* Standards details and Explanation */}
       <section className={styles.sectionLayout}>
@@ -299,6 +304,7 @@ export default function AirTightnessPage() {
           ))}
         </div>
       </section>
+      </div>
     </div>
   )
 }

@@ -82,22 +82,27 @@ export default function CommercialEpcPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ padding: 0, maxWidth: 'none' }}>
       {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <span className={styles.eyebrow}>Accredited Commercial NDEA</span>
-          <h1 className={styles.h1}>Commercial EPC Assessments. Derbyshire & beyond.</h1>
-          <p className={styles.sub}>
+      <section 
+        className={styles.heroFullScreen}
+        style={{ backgroundImage: 'url(/hero_commercial.png)' }}
+      >
+        <div className={styles.heroFullScreenInner}>
+          <span className={styles.eyebrow} style={{ color: '#9BFF59' }}>Accredited Commercial NDEA</span>
+          <h1 className={styles.h1} style={{ color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,0.5)' }}>Commercial EPC Assessments.</h1>
+          <p className={styles.sub} style={{ color: '#E8F4FF', fontSize: '1.25rem', textShadow: '0 2px 12px rgba(0,0,0,0.5)' }}>
             Legally required Energy Performance Certificates for non-domestic properties — produced by accredited Non-Domestic Energy Assessors (NDEAs) using SBEM methodology.
           </p>
-          <div style={{ marginTop: '32px' }}>
-            <a href="#quote-form" onClick={scrollToQuote} className={styles.btnPrimary} style={{ width: 'auto', display: 'inline-block', padding: '14px 32px' }}>
-              Get a commercial EPC quote
+          <div style={{ marginTop: '40px' }}>
+            <a href="#quote-form" onClick={scrollToQuote} className={styles.btnPrimary} style={{ fontSize: '1.1rem', padding: '16px 40px' }}>
+              Get a Commercial EPC Quote
             </a>
           </div>
         </div>
       </section>
+
+      <div className={styles.inner}>
 
       {/* What is a Commercial EPC Section */}
       <section className={styles.sectionLayout}>
@@ -447,6 +452,7 @@ export default function CommercialEpcPage() {
           </form>
         )}
       </section>
+      </div>
     </div>
   )
 }

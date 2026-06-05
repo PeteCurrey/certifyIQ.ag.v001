@@ -1,15 +1,20 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Loader2, UploadCloud, FileType } from 'lucide-react'
 import styles from './wizard.module.css'
 
 export default function WizardClient() {
   const router = useRouter()
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0) // Step 0 is AI Upload
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  
+  // AI Extraction State
+  const [uploadingPlan, setUploadingPlan] = useState(false)
+  const [planFile, setPlanFile] = useState<File | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Form State
   const [projectType, setProjectType] = useState('')
@@ -26,6 +31,42 @@ export default function WizardClient() {
 
   const handleNext = () => setStep(prev => prev + 1)
   const handlePrev = () => setStep(prev => prev - 1)
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setPlanFile(file)
+    setUploadingPlan(true)
+    setError(null)
+
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      const res = await fetch('/api/developer-extract', {
+        method: 'POST',
+        body: formData
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Failed to extract plan data')
+
+      const extracted = data.extractedData
+      if (extracted) {
+        if (extracted.project_type && extracted.project_type !== 'Unknown') setProjectType(extracted.project_type)
+        if (extracted.number_of_units) setNumUnits(extracted.number_of_units)
+        if (extracted.floor_area_sqm) setFloorArea(String(extracted.floor_area_sqm))
+        if (extracted.number_of_storeys) setNumStoreys(extracted.number_of_storeys)
+        if (extracted.construction_type && extracted.construction_type !== 'Unknown') setConstructionType(extracted.construction_type)
+      }
+      
+      // Auto advance to step 1
+      setStep(1)
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setUploadingPlan(false)
+    }
+  }
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -60,6 +101,47 @@ export default function WizardClient() {
   }
 
   // --- Step Content Renderers ---
+
+  const renderStep0 = () => (
+    <div className={styles.stepContainer}>
+      <h2 className={styles.stepTitle}>AI Plan Upload</h2>
+      <p className={styles.stepDesc}>Upload your architectural drawing (PDF or Image) to let our AI auto-fill the wizard for you, or skip to enter details manually.</p>
+      
+      <div className={styles.uploadArea} onClick={() => fileInputRef.current?.click()}>
+        <input 
+          type="file" 
+          ref={fileInputRef} 
+          style={{ display: 'none' }} 
+          accept="application/pdf,image/png,image/jpeg" 
+          onChange={handleFileUpload}
+        />
+        {uploadingPlan ? (
+          <div className={styles.uploadingState}>
+            <Loader2 className={styles.spin} size={48} color="#9BFF59" />
+            <p>Analyzing plans with Claude AI...</p>
+          </div>
+        ) : (
+          <div className={styles.uploadPrompt}>
+            <UploadCloud size={48} color="#4A6280" />
+            <h3>Click to upload plans</h3>
+            <p>PDF, PNG, or JPEG</p>
+          </div>
+        )}
+      </div>
+
+      {error && <div className={styles.errorBox}>{error}</div>}
+
+      <div className={styles.actionRow} style={{ justifyContent: 'center', marginTop: '2rem' }}>
+        <button 
+          onClick={handleNext} 
+          className={styles.ghostBtn}
+          disabled={uploadingPlan}
+        >
+          Skip & enter manually
+        </button>
+      </div>
+    </div>
+  )
 
   const renderStep1 = () => (
     <div className={styles.stepContainer}>
@@ -165,6 +247,16 @@ export default function WizardClient() {
             placeholder="Optional"
             value={floorArea}
             onChange={e => setFloorArea(e.target.value)}
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.field}>
+          <label>Number of Storeys</label>
+          <input 
+            type="number" 
+            min="1"
+            value={numStoreys}
+            onChange={e => setNumStoreys(parseInt(e.target.value) || 1)}
             className={styles.input}
           />
         </div>
@@ -311,14 +403,15 @@ export default function WizardClient() {
         <div className={styles.progressBar}>
           <div 
             className={styles.progressFill} 
-            style={{ width: `${(step / 6) * 100}%` }}
+            style={{ width: `${(Math.max(step, 1) / 6) * 100}%` }}
           />
         </div>
-        <div className={styles.progressText}>Step {step} of 6</div>
+        <div className={styles.progressText}>Step {Math.max(step, 1)} of 6</div>
       </div>
 
       {/* Main Form Area */}
       <main className={styles.mainArea}>
+        {step === 0 && renderStep0()}
         {step === 1 && renderStep1()}
         {step === 2 && renderStep2()}
         {step === 3 && renderStep3()}

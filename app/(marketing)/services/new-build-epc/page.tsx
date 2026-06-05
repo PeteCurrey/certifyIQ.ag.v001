@@ -71,22 +71,27 @@ export default function NewBuildEpcPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ padding: 0, maxWidth: 'none' }}>
       {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <span className={styles.eyebrow}>Accredited OC-EPC & SAP Assessor</span>
-          <h1 className={styles.h1}>New Build SAP Calculations & EPCs</h1>
-          <p className={styles.sub}>
+      <section 
+        className={styles.heroFullScreen}
+        style={{ backgroundImage: 'url(/hero_new_build.png)' }}
+      >
+        <div className={styles.heroFullScreenInner}>
+          <span className={styles.eyebrow} style={{ color: '#9BFF59' }}>Accredited OC-EPC & SAP Assessor</span>
+          <h1 className={styles.h1} style={{ color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,0.5)' }}>New Build SAP Calculations & EPCs</h1>
+          <p className={styles.sub} style={{ color: '#E8F4FF', fontSize: '1.25rem', textShadow: '0 2px 12px rgba(0,0,0,0.5)' }}>
             Ensure your new build, conversion, or highly glazed extension meets Part L building regulations with design-stage and as-built SAP assessments.
           </p>
-          <div style={{ marginTop: '32px' }}>
-            <button onClick={() => scrollToForm('full')} className={styles.btnPrimary} style={{ width: 'auto', display: 'inline-block', padding: '14px 32px' }}>
+          <div style={{ marginTop: '40px' }}>
+            <button onClick={() => scrollToForm('full')} className={styles.btnPrimary} style={{ fontSize: '1.1rem', padding: '16px 40px' }}>
               Book SAP Assessment
             </button>
           </div>
         </div>
       </section>
+
+      <div className={styles.inner}>
 
       {/* Explained Section */}
       <section className={styles.sectionLayout}>
@@ -114,7 +119,7 @@ export default function NewBuildEpcPage() {
           </ul>
         </div>
         <div className={styles.card} style={{ borderLeftColor: 'var(--accent-lime)' }}>
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>Why choose CertifyIQ?</h3>
+          <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>Why choose Avorria?</h3>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
             We work closely with local self-builders, architects, and volume property developers across Chesterfield and Derbyshire.
           </p>
@@ -391,6 +396,7 @@ export default function NewBuildEpcPage() {
           </form>
         )}
       </section>
+      </div>
     </div>
   )
 }

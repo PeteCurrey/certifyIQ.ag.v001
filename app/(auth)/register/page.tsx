@@ -74,7 +74,7 @@ export default function RegisterPage() {
         <div className={styles.brand}>
           <Link href="/" className={styles.logo}>
             <span className={styles.logoMark}>C</span>
-            <span className={styles.logoText}>CertifyIQ</span>
+            <span className={styles.logoText}>Avorria</span>
           </Link>
         </div>
 

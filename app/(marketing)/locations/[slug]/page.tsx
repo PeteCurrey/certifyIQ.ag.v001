@@ -24,13 +24,13 @@ export async function generateMetadata({ params }: LocationPageProps): Promise<M
 
   if (!pageData) {
     return {
-      title: 'EPC Assessor | CertifyIQ',
+      title: 'EPC Assessor | Avorria',
       description: 'Accredited energy performance assessments.',
     }
   }
 
   return {
-    title: `${pageData.page_title} | CertifyIQ`,
+    title: `${pageData.page_title} | Avorria`,
     description: `Accredited energy performance certificate (EPC) assessor in ${pageData.town}, ${pageData.county} (${pageData.postcode_prefix}). Assessments from £65. Fast 24-hour turnaround.`,
     keywords: [`EPC ${pageData.town}`, `Energy Assessor ${pageData.town}`, `EPC Certificate ${pageData.postcode_prefix}`],
   }
@@ -58,7 +58,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    'name': `CertifyIQ ${town}`,
+    'name': `Avorria ${town}`,
     'image': 'https://certifyiq.co.uk/logo.png',
     'telephone': '01246 000 000',
     'email': 'info@certifyiq.co.uk',
@@ -126,7 +126,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
           </p>
 
           <div className={styles.featureBox}>
-            <h3>Why Choose CertifyIQ in {town}?</h3>
+            <h3>Why Choose Avorria in {town}?</h3>
             <ul className={styles.list}>
               <li><strong>Local Expertise:</strong> We cover all addresses in {postcode_prefix} and surrounding Derbyshire areas.</li>
               <li><strong>Fast Lodgement:</strong> Your certificate is uploaded to the national register within 24 hours of our visit.</li>
@@ -180,7 +180,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
           </div>
           <div className={styles.reviewCard}>
             <div className={styles.stars}>★★★★★</div>
-            <p className={styles.reviewText}>&ldquo;I have used CertifyIQ for three rental properties in the {postcode_prefix} area. Booking was easy, and the prices are the best in Derbyshire.&rdquo;</p>
+            <p className={styles.reviewText}>&ldquo;I have used Avorria for three rental properties in the {postcode_prefix} area. Booking was easy, and the prices are the best in Derbyshire.&rdquo;</p>
             <span className={styles.reviewer}>— Sarah T., Landlord</span>
           </div>
         </div>

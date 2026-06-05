@@ -35,6 +35,21 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/admin/login', request.url))
   }
 
+  // Protect master compliance dashboard
+  if (pathname.startsWith('/dashboard') && !user) {
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  // Protect AOS routes
+  if (pathname.startsWith('/aos') && !user) {
+    return NextResponse.redirect(new URL('/admin/login', request.url))
+  }
+
+  // Protect agency portal
+  if (pathname.startsWith('/agency') && !user) {
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
+
   return supabaseResponse
 }
 

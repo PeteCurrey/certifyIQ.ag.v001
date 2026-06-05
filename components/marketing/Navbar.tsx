@@ -93,7 +93,7 @@ export default function Navbar() {
                 <div className={styles.megaInner}>
                   <div className={styles.megaCol}>
                     <h4 className={styles.menuHeading}>Residential Services</h4>
-                    <Link href="/book?service=domestic" className={styles.menuItem} onClick={closeAll}>
+                    <Link href="/services/domestic-epc" className={styles.menuItem} onClick={closeAll}>
                       <Home className={styles.menuIcon} size={20} />
                       <div>
                         <span className={styles.menuTitle}>Domestic EPC</span>
@@ -202,7 +202,7 @@ export default function Navbar() {
         <div className={styles.mobileMenu}>
           <div className={styles.mobileGroup}>
             <span className={styles.mobileGroupHeading}>Services</span>
-            <Link href="/book?service=domestic" onClick={closeAll}>Domestic EPC</Link>
+            <Link href="/services/domestic-epc" onClick={closeAll}>Domestic EPC</Link>
             <Link href="/services/new-build-epc" onClick={closeAll}>New Build EPC & SAP</Link>
             <Link href="/services/air-tightness" onClick={closeAll}>Air Tightness Testing</Link>
             <Link href="/services/commercial-epc" onClick={closeAll}>Commercial EPC</Link>

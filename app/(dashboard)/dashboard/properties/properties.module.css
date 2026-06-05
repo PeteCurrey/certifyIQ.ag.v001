@@ -1,0 +1,196 @@
+.page { max-width: 1400px; margin: 0 auto; }
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #E8F4FF;
+  margin: 0 0 0.25rem;
+}
+
+.pageSub { color: #4A6280; font-size: 0.9rem; margin: 0; }
+
+.headerActions { display: flex; gap: 1rem; align-items: center; }
+
+.importBtn {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: #0F1628; border: 1px solid #1E2D4A;
+  color: #8BA3BF; padding: 0.7rem 1.25rem;
+  border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.importBtn:hover { border-color: #4A6280; color: #E8F4FF; }
+
+.addBtn {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: #9BFF59; color: #080D18;
+  padding: 0.7rem 1.25rem; border-radius: 8px;
+  font-weight: 700; font-size: 0.9rem; text-decoration: none;
+  transition: all 0.2s;
+}
+.addBtn:hover { background: #aaff6b; }
+
+.toolBar {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+
+.searchWrap {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: #0F1628; border: 1px solid #1E2D4A;
+  border-radius: 8px; padding: 0.65rem 1rem;
+  flex: 1; max-width: 400px; transition: border-color 0.2s;
+}
+.searchWrap:focus-within { border-color: #9BFF59; }
+
+.searchIcon { color: #4A6280; flex-shrink: 0; }
+
+.searchInput {
+  background: none; border: none; color: #E8F4FF;
+  font-size: 0.9rem; width: 100%; outline: none;
+}
+.searchInput::placeholder { color: #4A6280; }
+
+.filterTabs { display: flex; gap: 0.5rem; }
+
+.filterTab {
+  background: #0F1628; border: 1px solid #1E2D4A;
+  color: #8BA3BF; padding: 0.5rem 1rem;
+  border-radius: 8px; font-size: 0.85rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.filterTab:hover { border-color: #4A6280; color: #E8F4FF; }
+.filterActive {
+  background: rgba(155, 255, 89, 0.1);
+  border-color: rgba(155, 255, 89, 0.4);
+  color: #9BFF59;
+}
+
+/* Modal */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+
+.modalBox {
+  background: #0F1628; border: 1px solid #1E2D4A;
+  border-radius: 16px; padding: 2.5rem;
+  max-width: 500px; width: 90%;
+}
+
+.modalTitle {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: #E8F4FF; margin: 0 0 0.5rem;
+}
+
+.modalDesc { color: #8BA3BF; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.5rem; }
+
+.dropZone {
+  border: 2px dashed #1E2D4A; border-radius: 12px;
+  padding: 2.5rem; display: flex; flex-direction: column;
+  align-items: center; gap: 0.75rem;
+  color: #8BA3BF; cursor: pointer; transition: all 0.2s;
+  margin-bottom: 1.5rem;
+}
+.dropZone:hover { border-color: #9BFF59; background: rgba(155,255,89,0.02); }
+.dropZone p { margin: 0; font-weight: 500; color: #E8F4FF; }
+.dropZone span { font-size: 0.8rem; }
+
+.modalActions { display: flex; gap: 1rem; justify-content: flex-end; }
+
+.modalCancel {
+  background: none; border: 1px solid #1E2D4A; color: #8BA3BF;
+  padding: 0.65rem 1.25rem; border-radius: 8px; cursor: pointer;
+  font-size: 0.9rem; transition: all 0.2s;
+}
+.modalCancel:hover { border-color: #4A6280; color: #E8F4FF; }
+
+.modalSubmit {
+  background: #9BFF59; color: #080D18;
+  border: none; padding: 0.65rem 1.5rem;
+  border-radius: 8px; cursor: pointer; font-weight: 700;
+  font-size: 0.9rem; transition: all 0.2s;
+}
+.modalSubmit:hover { background: #aaff6b; }
+
+/* Table */
+.tableCard {
+  background: #0F1628; border: 1px solid #1E2D4A;
+  border-radius: 12px; overflow: hidden;
+}
+
+.table {
+  width: 100%; border-collapse: collapse;
+}
+
+.table th {
+  text-align: left; padding: 1rem 1.25rem;
+  font-size: 0.75rem; color: #4A6280;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  border-bottom: 1px solid #1E2D4A;
+  background: #080D18;
+}
+
+.tableRow {
+  border-bottom: 1px solid #1E2D4A;
+  transition: background 0.15s;
+}
+.tableRow:last-child { border-bottom: none; }
+.tableRow:hover { background: rgba(30, 45, 74, 0.4); }
+
+.table td { padding: 1rem 1.25rem; vertical-align: middle; }
+
+.scoreBadge {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid; display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace; font-weight: 700; font-size: 0.8rem;
+}
+
+.propAddress { font-size: 0.9rem; font-weight: 500; color: #E8F4FF; }
+
+.typeTag {
+  background: #162036; border: 1px solid #1E2D4A;
+  color: #8BA3BF; padding: 0.25rem 0.75rem;
+  border-radius: 9999px; font-size: 0.75rem;
+}
+
+.statusTag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+}
+.statusTag[data-status="let"] { background: rgba(96,165,250,0.1); color: #60A5FA; }
+.statusTag[data-status="vacant"] { background: rgba(74,98,128,0.1); color: #4A6280; }
+.statusTag[data-status="under-construction"] { background: rgba(155,255,89,0.1); color: #9BFF59; }
+
+.expMissing { font-size: 0.8rem; color: #F87171; font-weight: 600; }
+.expExpired { font-size: 0.8rem; color: #F87171; font-weight: 600; }
+.expWarning { font-size: 0.8rem; color: #F59E0B; font-weight: 600; }
+.expAtRisk { font-size: 0.8rem; color: #FB923C; font-weight: 600; }
+.expOk { font-size: 0.8rem; color: #9BFF59; }
+
+.riskTag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+}
+.riskTag[data-risk="high"] { background: rgba(248,113,113,0.1); color: #F87171; }
+.riskTag[data-risk="medium"] { background: rgba(245,158,11,0.1); color: #F59E0B; }
+.riskTag[data-risk="low"] { background: rgba(155,255,89,0.1); color: #9BFF59; }
+.riskTag[data-risk="pending"] { background: rgba(74,98,128,0.1); color: #4A6280; }
+
+.viewBtn {
+  display: flex; align-items: center; gap: 0.25rem;
+  font-size: 0.85rem; color: #4A6280;
+  text-decoration: none; transition: color 0.2s;
+  white-space: nowrap;
+}
+.viewBtn:hover { color: #9BFF59; }

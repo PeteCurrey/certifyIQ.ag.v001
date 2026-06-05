@@ -1,0 +1,147 @@
+.page { max-width: 1400px; }
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 0.25rem;
+}
+
+.subtitle { color: #64748B; font-size: 0.9rem; margin: 0; }
+
+.orderBtn {
+  background: #0F766E;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.orderBtn:hover { background: #0D5F58; }
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.search {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #0F172A;
+  background: #fff;
+  width: 100%;
+  max-width: 380px;
+  box-sizing: border-box;
+}
+
+.search:focus {
+  outline: none;
+  border-color: #0F766E;
+  box-shadow: 0 0 0 3px rgba(15,118,110,0.1);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterBtn {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 100px;
+  padding: 0.35rem 0.875rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filterBtn:hover { border-color: #94A3B8; color: #0F172A; }
+
+.filterActive {
+  background: #0F766E !important;
+  border-color: #0F766E !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tableWrap { overflow-x: auto; }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #E2E8F0;
+  border-top-color: #0F766E;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94A3B8;
+  border-bottom: 1px solid #E2E8F0;
+  background: #F8FAFC;
+}
+
+.table td {
+  padding: 1rem;
+  color: #374151;
+  border-bottom: 1px solid #F1F5F9;
+  vertical-align: middle;
+}
+
+.row:hover { background: #F8FAFC; cursor: pointer; }
+.ref { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: #64748B; }
+
+.empty {
+  text-align: center;
+  padding: 3rem;
+  color: #94A3B8;
+  font-size: 0.9rem;
+}

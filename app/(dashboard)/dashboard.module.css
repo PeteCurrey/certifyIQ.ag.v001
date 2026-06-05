@@ -1,0 +1,236 @@
+.appContainer {
+  display: flex;
+  height: 100vh;
+  background: #080D18;
+  color: #E8F4FF;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 280px;
+  background: #050810;
+  border-right: 1px solid #1E2D4A;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebarHeader {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid #1E2D4A;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #9BFF59;
+  text-decoration: none;
+}
+
+.versionBadge {
+  background: rgba(155, 255, 89, 0.1);
+  color: #9BFF59;
+  font-size: 0.65rem;
+  font-family: 'DM Mono', monospace;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(155, 255, 89, 0.2);
+}
+
+.navMenu {
+  padding: 1.5rem 1rem;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.navLabel {
+  font-size: 0.75rem;
+  color: #4A6280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 1.5rem 0 0.5rem 0.75rem;
+  font-weight: 600;
+}
+
+.navMenu p:first-child {
+  margin-top: 0;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #8BA3BF;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.navLink:hover {
+  background: #0F1628;
+  color: #E8F4FF;
+}
+
+.navLink.active {
+  background: #162036;
+  color: #9BFF59;
+  border: 1px solid #1E2D4A;
+}
+
+.aiIcon {
+  font-size: 1.1rem;
+}
+
+.sidebarFooter {
+  padding: 1.5rem;
+  border-top: 1px solid #1E2D4A;
+  background: #03050A;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1E2D4A;
+  color: #E8F4FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #E8F4FF;
+}
+
+.userRole {
+  font-size: 0.75rem;
+  color: #8BA3BF;
+}
+
+.logoutBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem;
+  background: none;
+  border: 1px solid #1E2D4A;
+  color: #8BA3BF;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+
+.logoutBtn:hover {
+  background: #1E2D4A;
+  color: #E8F4FF;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #080D18;
+  overflow: hidden;
+}
+
+.topHeader {
+  height: 70px;
+  border-bottom: 1px solid #1E2D4A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(8, 13, 24, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background: #0F1628;
+  border: 1px solid #1E2D4A;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  width: 400px;
+  transition: border-color 0.2s;
+}
+
+.searchBar:focus-within {
+  border-color: #9BFF59;
+}
+
+.searchIcon {
+  color: #4A6280;
+  margin-right: 0.75rem;
+}
+
+.searchInput {
+  background: none;
+  border: none;
+  color: #E8F4FF;
+  width: 100%;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #4A6280;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bookBtn {
+  background: #9BFF59;
+  color: #080D18;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.bookBtn:hover {
+  background: #aaff6b;
+  transform: translateY(-1px);
+}
+
+.pageContent {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}

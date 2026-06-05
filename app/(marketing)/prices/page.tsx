@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import styles from './prices.module.css'
 
 export const metadata: Metadata = {
-  title: 'EPC Pricing | CertifyIQ',
+  title: 'EPC Pricing | Avorria',
   description: 'Transparent, fixed-price EPC assessments from £65. No hidden fees. Includes assessor visit, national registration and 10-year validity.',
 }
 

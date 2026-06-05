@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
           <div className={styles.col}>
             <h4>Services</h4>
-            <Link href="/book?service=domestic">Domestic EPC</Link>
+            <Link href="/services/domestic-epc">Domestic EPC</Link>
             <Link href="/services/commercial-epc">Commercial EPC</Link>
             <Link href="/services/new-build-epc">New Build EPC & SAP</Link>
             <Link href="/services/air-tightness">Air Tightness Testing</Link>
