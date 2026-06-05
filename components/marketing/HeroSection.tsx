@@ -1,52 +1,7 @@
 'use client'
-import React, { useRef, useEffect, useState, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import styles from './HeroSection.module.css'
-
-// ── Particle field ──
-function ParticleCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')!
-    let animId: number
-    const particles: { x: number; y: number; vx: number; vy: number; r: number }[] = []
-    const resize = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-    }
-    resize()
-    for (let i = 0; i < 30; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 2 + 1,
-      })
-    }
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy
-        if (p.x < 0) p.x = canvas.width
-        if (p.x > canvas.width) p.x = 0
-        if (p.y < 0) p.y = canvas.height
-        if (p.y > canvas.height) p.y = 0
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(15, 118, 110, 0.15)'
-        ctx.fill()
-      })
-      animId = requestAnimationFrame(draw)
-    }
-    draw()
-    window.addEventListener('resize', resize)
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
-  }, [])
-  return <canvas ref={canvasRef} className={styles.canvas} />
-}
 
 // ── Price Calculator ──
 const PROPERTY_TYPES = ['Flat', 'Terraced', 'Semi', 'Detached', 'Bungalow']
@@ -152,13 +107,16 @@ function PriceCalculator() {
 export default function HeroSection() {
   return (
     <section className={styles.hero}>
-      <ParticleCanvas />
+      {/* Background image */}
+      <div className={styles.bgImage} aria-hidden="true" />
+      {/* Light overlay */}
+      <div className={styles.overlay} aria-hidden="true" />
       <div className={styles.inner}>
         <div className={styles.left}>
           <span className={styles.eyebrow}>RdSAP 10 Certified Assessors · Chesterfield &amp; Derbyshire</span>
-          <h1 className={styles.h1}>Get your EPC.<br />Done properly.</h1>
+          <h1 className={styles.h1}>Your home's energy<br />certificate, sorted.</h1>
           <p className={styles.sub}>
-            Fast, transparent, fully accredited Energy Performance Certificates for homeowners, landlords and estate agents. Certificate issued within 24 hours of assessment.
+            Fully accredited Energy Performance Certificates for homeowners, landlords and estate agents across Chesterfield &amp; Derbyshire. Certificate issued within 24 hours of your assessment.
           </p>
           <div className={styles.ctas}>
             <Link href="/book" className={styles.ctaPrimary} id="hero-cta-book">Book your EPC — from £65</Link>

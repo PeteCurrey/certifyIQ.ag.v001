@@ -3,21 +3,37 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: var(--gradient-hero);
   overflow: hidden;
   padding-top: 80px;
 }
 
-.canvas {
+/* Full-screen background photo */
+.bgImage {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  background-image: url('/hero-bg.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* Soft white overlay — keeps the photo visible but ensures legibility */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.80) 45%,
+    rgba(255, 255, 255, 0.35) 100%
+  );
+  z-index: 1;
 }
 
 .inner {
   position: relative;
+  z-index: 2;
   max-width: 1280px;
   margin: 0 auto;
   padding: 6rem 2rem 4rem;
