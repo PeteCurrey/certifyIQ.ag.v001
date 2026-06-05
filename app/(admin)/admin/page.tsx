@@ -34,6 +34,7 @@ export default function AdminDashboard() {
   const [bookings, setBookings] = useState<Booking[]>([])
   const [loading, setLoading] = useState(true)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false)
   
   const supabase = createClient()
 
@@ -43,6 +44,15 @@ export default function AdminDashboard() {
         const { data: { user }, error: userErr } = await supabase.auth.getUser()
         if (userErr || !user) {
           throw new Error('Assessor session not found. Please log in.')
+        }
+
+        const { data: curAssessor } = await supabase
+          .from('assessors')
+          .select('is_super_admin')
+          .eq('auth_user_id', user.id)
+          .single()
+        if (curAssessor?.is_super_admin) {
+          setIsSuperAdmin(true)
         }
 
         // Fetch all bookings (since assessors can see all bookings)
@@ -156,6 +166,12 @@ export default function AdminDashboard() {
                   <th>Client</th>
                   <th>Preferred Date</th>
                   <th>Slot</th>
+                  {isSuperAdmin && (
+                    <>
+                      <th>Sales Price</th>
+                      <th>Payment Date</th>
+                    </>
+                  )}
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -165,6 +181,10 @@ export default function AdminDashboard() {
                   const prop = booking.properties
                   const cust = booking.customers
                   const isInspectable = booking.status !== 'certificate_issued' && booking.status !== 'cancelled'
+                  
+                  // Payment Date calculation: confirmed_datetime or created_at for paid items
+                  const hasPaid = booking.status !== 'pending_payment' && booking.status !== 'cancelled'
+                  const paymentDate = hasPaid ? (booking.confirmed_datetime || booking.created_at) : null
 
                   return (
                     <tr key={booking.id}>
@@ -183,6 +203,16 @@ export default function AdminDashboard() {
                       </td>
                       <td>{booking.preferred_date}</td>
                       <td style={{ textTransform: 'capitalize' }}>{booking.preferred_time_slot}</td>
+                      {isSuperAdmin && (
+                        <>
+                          <td style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, color: 'var(--accent-lime)' }}>
+                            £{booking.price_gbp}
+                          </td>
+                          <td style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
+                            {paymentDate ? new Date(paymentDate).toLocaleDateString('en-GB') : '—'}
+                          </td>
+                        </>
+                      )}
                       <td>
                         <StatusBadge status={booking.status} />
                       </td>

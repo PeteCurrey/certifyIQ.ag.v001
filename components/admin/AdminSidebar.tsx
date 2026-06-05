@@ -1,8 +1,8 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut } from 'lucide-react'
+import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import styles from './AdminSidebar.module.css'
 
@@ -10,6 +10,24 @@ export default function AdminSidebar() {
   const pathname = usePathname()
   const router = useRouter()
   const supabase = createClient()
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false)
+
+  useEffect(() => {
+    async function checkRole() {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        const { data } = await supabase
+          .from('assessors')
+          .select('is_super_admin')
+          .eq('auth_user_id', user.id)
+          .single()
+        if (data?.is_super_admin) {
+          setIsSuperAdmin(true)
+        }
+      }
+    }
+    checkRole()
+  }, [])
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
@@ -23,6 +41,12 @@ export default function AdminSidebar() {
     { name: 'Assessments', href: '/admin/assessments', icon: ClipboardList },
     { name: 'Settings', href: '/admin/settings', icon: Settings },
   ]
+
+  if (isSuperAdmin) {
+    // Insert after Assessments or keep order
+    menuItems.splice(3, 0, { name: 'Team Directory', href: '/admin/team', icon: Users })
+    menuItems.splice(4, 0, { name: 'Revenue', href: '/admin/revenue', icon: BarChart3 })
+  }
 
   return (
     <aside className={styles.sidebar}>

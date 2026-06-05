@@ -15,12 +15,15 @@ interface Assessor {
   accreditation_expiry: string
   service_area_postcodes: string[]
   is_active: boolean
+  is_super_admin: boolean
 }
 
 export default function TeamPage() {
   const [assessors, setAssessors] = useState<Assessor[]>([])
   const [loading, setLoading] = useState(true)
   const [inviteModalOpen, setInviteModalOpen] = useState(false)
+  const [currentUser, setCurrentUser] = useState<any>(null)
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false)
   
   // New Assessor state
   const [newAssessor, setNewAssessor] = useState({
@@ -31,6 +34,7 @@ export default function TeamPage() {
     number: '',
     expiry: '',
     postcodes: '',
+    isSuperAdmin: false,
   })
 
   const supabase = createClient()
@@ -38,6 +42,19 @@ export default function TeamPage() {
   useEffect(() => {
     async function loadTeam() {
       try {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user) {
+          setCurrentUser(user)
+          const { data: curAssessor } = await supabase
+            .from('assessors')
+            .select('is_super_admin')
+            .eq('auth_user_id', user.id)
+            .single()
+          if (curAssessor?.is_super_admin) {
+            setIsSuperAdmin(true)
+          }
+        }
+
         const { data, error } = await supabase
           .from('assessors')
           .select('*')
@@ -70,6 +87,26 @@ export default function TeamPage() {
     }
   }
 
+  const handleToggleSuperAdmin = async (id: string, currentVal: boolean) => {
+    if (!isSuperAdmin) {
+      alert('Only Super Admins can manage user permissions.')
+      return
+    }
+    try {
+      const { error } = await supabase
+        .from('assessors')
+        .update({ is_super_admin: !currentVal })
+        .eq('id', id)
+
+      if (error) throw error
+
+      setAssessors(prev => prev.map(a => a.id === id ? { ...a, is_super_admin: !currentVal } : a))
+    } catch (err) {
+      console.error(err)
+      alert('Failed to update super admin permissions')
+    }
+  }
+
   const handleCreateAssessor = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
@@ -89,6 +126,7 @@ export default function TeamPage() {
           accreditation_expiry: newAssessor.expiry,
           service_area_postcodes: postcodeArr,
           is_active: true,
+          is_super_admin: newAssessor.isSuperAdmin,
         })
         .select('*')
         .single()
@@ -105,6 +143,7 @@ export default function TeamPage() {
         number: '',
         expiry: '',
         postcodes: '',
+        isSuperAdmin: false,
       })
     } catch (err: any) {
       console.error(err)
@@ -159,26 +198,64 @@ export default function TeamPage() {
               {/* Status Indicator */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
                 <div>
-                  <h3 className={styles.cardTitle} style={{ margin: 0 }}>{assessor.full_name}</h3>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
-                    ID: {assessor.accreditation_number}
-                  </span>
+                  <h3 className={styles.cardTitle} style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    {assessor.full_name}
+                  </h3>
+                  <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.2rem' }}>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+                      ID: {assessor.accreditation_number}
+                    </span>
+                    {assessor.is_super_admin && (
+                      <span style={{
+                        fontSize: '0.65rem',
+                        background: 'rgba(245,166,35,0.15)',
+                        color: 'var(--accent-amber)',
+                        padding: '0rem 0.35rem',
+                        borderRadius: '4px',
+                        fontWeight: 600,
+                        border: '1px solid rgba(245,166,35,0.3)'
+                      }}>
+                        SUPER ADMIN
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <button
-                  onClick={() => handleToggleStatus(assessor.id, assessor.is_active)}
-                  style={{
-                    background: assessor.is_active ? 'rgba(155, 255, 89, 0.1)' : 'rgba(255, 92, 92, 0.1)',
-                    border: '1px solid ' + (assessor.is_active ? 'var(--accent-lime)' : 'var(--accent-red)'),
-                    color: assessor.is_active ? 'var(--accent-lime)' : 'var(--accent-red)',
-                    padding: '0.25rem 0.6rem',
-                    borderRadius: '4px',
-                    fontSize: '0.75rem',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {assessor.is_active ? 'Active' : 'Suspended'}
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'flex-end' }}>
+                  <button
+                    onClick={() => handleToggleStatus(assessor.id, assessor.is_active)}
+                    style={{
+                      background: assessor.is_active ? 'rgba(155, 255, 89, 0.1)' : 'rgba(255, 92, 92, 0.1)',
+                      border: '1px solid ' + (assessor.is_active ? 'var(--accent-lime)' : 'var(--accent-red)'),
+                      color: assessor.is_active ? 'var(--accent-lime)' : 'var(--accent-red)',
+                      padding: '0.25rem 0.6rem',
+                      borderRadius: '4px',
+                      fontSize: '0.75rem',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {assessor.is_active ? 'Active' : 'Suspended'}
+                  </button>
+
+                  {isSuperAdmin && currentUser?.email !== assessor.email && (
+                    <button
+                      onClick={() => handleToggleSuperAdmin(assessor.id, assessor.is_super_admin)}
+                      style={{
+                        background: assessor.is_super_admin ? 'rgba(245, 166, 35, 0.1)' : 'rgba(255, 255, 255, 0.03)',
+                        border: '1px solid ' + (assessor.is_super_admin ? 'var(--accent-amber)' : 'var(--border-subtle)'),
+                        color: assessor.is_super_admin ? 'var(--accent-amber)' : 'var(--text-secondary)',
+                        padding: '0.2rem 0.5rem',
+                        borderRadius: '4px',
+                        fontSize: '0.7rem',
+                        cursor: 'pointer',
+                        fontWeight: 500,
+                      }}
+                      title="Toggle Super Admin role"
+                    >
+                      {assessor.is_super_admin ? 'Demote' : 'Promote Admin'}
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Warnings */}
@@ -341,6 +418,21 @@ export default function TeamPage() {
                   style={{ width: '100%', background: '#080d18', border: '1px solid var(--border-color)', color: '#fff', padding: '0.5rem 0.75rem', borderRadius: '6px' }}
                 />
               </div>
+
+              {isSuperAdmin && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
+                  <input
+                    type="checkbox"
+                    id="isSuperAdminInput"
+                    checked={newAssessor.isSuperAdmin}
+                    onChange={e => setNewAssessor(p => ({ ...p, isSuperAdmin: e.target.checked }))}
+                    style={{ accentColor: 'var(--accent-lime)', width: '16px', height: '16px' }}
+                  />
+                  <label htmlFor="isSuperAdminInput" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                    Grant Super Admin Permissions
+                  </label>
+                </div>
+              )}
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1rem' }}>
                 <button

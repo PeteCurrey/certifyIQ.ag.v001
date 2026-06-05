@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Bell, User, Settings, Menu, X, LayoutDashboard, Calendar, ClipboardList, LogOut } from 'lucide-react'
+import { Bell, User, Settings, Menu, X, LayoutDashboard, Calendar, ClipboardList, LogOut, Users, BarChart3 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import styles from './AdminHeader.module.css'
 
 export default function AdminHeader() {
   const [assessorName, setAssessorName] = useState<string | null>(null)
   const [accreditationNum, setAccreditationNum] = useState<string | null>(null)
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const supabase = createClient()
   const router = useRouter()
@@ -20,13 +21,16 @@ export default function AdminHeader() {
         // Fetch assessor record
         const { data, error } = await supabase
           .from('assessors')
-          .select('full_name, accreditation_number')
+          .select('full_name, accreditation_number, is_super_admin')
           .eq('auth_user_id', user.id)
           .single()
 
         if (data) {
           setAssessorName(data.full_name)
           setAccreditationNum(data.accreditation_number)
+          if (data.is_super_admin) {
+            setIsSuperAdmin(true)
+          }
         } else {
           setAssessorName(user.email ?? 'Assessor')
         }
@@ -65,7 +69,14 @@ export default function AdminHeader() {
             <User size={16} />
           </div>
           <div className={styles.meta}>
-            <span className={styles.name}>{assessorName || 'Assessor'}</span>
+            <span className={styles.name} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+              {assessorName || 'Assessor'}
+              {isSuperAdmin && (
+                <span style={{ fontSize: '0.6rem', color: 'var(--accent-amber)', background: 'rgba(245,166,35,0.15)', padding: '0.05rem 0.25rem', borderRadius: '4px', border: '1px solid rgba(245,166,35,0.3)' }}>
+                  Admin
+                </span>
+              )}
+            </span>
             {accreditationNum && (
               <span className={styles.accreditation}>{accreditationNum}</span>
             )}
@@ -112,6 +123,26 @@ export default function AdminHeader() {
                 <ClipboardList size={18} />
                 <span>Assessments</span>
               </Link>
+              {isSuperAdmin && (
+                <>
+                  <Link 
+                    href="/admin/team" 
+                    className={styles.drawerLink} 
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Users size={18} />
+                    <span>Team Directory</span>
+                  </Link>
+                  <Link 
+                    href="/admin/revenue" 
+                    className={styles.drawerLink} 
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <BarChart3 size={18} />
+                    <span>Revenue</span>
+                  </Link>
+                </>
+              )}
               <Link 
                 href="/admin/settings" 
                 className={styles.drawerLink} 

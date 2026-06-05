@@ -153,6 +153,14 @@ export default function LiveAssessmentPage() {
         if (bErr || !bookingData) throw new Error('Booking not found')
         setBooking(bookingData)
 
+        // Automatically set status to in_progress if starting assessment
+        if (bookingData.status === 'scheduled' || bookingData.status === 'paid') {
+          await supabase
+            .from('bookings')
+            .update({ status: 'in_progress', updated_at: new Date().toISOString() })
+            .eq('id', bookingId)
+        }
+
         const { data: assessmentData } = await supabase
           .from('assessments')
           .select('*')
@@ -161,6 +169,12 @@ export default function LiveAssessmentPage() {
 
         if (assessmentData) {
           setAssessment(assessmentData)
+          if (assessmentData.status === 'not_started') {
+            await supabase
+              .from('assessments')
+              .update({ status: 'in_progress', started_at: new Date().toISOString(), updated_at: new Date().toISOString() })
+              .eq('booking_id', bookingId)
+          }
           // Populate form with existing assessment data
           setForm(prev => ({
             ...prev,
