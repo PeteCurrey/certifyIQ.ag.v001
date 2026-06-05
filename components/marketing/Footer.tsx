@@ -10,7 +10,7 @@ export default function Footer() {
         <div className={styles.grid}>
           <div className={styles.col}>
             <div className={styles.brand}>
-              <span className={styles.logoMark}>C</span>
+
               <span className={styles.logoText}>Avorria</span>
             </div>
             <p className={styles.tagline}>RdSAP 10 certified EPCs for homeowners, landlords and agents across Chesterfield & Derbyshire.</p>

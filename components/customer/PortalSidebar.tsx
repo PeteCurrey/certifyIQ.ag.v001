@@ -28,7 +28,7 @@ export default function PortalSidebar() {
     <aside className={styles.sidebar}>
       <div className={styles.brand}>
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoMark}>C</span>
+
           <span className={styles.logoText}>Avorria</span>
         </Link>
         <span className={styles.portalBadge}>Client Portal</span>

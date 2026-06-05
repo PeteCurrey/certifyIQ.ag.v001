@@ -31,20 +31,7 @@
   text-decoration: none;
 }
 
-.logoMark {
-  display: inline-flex;
-  width: 36px;
-  height: 36px;
-  background: #0F766E;
-  color: #FFFFFF;
-  font-family: 'DM Mono', monospace;
-  font-weight: 600;
-  font-size: 1.15rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
+
 
 .logoText {
   font-family: 'Syne', sans-serif;

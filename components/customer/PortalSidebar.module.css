@@ -24,21 +24,6 @@
   text-decoration: none;
 }
 
-.logoMark {
-  display: inline-flex;
-  width: 32px;
-  height: 32px;
-  background: var(--accent-lime);
-  color: var(--bg-obsidian);
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 1rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  flex-shrink: 0;
-}
-
 .logoText {
   font-family: var(--font-headings);
   font-weight: 700;
