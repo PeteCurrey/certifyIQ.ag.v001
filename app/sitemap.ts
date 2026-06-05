@@ -18,6 +18,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/improve',
     '/epc-register',
     '/landlord-compliance',
+    '/developer',
+    '/developer/wizard',
     '/prices',
     '/book',
     '/faq',
@@ -58,5 +60,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  return [...routes, ...epcRoutes, ...complianceRoutes]
+  // Developer Compliance location SEO pages
+  const { data: developerPages } = await supabase
+    .from('developer_seo_pages')
+    .select('slug, created_at')
+    .eq('is_live', true)
+
+  const developerRoutes = (developerPages || []).map((page: { slug: string; created_at: string }) => ({
+    url: `${baseUrl}/developer/${page.slug}`,
+    lastModified: page.created_at ? new Date(page.created_at) : new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [...routes, ...epcRoutes, ...complianceRoutes, ...developerRoutes]
 }

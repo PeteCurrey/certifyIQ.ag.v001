@@ -1,0 +1,345 @@
+/* Wizard CSS Module */
+
+.wizardPage {
+  background: var(--bg-surface-elevated, #F4F4F5);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+}
+
+.header {
+  background: #fff;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.headerTitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.closeBtn {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--bg-surface-elevated);
+}
+
+.progressContainer {
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.progressBar {
+  max-width: 600px;
+  margin: 0 auto 0.75rem;
+  height: 6px;
+  background: var(--bg-surface-elevated);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--accent-lime);
+  transition: width 0.4s ease-in-out;
+}
+
+.progressText {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.mainArea {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 2rem;
+}
+
+.stepContainer {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 800px;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stepTitle {
+  font-size: 2rem;
+  font-family: 'Syne', sans-serif;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.stepDesc {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+}
+
+/* Options Grids */
+.optionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.optionCard {
+  background: #FAFAFA;
+  border: 2px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.optionCard:hover {
+  border-color: var(--text-muted);
+  background: #fff;
+}
+
+.optionCard.selected {
+  border-color: var(--accent-lime);
+  background: rgba(15, 118, 110, 0.05);
+}
+
+.optionIcon {
+  font-size: 2rem;
+}
+
+.optionLabel {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Small Options */
+.optionsGridSm {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.optionCardSm {
+  background: #FAFAFA;
+  border: 1px solid var(--border-subtle);
+  padding: 0.875rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.optionCardSm:hover {
+  border-color: var(--text-muted);
+}
+
+.optionCardSm.selected {
+  border-color: var(--accent-lime);
+  background: rgba(15, 118, 110, 0.05);
+  color: var(--accent-lime);
+}
+
+/* Forms */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.input {
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #FAFAFA;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-lime);
+  background: #fff;
+}
+
+/* Timeline Stage Selector */
+.timelineSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.timelineNode {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #FAFAFA;
+  border: 1px solid var(--border-subtle);
+  padding: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.timelineNode:hover {
+  border-color: var(--text-muted);
+}
+
+.timelineNode.selected {
+  border-color: var(--accent-lime);
+  background: rgba(15, 118, 110, 0.05);
+}
+
+.nodeCircle {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.timelineNode.selected .nodeCircle {
+  background: var(--accent-lime);
+  border-color: var(--accent-lime);
+  color: #fff;
+}
+
+.nodeLabel {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Actions */
+.actionRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s;
+}
+
+.backBtn:hover {
+  color: var(--text-primary);
+}
+
+.nextBtn, .submitBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #18181B;
+  color: #fff;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nextBtn:hover:not(:disabled) {
+  background: var(--accent-lime);
+}
+
+.submitBtn {
+  background: var(--accent-lime);
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #115E59;
+}
+
+.nextBtn:disabled, .submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.errorBox {
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--accent-red);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}

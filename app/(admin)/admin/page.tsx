@@ -40,9 +40,16 @@ interface ComplianceStats {
   recentReports: Array<{ id: string; address: string; postcode: string; overall_score: string; current_rating: string; created_at: string }>
 }
 
+interface DeveloperStats {
+  total: number
+  highRisk: number
+  recentProjects: Array<{ id: string; project_type: string; town: string; postcode: string; created_at: string }>
+}
+
 export default function AdminDashboard() {
   const [bookings, setBookings] = useState<Booking[]>([])
   const [complianceStats, setComplianceStats] = useState<ComplianceStats | null>(null)
+  const [developerStats, setDeveloperStats] = useState<DeveloperStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [isSuperAdmin, setIsSuperAdmin] = useState(false)
@@ -91,6 +98,19 @@ export default function AdminDashboard() {
           const atRisk = complianceData.filter((r: any) => ['AT RISK', 'HIGH RISK'].includes(r.overall_score || '')).length
           const compliant = total - nonCompliant - atRisk
           setComplianceStats({ total, nonCompliant, atRisk, compliant, recentReports: complianceData.slice(0, 5) })
+        }
+
+        // Fetch developer projects stats
+        const { data: developerData } = await supabase
+          .from('developer_projects')
+          .select('*, developer_compliance_reports(risk_score)')
+          .order('created_at', { ascending: false })
+          .limit(50)
+
+        if (developerData) {
+           const total = developerData.length
+           const highRisk = developerData.filter((p: any) => p.developer_compliance_reports?.[0]?.risk_score === 'HIGH').length
+           setDeveloperStats({ total, highRisk, recentProjects: developerData.slice(0, 5) })
         }
 
       } catch (err: any) {
@@ -273,6 +293,94 @@ export default function AdminDashboard() {
                           style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none' }}
                         >
                           View Report →
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Developer Projects Section */}
+      {developerStats && (
+        <div className={styles.jobsCard} style={{ marginTop: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <h3 className={styles.sectionTitle} style={{ marginBottom: 0 }}>Developer Compliance Projects</h3>
+            <Link
+              href="/developer"
+              style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none', fontFamily: 'var(--font-mono)' }}
+            >
+              → Open Wizard
+            </Link>
+          </div>
+
+          <div className={styles.metricsRow} style={{ marginBottom: '1.5rem' }}>
+             <div className={styles.metricCard}>
+              <div className={styles.metricHeader}>
+                <ClipboardList className={styles.metricIcon} style={{ color: 'var(--accent-lime)' }} />
+                <span>Total Projects Planned</span>
+              </div>
+              <div className={styles.metricValue}>{developerStats.total}</div>
+              <p className={styles.metricLabel}>Wizard completions</p>
+            </div>
+            <div className={styles.metricCard}>
+              <div className={styles.metricHeader}>
+                <TriangleAlert className={styles.metricIcon} style={{ color: '#FF5C5C' }} />
+                <span>High Risk Projects</span>
+              </div>
+              <div className={styles.metricValue} style={{ color: '#FF5C5C' }}>{developerStats.highRisk}</div>
+              <p className={styles.metricLabel}>Potential delays flagged</p>
+            </div>
+          </div>
+          
+           {developerStats.recentProjects.length > 0 && (
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Project</th>
+                    <th>Type</th>
+                    <th>Date Planned</th>
+                    <th>Risk Score</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {developerStats.recentProjects.map((p: any) => (
+                    <tr key={p.id}>
+                      <td>
+                        <div className={styles.propCell}>
+                          <strong>{p.town}</strong>
+                          <span>{p.postcode}</span>
+                        </div>
+                      </td>
+                      <td>{p.project_type}</td>
+                      <td style={{ fontSize: '0.8rem', color: '#8BA3BF', fontFamily: 'var(--font-mono)' }}>
+                        {new Date(p.created_at).toLocaleDateString('en-GB')}
+                      </td>
+                       <td>
+                        <span style={{
+                          display: 'inline-block',
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: '4px',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          background: p.developer_compliance_reports?.[0]?.risk_score === 'HIGH' ? 'rgba(255,92,92,0.1)' : p.developer_compliance_reports?.[0]?.risk_score === 'MEDIUM' ? 'rgba(245,166,35,0.1)' : 'rgba(155,255,89,0.1)',
+                          color: p.developer_compliance_reports?.[0]?.risk_score === 'HIGH' ? '#FF5C5C' : p.developer_compliance_reports?.[0]?.risk_score === 'MEDIUM' ? '#F5A623' : 'var(--accent-lime)',
+                        }}>
+                          {p.developer_compliance_reports?.[0]?.risk_score || 'N/A'}
+                        </span>
+                      </td>
+                      <td>
+                        <Link
+                          href={`/developer/report/${p.developer_compliance_reports?.[0]?.id}`}
+                          style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none' }}
+                        >
+                          View Plan →
                         </Link>
                       </td>
                     </tr>

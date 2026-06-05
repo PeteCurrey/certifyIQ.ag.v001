@@ -1,0 +1,254 @@
+/* Developer Location CSS Module */
+
+.page {
+  background: var(--bg-obsidian);
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+.hero {
+  background: linear-gradient(135deg, #FAFAFA 0%, #F4F4F5 100%);
+  padding: 6rem 2rem 4rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.heroInner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: rgba(15, 118, 110, 0.1);
+  color: var(--accent-lime);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-family: var(--font-headings);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #18181B;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+}
+
+.heroActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 2rem;
+  background: var(--accent-lime);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.primaryCta:hover {
+  background: #115E59;
+}
+
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 2rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.secondaryCta:hover {
+  background: var(--bg-surface-elevated);
+}
+
+/* Content Area */
+.contentSection {
+  padding: 4rem 2rem;
+  background: #fff;
+}
+
+.contentGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 4rem;
+}
+
+@media (max-width: 900px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.prose {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.prose h2 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 2.5rem 0 1rem;
+  font-family: var(--font-headings);
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 2rem 0 1rem;
+}
+
+.prose p {
+  margin-bottom: 1.5rem;
+}
+
+.prose ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.wizardPromo {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.wizardPromo h3 {
+  font-size: 1.75rem;
+  font-family: var(--font-headings);
+  margin-bottom: 1rem;
+}
+
+.wizardPromo p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+}
+
+.promoBtn {
+  display: inline-block;
+  background: #18181B;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.promoBtn:hover {
+  background: var(--accent-lime);
+}
+
+/* Sidebar */
+.trustCard {
+  background: #FAFAFA;
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.trustCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.trustList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trustList li {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contactCard {
+  background: var(--accent-lime);
+  color: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.contactCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.contactCard p {
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.phoneLink {
+  display: block;
+  font-size: 1.5rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.emailBtn {
+  display: block;
+  text-align: center;
+  background: #fff;
+  color: var(--accent-lime);
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.emailBtn:hover {
+  transform: translateY(-2px);
+}
