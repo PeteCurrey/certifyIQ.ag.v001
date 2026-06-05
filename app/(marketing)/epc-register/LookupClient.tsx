@@ -1,6 +1,7 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import RatingBadge from '@/components/ui/RatingBadge'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
 import styles from './lookup.module.css'
@@ -68,144 +69,7 @@ function EfficiencyBar({ current, potential }: { current: number; potential: num
   )
 }
 
-function CertCard({ row, onBack }: { row: EPCRow; onBack: () => void }) {
-  const rating = row['current-energy-rating'] || 'G'
-  const potential = row['potential-energy-rating'] || 'C'
-  const lodged = row['lodgement-datetime']
-  const lodgedYear = lodged ? new Date(lodged).getFullYear() : '—'
-  const expiry = expiryInfo(lodged)
 
-  const annualCost = (Number(row['lighting-cost-current']) || 0) +
-    (Number(row['heating-cost-current']) || 0) +
-    (Number(row['hot-water-cost-current']) || 0)
-
-  const urgentRatings = ['G', 'F', 'E']
-  const goodRatings = ['A', 'B']
-
-  const fullAddress = [row['address1'], row['address2'], row['address3'], row['postcode']]
-    .filter(Boolean).join(', ')
-
-  return (
-    <div className={styles.certDetail}>
-      <button className={styles.backLink} onClick={onBack}>← Search again</button>
-
-      {/* Top row */}
-      <div className={styles.certTopRow}>
-        <div className={styles.certRatings}>
-          <div className={styles.certRatingBlock}>
-            <span className={styles.certRatingLabel}>Current</span>
-            <RatingBadge rating={rating} size="lg" />
-          </div>
-          <div className={styles.certArrow}>→</div>
-          <div className={styles.certRatingBlock}>
-            <span className={styles.certRatingLabel}>Potential</span>
-            <RatingBadge rating={potential} size="md" />
-          </div>
-        </div>
-        <div className={styles.certMeta}>
-          <p className={styles.certAddress}>{fullAddress}</p>
-          <p className={styles.certPropType}>{row['built-form']} {row['property-type']}</p>
-          <p className={`${styles.certExpiry} ${expiry.cls}`}>{expiry.label}</p>
-          <p className={styles.certLodged}>Lodged: {lodgedYear}</p>
-        </div>
-      </div>
-
-      {/* Efficiency bar */}
-      <div className={styles.certSection}>
-        <h3 className={styles.certSectionTitle}>Energy efficiency score</h3>
-        <EfficiencyBar
-          current={Number(row['current-energy-efficiency']) || 0}
-          potential={Number(row['potential-energy-efficiency']) || 0}
-        />
-      </div>
-
-      {/* Energy data cards */}
-      <div className={styles.energyCardsRow}>
-        {annualCost > 0 && (
-          <div className={styles.energyCard}>
-            <span className={styles.energyCardLabel}>Annual energy cost</span>
-            <span className={styles.energyCardValue}>£{Math.round(annualCost).toLocaleString()}</span>
-            <span className={styles.energyCardUnit}>per year (est.)</span>
-          </div>
-        )}
-        {row['co2-emissions-current'] && (
-          <div className={styles.energyCard}>
-            <span className={styles.energyCardLabel}>CO₂ emissions</span>
-            <span className={styles.energyCardValue}>{row['co2-emissions-current']}</span>
-            <span className={styles.energyCardUnit}>tonnes/year</span>
-          </div>
-        )}
-        {row['energy-consumption-current'] && (
-          <div className={styles.energyCard}>
-            <span className={styles.energyCardLabel}>Energy use</span>
-            <span className={styles.energyCardValue}>{Math.round(Number(row['energy-consumption-current']))}</span>
-            <span className={styles.energyCardUnit}>kWh/m²/year</span>
-          </div>
-        )}
-        {row['total-floor-area'] && (
-          <div className={styles.energyCard}>
-            <span className={styles.energyCardLabel}>Floor area</span>
-            <span className={styles.energyCardValue}>{row['total-floor-area']}</span>
-            <span className={styles.energyCardUnit}>m²</span>
-          </div>
-        )}
-      </div>
-
-      {/* Environmental impact */}
-      {row['environment-impact-current'] && (
-        <div className={styles.certSection}>
-          <h3 className={styles.certSectionTitle}>Environmental impact</h3>
-          <div className={styles.envImpactRow}>
-            <div className={styles.envImpactBlock}>
-              <span className={styles.envImpactLabel}>Current</span>
-              <span className={styles.envImpactScore} style={{ color: 'var(--accent-amber)' }}>
-                {row['environment-impact-current']}
-              </span>
-            </div>
-            <div className={styles.envImpactArrow}>→</div>
-            <div className={styles.envImpactBlock}>
-              <span className={styles.envImpactLabel}>Potential</span>
-              <span className={styles.envImpactScore} style={{ color: 'var(--accent-lime)' }}>
-                {row['environment-impact-potential']}
-              </span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Contextual CTA */}
-      {urgentRatings.includes(rating) && (
-        <div className={`${styles.ctaBand} ${styles.ctaBandUrgent}`}>
-          <div>
-            <strong>Below rental compliance threshold</strong>
-            <p>Properties rated {rating} may not meet current Minimum Energy Efficiency Standards. Book an assessment to understand your options.</p>
-          </div>
-          <Link href="/book" className={styles.ctaBandBtn}>Book an EPC →</Link>
-        </div>
-      )}
-      {!urgentRatings.includes(rating) && !goodRatings.includes(rating) && (
-        <div className={`${styles.ctaBand} ${styles.ctaBandNeutral}`}>
-          <div>
-            <strong>{expiry.label}</strong>
-            <p>Stay compliant — book a renewal before your certificate expires.</p>
-          </div>
-          <Link href="/book" className={styles.ctaBandBtn}>Book a renewal →</Link>
-        </div>
-      )}
-      {goodRatings.includes(rating) && (
-        <div className={`${styles.ctaBand} ${styles.ctaBandGood}`}>
-          <div>
-            <strong>Excellent energy rating</strong>
-            <p>Share this certificate with your estate agent or solicitor to demonstrate your property's efficiency.</p>
-          </div>
-          <a href={`https://epc.opendatacommunities.org/domestic/${row['lmk-key']}`} target="_blank" rel="noopener noreferrer" className={styles.ctaBandBtn}>
-            View official certificate →
-          </a>
-        </div>
-      )}
-    </div>
-  )
-}
 
 function SkeletonCards() {
   return (
@@ -221,15 +85,15 @@ function SkeletonCards() {
   )
 }
 
-export default function LookupClient() {
-  const [postcode, setPostcode] = useState('')
+export default function LookupClient({ defaultPostcode = '' }: { defaultPostcode?: string }) {
+  const [postcode, setPostcode] = useState(defaultPostcode)
   const [address, setAddress] = useState('')
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [domestic, setDomestic] = useState<EPCRow[]>([])
   const [nonDomestic, setNonDomestic] = useState<any[]>([])
-  const [selected, setSelected] = useState<EPCRow | null>(null)
+  const router = useRouter()
   const [postcodeErr, setPostcodeErr] = useState('')
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -242,7 +106,6 @@ export default function LookupClient() {
     setLoading(true)
     setErrorMsg(null)
     setSearched(false)
-    setSelected(null)
     setDomestic([])
     setNonDomestic([])
 
@@ -255,14 +118,35 @@ export default function LookupClient() {
       setDomestic(data.domestic || [])
       setNonDomestic(data.nonDomestic || [])
       setSearched(true)
-      // Auto-select if only one result
-      if ((data.domestic || []).length === 1) setSelected(data.domestic[0])
+
+      // Log the search
+      fetch('/api/epc-analytics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'log_search',
+          postcode: postcode.trim(),
+          address_query: address.trim(),
+        })
+      }).catch(err => console.error('Failed to log search', err))
+
+      // Auto-redirect if only one result
+      if ((data.domestic || []).length === 1) {
+        router.push(`/epc-register/result/${data.domestic[0]['lmk-key']}`)
+      }
     } catch (err: any) {
       setErrorMsg(err.message)
     } finally {
       setLoading(false)
     }
   }
+
+  // Auto-run search if a defaultPostcode is provided and it looks valid
+  useEffect(() => {
+    if (defaultPostcode && POSTCODE_RE.test(defaultPostcode) && !searched && !loading) {
+      handleSearch(new Event('submit') as any)
+    }
+  }, [defaultPostcode])
 
   const total = domestic.length + nonDomestic.length
 
@@ -321,13 +205,10 @@ export default function LookupClient() {
       {loading && <SkeletonCards />}
       {errorMsg && <div className={styles.error}>{errorMsg}</div>}
 
-      {/* Full certificate view */}
-      {selected && !loading && (
-        <CertCard row={selected} onBack={() => setSelected(null)} />
-      )}
+
 
       {/* Results list */}
-      {!selected && searched && !loading && !errorMsg && (
+      {searched && !loading && !errorMsg && (
         <div className={styles.resultsArea}>
           <h2 className={styles.resultsTitle}>
             {total === 0 ? 'No results found' : `${total} certificate${total !== 1 ? 's' : ''} found`}
@@ -345,7 +226,7 @@ export default function LookupClient() {
                   <button
                     key={row['lmk-key']}
                     className={styles.addressCard}
-                    onClick={() => setSelected(row)}
+                    onClick={() => router.push(`/epc-register/result/${row['lmk-key']}`)}
                   >
                     <div className={styles.addressCardLeft}>
                       <p className={styles.addressCardAddr}>{fullAddr}</p>

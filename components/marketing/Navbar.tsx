@@ -163,10 +163,10 @@ export default function Navbar() {
                     <span className={styles.menuDesc}>Cost-effective ways to boost efficiency.</span>
                   </div>
                 </Link>
-                <Link href="/lookup" className={styles.menuItem} onClick={closeAll}>
+                <Link href="/epc-register" className={styles.menuItem} onClick={closeAll}>
                   <Search className={styles.menuIcon} size={20} />
                   <div>
-                    <span className={styles.menuTitle}>EPC Lookup</span>
+                    <span className={styles.menuTitle}>EPC Register Search</span>
                     <span className={styles.menuDesc}>Find and download an existing certificate.</span>
                   </div>
                 </Link>
@@ -211,7 +211,7 @@ export default function Navbar() {
             <span className={styles.mobileGroupHeading}>Tools</span>
             <Link href="/estimate" onClick={closeAll}>Estimator</Link>
             <Link href="/improve" onClick={closeAll}>Advisor</Link>
-            <Link href="/lookup" onClick={closeAll}>EPC Lookup</Link>
+            <Link href="/epc-register" onClick={closeAll}>EPC Lookup</Link>
             <Link href="/tools/sap-checker" onClick={closeAll}>SAP Compliance Checker</Link>
           </div>
           <div className={styles.mobileGroup}>

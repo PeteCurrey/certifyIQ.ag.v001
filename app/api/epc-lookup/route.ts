@@ -59,7 +59,27 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Certificate not found' }, { status: 404 })
       }
       const data = await res.json()
-      return NextResponse.json(data)
+
+      // Fetch recommendations if domestic
+      let recommendations = []
+      if (type !== 'non-domestic') {
+        const recEndpoint = `https://epc.opendatacommunities.org/api/v1/domestic/recommendations/${encodeURIComponent(lmk)}`
+        try {
+          incrementCounter()
+          const recRes = await fetch(recEndpoint, {
+            headers: { Accept: 'application/json', Authorization: auth },
+            next: { revalidate: 3600 },
+          })
+          if (recRes.ok) {
+            const recData = await recRes.json()
+            recommendations = recData.rows || []
+          }
+        } catch (e) {
+          console.error('[EPC API] Failed to fetch recommendations', e)
+        }
+      }
+
+      return NextResponse.json({ ...data, recommendations })
     } catch (err) {
       console.error('[EPC API] Certificate fetch error:', err)
       return NextResponse.json({ error: 'Failed to fetch certificate' }, { status: 500 })
