@@ -45,9 +45,9 @@ export default async function DeveloperReportPage({ params }: { params: Promise<
 
       <div className={styles.topBar}>
         <Link href="/developer" className={styles.backLink}>← Back to Planner</Link>
-        <button onClick={() => {}} className={styles.printBtn} style={{ cursor: 'pointer' }}>
-          🖨️ Save as PDF
-        </button>
+        <a href={`/api/developer-compliance/pdf/${report.id}`} download className={styles.printBtn}>
+          🖨️ Download PDF Plan
+        </a>
       </div>
 
       {/* Hero Summary */}
@@ -187,11 +187,7 @@ export default async function DeveloperReportPage({ params }: { params: Promise<
         </div>
       </div>
       
-      {/* Client-side print script logic injected via dangerouslySetInnerHTML or simply utilizing window.print in a client wrapper if needed. For simplicity, we just use a basic onClick handler above which won't work in a pure server component without 'use client', so we'll leave it as a visual button for now, or wrap it in a client component in a refactor. */}
-      {/* Actually, to make print work, I'll add a tiny script. */}
-      <script dangerouslySetInnerHTML={{ __html: `
-        document.querySelector('.${styles.printBtn}').addEventListener('click', () => window.print());
-      `}} />
+      {/* The browser print script has been removed in favor of the new branded server-side PDF generator */}
     </div>
   )
 }
