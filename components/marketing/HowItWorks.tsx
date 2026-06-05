@@ -31,20 +31,31 @@ export default function HowItWorks() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <p className={styles.eyebrow}>Simple process</p>
-        <h2 className={styles.h2}>Three steps to certified</h2>
-        <div className={styles.steps}>
-          {steps.map((step, i) => (
-            <div key={i} className={styles.step}>
-              <div className={styles.stepIcon}>{step.icon}</div>
-              <div className={styles.stepContent}>
-                <span className={styles.stepNum}>{step.num}</span>
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <p className={styles.stepDesc}>{step.desc}</p>
-                <span className={styles.stepNote}>{step.note}</span>
-              </div>
+        <div className={styles.header}>
+          <p className={styles.eyebrow}>Simple process</p>
+          <h2 className={styles.h2}>Three steps to certified</h2>
+        </div>
+        <div className={styles.grid}>
+          <div className={styles.imageCol}>
+            <div className={styles.imageWrapper}>
+              <img src="/how-it-works.jpg" alt="Professional assessor visiting a beautifully lit modern home" className={styles.image} />
             </div>
-          ))}
+          </div>
+          <div className={styles.stepsCol}>
+            <div className={styles.steps}>
+              {steps.map((step, i) => (
+                <div key={i} className={styles.step}>
+                  <div className={styles.stepIcon}>{step.icon}</div>
+                  <div className={styles.stepContent}>
+                    <span className={styles.stepNum}>{step.num}</span>
+                    <h3 className={styles.stepTitle}>{step.title}</h3>
+                    <p className={styles.stepDesc}>{step.desc}</p>
+                    <span className={styles.stepNote}>{step.note}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

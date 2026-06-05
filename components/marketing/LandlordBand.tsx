@@ -6,6 +6,8 @@ import styles from './LandlordBand.module.css'
 export default function LandlordBand() {
   return (
     <section className={styles.band}>
+      <div className={styles.bgImage} aria-hidden="true" />
+      <div className={styles.overlay} aria-hidden="true" />
       <div className={styles.inner}>
         <div className={styles.left}>
           <span className={styles.badge}>
