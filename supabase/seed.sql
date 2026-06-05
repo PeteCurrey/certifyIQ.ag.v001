@@ -47,6 +47,42 @@ INSERT INTO assessors (
   1
 );
 
+-- Seed Pete Currey Assessor User
+INSERT INTO auth.users (
+  id, instance_id, email, encrypted_password, email_confirmed_at, 
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at, role
+)
+VALUES (
+  '23456789-2345-2345-2345-234567890123', 
+  '00000000-0000-0000-0000-000000000000', 
+  'petecurrrey@gmail.com', 
+  crypt('Vivaro2104!!', gen_salt('bf')), 
+  now(), 
+  '{"provider": "email", "providers": ["email"]}', 
+  '{}', 
+  now(), 
+  now(), 
+  'authenticated'
+) ON CONFLICT DO NOTHING;
+
+INSERT INTO assessors (
+  auth_user_id, full_name, email, phone, accreditation_body, 
+  accreditation_number, accreditation_expiry, service_area_postcodes, is_active,
+  attma_registration, attma_level
+) VALUES (
+  '23456789-2345-2345-2345-234567890123', 
+  'Pete Currey', 
+  'petecurrrey@gmail.com', 
+  '07700900002', 
+  'elmhurst', 
+  'EES123456', 
+  '2026-12-31', 
+  ARRAY['S40','S41','S42','S43','S44','S45','DE4','DE55'], 
+  true,
+  true,
+  1
+);
+
 -- Seed Customers
 INSERT INTO auth.users (
   id, instance_id, email, encrypted_password, email_confirmed_at, 
