@@ -61,7 +61,7 @@ async function runMigrations() {
 async function createAssessorUser() {
   console.log('👤 Creating assessor user account...');
 
-  const email = 'petecurrrey@gmail.com';
+  const email = 'petecurrey@gmail.com';
   const password = 'Vivaro2104!!';
 
   // Check if user already exists
@@ -113,7 +113,7 @@ async function createAssessorRecord(authUserId) {
         service_area_postcodes, is_active
       )
       VALUES (
-        $1, 'Pete Currey', 'petecurrrey@gmail.com', '07700900000',
+        $1, 'Pete Currey', 'petecurrey@gmail.com', '07700900000',
         'elmhurst', 'EES-TEST-001', '2027-12-31',
         ARRAY['S40','S41','S42','S43','S44','S45','DE4','DE55'],
         true
@@ -156,7 +156,7 @@ async function main() {
     console.log('\n🎉 Setup Complete!');
     console.log('==================');
     console.log('Login URL:  https://avorria.co.uk/login (or localhost:3000/login)');
-    console.log('Email:      petecurrrey@gmail.com');
+    console.log('Email:      petecurrey@gmail.com');
     console.log('Password:   Vivaro2104!!');
     console.log('\nYou should now be able to log in and access the assessor dashboard.');
   } else {

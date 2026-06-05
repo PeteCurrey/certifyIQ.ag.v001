@@ -11,10 +11,10 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
 })
 
 async function run() {
-  console.log('Creating auth user for petecurrrey@gmail.com...')
+  console.log('Creating auth user for petecurrey@gmail.com...')
   
   const { data: authData, error: authError } = await supabase.auth.admin.createUser({
-    email: 'petecurrrey@gmail.com',
+    email: 'petecurrey@gmail.com',
     password: 'Vivaro2104!!',
     email_confirm: true
   })
@@ -37,7 +37,7 @@ async function run() {
           console.error('Error fetching users:', usersErr)
           process.exit(1)
       }
-      const user = users.users.find(u => u.email === 'petecurrrey@gmail.com')
+      const user = users.users.find(u => u.email === 'petecurrey@gmail.com')
       if (user) {
           userId = user.id
           console.log('Found existing user id:', userId)
@@ -53,7 +53,7 @@ async function run() {
   const { data: assessor, error: assessorErr } = await supabase.from('assessors').upsert({
     auth_user_id: userId,
     full_name: 'Pete Currey',
-    email: 'petecurrrey@gmail.com',
+    email: 'petecurrey@gmail.com',
     phone: '07700900002',
     accreditation_body: 'elmhurst',
     accreditation_number: 'EES123456',
@@ -70,7 +70,7 @@ async function run() {
       const { error: insErr } = await supabase.from('assessors').insert({
         auth_user_id: userId,
         full_name: 'Pete Currey',
-        email: 'petecurrrey@gmail.com',
+        email: 'petecurrey@gmail.com',
         phone: '07700900002',
         accreditation_body: 'elmhurst',
         accreditation_number: 'EES123456',
