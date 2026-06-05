@@ -44,7 +44,7 @@ const REQUIRED_PHOTOS = [
 ]
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
-export default function AosMobilePage() {
+function AosMobileContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const initialTab = searchParams.get('tab') || 'jobs'
@@ -720,5 +720,13 @@ export default function AosMobilePage() {
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       `}</style>
     </div>
+  )
+}
+
+export default function AosMobilePage() {
+  return (
+    <React.Suspense fallback={<div style={{ display: 'flex', height: '100vh', backgroundColor: '#080D18', alignItems: 'center', justifyContent: 'center' }}><Loader2 size={48} style={{ color: '#9BFF59', animation: 'spin 1s linear infinite' }} /></div>}>
+      <AosMobileContent />
+    </React.Suspense>
   )
 }

@@ -271,7 +271,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     return new NextResponse(stream as unknown as ReadableStream, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': \`attachment; filename="Avorria_Compliance_Plan_\${report.developer_projects.postcode.replace(' ', '_')}.pdf"\`
+        'Content-Disposition': `attachment; filename="Avorria_Compliance_Plan_${report.developer_projects.postcode.replace(' ', '_')}.pdf"`
       }
     })
   } catch (error: any) {
