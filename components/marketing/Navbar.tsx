@@ -184,7 +184,7 @@ export default function Navbar() {
           <Link href="/prices" className={styles.link}>Pricing</Link>
           <Link href="/blog" className={styles.link}>Blog</Link>
           <Link href="/faq" className={styles.link}>FAQ</Link>
-          <Link href="/portal" className={styles.linkPortal}>My Account</Link>
+          <Link href="/login" className={styles.linkPortal}>My Account</Link>
           <Link href="/book" className={styles.cta}>Book Now</Link>
         </div>
 
@@ -220,7 +220,7 @@ export default function Navbar() {
             <Link href="/blog" onClick={closeAll}>Blog</Link>
             <Link href="/faq" onClick={closeAll}>FAQ</Link>
           </div>
-          <Link href="/portal" className={styles.mobileLinkPortal} onClick={closeAll}>My Account</Link>
+          <Link href="/login" className={styles.mobileLinkPortal} onClick={closeAll}>My Account</Link>
           <Link href="/book" className={styles.cta} onClick={closeAll}>Book Now</Link>
         </div>
       )}
