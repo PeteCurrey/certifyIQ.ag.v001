@@ -169,7 +169,7 @@ export default function AIEstimatorPage() {
       {!result && !loading && (
         <div className={styles.wizardCard}>
           <div className={styles.wizardHeader}>
-            <span className={styles.eyebrow}>AI EPC Estimator</span>
+            <span className={styles.eyebrow}>EPC Estimator</span>
             <div className={styles.progressBar}>
               <div className={styles.progressFill} style={{ width: `${progressPct}%` }} />
             </div>
@@ -309,7 +309,7 @@ export default function AIEstimatorPage() {
               href={`/improve?postcode=S401AA&rating=${result.band}`} 
               className={styles.buttonImprove}
             >
-              Analyze Upgrades in AI Planner →
+              Analyze Upgrades in Planner →
             </Link>
             <Link href="/book" className={styles.buttonBook}>
               Book Official EPC Assessment — £65

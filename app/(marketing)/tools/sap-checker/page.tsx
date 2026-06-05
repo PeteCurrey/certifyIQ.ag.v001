@@ -71,7 +71,7 @@ export default function SapComplianceCheckerPage() {
   return (
     <div className={styles.container}>
       <div className={styles.titleSection}>
-        <span className={styles.eyebrow}>AI Compliance Tools</span>
+        <span className={styles.eyebrow}>Compliance Tools</span>
         <h1 className={styles.title}>SAP Compliance Checker</h1>
         <p className={styles.subtitle}>
           Estimate your new build or conversion's Part L SAP performance before submitting plans to Building Control.

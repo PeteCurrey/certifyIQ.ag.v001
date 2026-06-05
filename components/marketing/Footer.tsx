@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
           <div className={styles.col}>
             <h4>Tools</h4>
-            <Link href="/estimate">AI Estimator</Link>
+            <Link href="/estimate">EPC Estimator</Link>
             <Link href="/improve">Improvement Advisor</Link>
             <Link href="/lookup">EPC Lookup</Link>
             <Link href="/tools/sap-checker">SAP Checker</Link>

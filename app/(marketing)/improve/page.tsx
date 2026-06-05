@@ -77,7 +77,7 @@ function ImprovementPlannerContent() {
   return (
     <div className={styles.planner}>
       <div className={styles.hero}>
-        <span className={styles.eyebrow}>AI Retrofit Advisor</span>
+        <span className={styles.eyebrow}>Retrofit Advisor</span>
         <h1 className={styles.title}>Improve your EPC rating</h1>
         <p className={styles.subtext}>
           Find the most cost-effective path to reach Band C or higher. Generate a customized capital plan ranked by return on investment.
