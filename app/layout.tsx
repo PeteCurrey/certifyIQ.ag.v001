@@ -3,16 +3,16 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'CertifyIQ — UK EPC Assessments | Chesterfield & Derbyshire',
-    template: '%s | CertifyIQ',
+    default: 'Avorria — UK EPC Assessments | Chesterfield & Derbyshire',
+    template: '%s | Avorria',
   },
   description: 'Fast, transparent, fully accredited Energy Performance Certificates for homeowners, landlords and estate agents. Certificate issued within 24 hours of assessment.',
   keywords: ['EPC', 'Energy Performance Certificate', 'Chesterfield', 'Derbyshire', 'RdSAP 10', 'domestic energy assessor'],
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    url: 'https://certifyiq.co.uk',
-    siteName: 'CertifyIQ',
+    url: 'https://avorria.co.uk',
+    siteName: 'Avorria',
   },
 }
 

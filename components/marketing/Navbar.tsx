@@ -73,7 +73,7 @@ export default function Navbar() {
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} onClick={closeAll}>
           <span className={styles.logoMark}>C</span>
-          <span className={styles.logoText}>CertifyIQ</span>
+          <span className={styles.logoText}>Avorria</span>
         </Link>
         
         {/* Desktop Links */}

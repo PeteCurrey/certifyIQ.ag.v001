@@ -12,13 +12,13 @@ const TESTIMONIALS = [
     name: 'James R.', 
     type: 'Landlord · Chesterfield', 
     rating: 5, 
-    text: 'I used CertifyIQ for four of my rental properties. The bulk pricing saved me a significant amount and the turnaround was outstanding.' 
+    text: 'I used Avorria for four of my rental properties. The bulk pricing saved me a significant amount and the turnaround was outstanding.' 
   },
   { 
     name: 'Premier Homes', 
     type: 'Estate Agent · Derby', 
     rating: 5, 
-    text: 'We use CertifyIQ as our preferred EPC provider. Fast, reliable, and the branded reports are a nice touch for our clients.' 
+    text: 'We use Avorria as our preferred EPC provider. Fast, reliable, and the branded reports are a nice touch for our clients.' 
   },
 ]
 

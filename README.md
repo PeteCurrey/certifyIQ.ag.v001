@@ -1,4 +1,4 @@
-# CertifyIQ — UK EPC Assessments
+# Avorria — UK EPC Assessments
 
 Fast, transparent, fully accredited Energy Performance Certificates for homeowners, landlords and estate agents in Chesterfield & Derbyshire.
 

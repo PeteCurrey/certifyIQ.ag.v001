@@ -11,7 +11,7 @@ export default function Footer() {
           <div className={styles.col}>
             <div className={styles.brand}>
               <span className={styles.logoMark}>C</span>
-              <span className={styles.logoText}>CertifyIQ</span>
+              <span className={styles.logoText}>Avorria</span>
             </div>
             <p className={styles.tagline}>RdSAP 10 certified EPCs for homeowners, landlords and agents across Chesterfield & Derbyshire.</p>
             <div className={styles.contact}>
@@ -19,9 +19,9 @@ export default function Footer() {
                 <Phone size={16} className={styles.icon} />
                 <span>01246 000 000</span>
               </a>
-              <a href="mailto:info@certifyiq.co.uk" className={styles.contactItem}>
+              <a href="mailto:info@avorria.co.uk" className={styles.contactItem}>
                 <Mail size={16} className={styles.icon} />
-                <span>info@certifyiq.co.uk</span>
+                <span>info@avorria.co.uk</span>
               </a>
             </div>
           </div>
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
         </div>
         <div className={styles.bottom}>
-          <p>© {new Date().getFullYear()} CertifyIQ Ltd. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Avorria Ltd. All rights reserved.</p>
           <div className={styles.bottomLinks}>
             <Link href="/privacy">Privacy Policy</Link>
             <Link href="/terms">Terms of Service</Link>

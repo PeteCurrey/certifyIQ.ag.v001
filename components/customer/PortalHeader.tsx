@@ -63,7 +63,7 @@ export default function PortalHeader() {
         <div className={styles.drawerOverlay} onClick={() => setMobileMenuOpen(false)}>
           <div className={styles.drawer} onClick={(e) => e.stopPropagation()}>
             <div className={styles.drawerHeader}>
-              <span className={styles.drawerTitle}>CertifyIQ</span>
+              <span className={styles.drawerTitle}>Avorria</span>
               <button 
                 className={styles.closeButton} 
                 onClick={() => setMobileMenuOpen(false)}

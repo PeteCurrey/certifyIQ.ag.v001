@@ -78,7 +78,7 @@ export default function AdminHeader() {
         <div className={styles.drawerOverlay} onClick={() => setMobileMenuOpen(false)}>
           <div className={styles.drawer} onClick={(e) => e.stopPropagation()}>
             <div className={styles.drawerHeader}>
-              <span className={styles.drawerTitle}>CertifyIQ Admin</span>
+              <span className={styles.drawerTitle}>Avorria Admin</span>
               <button 
                 className={styles.closeButton} 
                 onClick={() => setMobileMenuOpen(false)}
