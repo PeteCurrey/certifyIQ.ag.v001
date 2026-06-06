@@ -50,6 +50,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
+  // Protect new Agent Portal
+  if (pathname.startsWith('/agent') && pathname !== '/agent/login' && !user) {
+    return NextResponse.redirect(new URL('/agent/login', request.url))
+  }
+
   return supabaseResponse
 }
 

@@ -5,11 +5,12 @@ import AIToolsShowcase from '@/components/marketing/AIToolsShowcase'
 import SocialProof from '@/components/marketing/SocialProof'
 import PricingOverview from '@/components/marketing/PricingOverview'
 import TrustSection from '@/components/marketing/TrustSection'
+import AgentBand from '@/components/marketing/AgentBand'
 import LandlordBand from '@/components/marketing/LandlordBand'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Avorria — UK EPC Assessments | Chesterfield & Derbyshire',
+  title: 'Avorria — EPC Assessments | Chesterfield & Derbyshire',
   description: 'Fast, transparent, fully accredited Energy Performance Certificates. Book online from £65. Certificate issued within 24 hours.',
 }
 
@@ -23,6 +24,7 @@ export default function HomePage() {
       <SocialProof />
       <PricingOverview />
       <TrustSection />
+      <AgentBand />
       <LandlordBand />
     </>
   )

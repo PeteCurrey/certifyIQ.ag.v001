@@ -16,88 +16,213 @@ const PRICE_MAP: Record<string, Record<string, number>> = {
 }
 
 function PriceCalculator() {
+  const [tab, setTab] = useState<'domestic' | 'commercial'>('domestic')
+
+  // Domestic state
   const [postcode, setPostcode] = useState('')
   const [postcodeValid, setPostcodeValid] = useState<boolean | null>(null)
   const [propType, setPropType] = useState('Semi')
   const [beds, setBeds] = useState('3')
-  const [price, setPrice] = useState<number | null>(80)
-  const [animPrice, setAnimPrice] = useState<number | null>(null)
+  const [domPrice, setDomPrice] = useState<number | null>(80)
+  const [animDomPrice, setAnimDomPrice] = useState<number | null>(null)
+
+  // Commercial state
+  const [commPostcode, setCommPostcode] = useState('')
+  const [commPostcodeValid, setCommPostcodeValid] = useState<boolean | null>(null)
+  const [area, setArea] = useState('150')
+  const [unit, setUnit] = useState<'sqm' | 'sqft'>('sqm')
+  const [commPrice, setCommPrice] = useState<number | null>(null)
+  const [animCommPrice, setAnimCommPrice] = useState<number | null>(null)
 
   const ukPostcodeRegex = /^[A-Z]{1,2}[0-9][0-9A-Z]?\s*[0-9][A-Z]{2}$/i
 
+  // Validation
   useEffect(() => {
     if (postcode.length > 2) setPostcodeValid(ukPostcodeRegex.test(postcode.trim()))
     else setPostcodeValid(null)
   }, [postcode])
 
   useEffect(() => {
+    if (commPostcode.length > 2) setCommPostcodeValid(ukPostcodeRegex.test(commPostcode.trim()))
+    else setCommPostcodeValid(null)
+  }, [commPostcode])
+
+  // Domestic price animation
+  useEffect(() => {
     const newPrice = PRICE_MAP[propType]?.[beds] ?? 80
-    setPrice(newPrice)
-    let start = animPrice ?? newPrice
+    setDomPrice(newPrice)
+    let start = animDomPrice ?? newPrice
     const steps = 20
     const diff = (newPrice - start) / steps
     let step = 0
     const t = setInterval(() => {
       step++
-      setAnimPrice(Math.round(start + diff * step))
-      if (step >= steps) { clearInterval(t); setAnimPrice(newPrice) }
+      setAnimDomPrice(Math.round(start + diff * step))
+      if (step >= steps) { clearInterval(t); setAnimDomPrice(newPrice) }
     }, 20)
     return () => clearInterval(t)
   }, [propType, beds])
 
-  const bookingParams = new URLSearchParams({ postcode, propType, beds, price: String(price) }).toString()
+  // Commercial price animation
+  useEffect(() => {
+    const numericArea = parseFloat(area)
+    if (isNaN(numericArea) || numericArea <= 0) {
+      setCommPrice(null)
+      return
+    }
+    const areaSqm = unit === 'sqft' ? numericArea / 10.764 : numericArea
+    // Example formula: £150 base + £0.50 per sqm (min 150)
+    const newPrice = Math.max(150, Math.round(150 + areaSqm * 0.50))
+    setCommPrice(newPrice)
+
+    let start = animCommPrice ?? newPrice
+    const steps = 20
+    const diff = (newPrice - start) / steps
+    let step = 0
+    const t = setInterval(() => {
+      step++
+      setAnimCommPrice(Math.round(start + diff * step))
+      if (step >= steps) { clearInterval(t); setAnimCommPrice(newPrice) }
+    }, 20)
+    return () => clearInterval(t)
+  }, [area, unit])
+
+  const domBookingParams = new URLSearchParams({ postcode, propType, beds, price: String(domPrice) }).toString()
+  const commBookingParams = new URLSearchParams({ type: 'commercial', postcode: commPostcode, area, unit, price: String(commPrice) }).toString()
 
   return (
     <div className={styles.calcCard}>
-      <p className={styles.calcTitle}>Instant price check</p>
-
-      <div className={styles.field}>
-        <label className={styles.fieldLabel}>Your postcode</label>
-        <div className={styles.postcodeWrap}>
-          <input
-            className={`${styles.postcodeInput} ${postcodeValid === false ? styles.invalid : postcodeValid === true ? styles.valid : ''}`}
-            type="text"
-            placeholder="e.g. S40 1AA"
-            value={postcode}
-            onChange={e => setPostcode(e.target.value.toUpperCase())}
-            maxLength={8}
-            id="hero-postcode"
-          />
-          {postcodeValid === true && <span className={styles.validMark}>✓</span>}
-          {postcodeValid === false && <span className={styles.invalidMark}>✗</span>}
-        </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <p className={styles.calcTitle} style={{ margin: 0 }}>Instant price check</p>
       </div>
 
-      <div className={styles.field}>
-        <label className={styles.fieldLabel}>Property type</label>
-        <div className={styles.pills}>
-          {PROPERTY_TYPES.map(t => (
-            <button key={t} id={`proptype-${t.toLowerCase()}`} className={`${styles.pill} ${propType === t ? styles.pillActive : ''}`} onClick={() => setPropType(t)}>{t}</button>
-          ))}
-        </div>
+      <div className={styles.tabs}>
+        <button
+          className={`${styles.tab} ${tab === 'domestic' ? styles.tabActive : ''}`}
+          onClick={() => setTab('domestic')}
+        >
+          Domestic
+        </button>
+        <button
+          className={`${styles.tab} ${tab === 'commercial' ? styles.tabActive : ''}`}
+          onClick={() => setTab('commercial')}
+        >
+          Commercial
+        </button>
       </div>
 
-      <div className={styles.field}>
-        <label className={styles.fieldLabel}>Bedrooms</label>
-        <div className={styles.pills}>
-          {BEDROOM_OPTIONS.map(b => (
-            <button key={b} id={`beds-${b}`} className={`${styles.pill} ${beds === b ? styles.pillActive : ''}`} onClick={() => setBeds(b)}>{b}</button>
-          ))}
-        </div>
-      </div>
+      {tab === 'domestic' && (
+        <>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Your postcode</label>
+            <div className={styles.postcodeWrap}>
+              <input
+                className={`${styles.postcodeInput} ${postcodeValid === false ? styles.invalid : postcodeValid === true ? styles.valid : ''}`}
+                type="text"
+                placeholder="e.g. S40 1AA"
+                value={postcode}
+                onChange={e => setPostcode(e.target.value.toUpperCase())}
+                maxLength={8}
+                id="hero-postcode"
+              />
+              {postcodeValid === true && <span className={styles.validMark}>✓</span>}
+              {postcodeValid === false && <span className={styles.invalidMark}>✗</span>}
+            </div>
+          </div>
 
-      {animPrice !== null && (
-        <div className={styles.priceResult}>
-          <span className={styles.priceLabel}>Your EPC:</span>
-          <span className={styles.price}>£{animPrice}</span>
-        </div>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Property type</label>
+            <div className={styles.pills}>
+              {PROPERTY_TYPES.map(t => (
+                <button key={t} id={`proptype-${t.toLowerCase()}`} className={`${styles.pill} ${propType === t ? styles.pillActive : ''}`} onClick={() => setPropType(t)}>{t}</button>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Bedrooms</label>
+            <div className={styles.pills}>
+              {BEDROOM_OPTIONS.map(b => (
+                <button key={b} id={`beds-${b}`} className={`${styles.pill} ${beds === b ? styles.pillActive : ''}`} onClick={() => setBeds(b)}>{b}</button>
+              ))}
+            </div>
+          </div>
+
+          {animDomPrice !== null && (
+            <div className={styles.priceResult}>
+              <span className={styles.priceLabel}>Your EPC:</span>
+              <span className={styles.price}>£{animDomPrice}</span>
+            </div>
+          )}
+
+          <p className={styles.priceSubtext}>Includes assessor visit · certificate · 10-year registration</p>
+
+          <Link href={`/book?${domBookingParams}`} className={styles.calcCta} id="hero-book-cta">
+            Book this price →
+          </Link>
+        </>
       )}
 
-      <p className={styles.priceSubtext}>Includes assessor visit · certificate · 10-year registration</p>
+      {tab === 'commercial' && (
+        <>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Site postcode</label>
+            <div className={styles.postcodeWrap}>
+              <input
+                className={`${styles.postcodeInput} ${commPostcodeValid === false ? styles.invalid : commPostcodeValid === true ? styles.valid : ''}`}
+                type="text"
+                placeholder="e.g. S40 1AA"
+                value={commPostcode}
+                onChange={e => setCommPostcode(e.target.value.toUpperCase())}
+                maxLength={8}
+              />
+              {commPostcodeValid === true && <span className={styles.validMark}>✓</span>}
+              {commPostcodeValid === false && <span className={styles.invalidMark}>✗</span>}
+            </div>
+          </div>
 
-      <Link href={`/book?${bookingParams}`} className={styles.calcCta} id="hero-book-cta">
-        Book this price →
-      </Link>
+          <div className={styles.field}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <label className={styles.fieldLabel} style={{ margin: 0 }}>Floor area</label>
+              <div className={styles.pills} style={{ gap: '0.25rem' }}>
+                <button
+                  className={`${styles.pill} ${unit === 'sqm' ? styles.pillActive : ''}`}
+                  onClick={() => setUnit('sqm')}
+                  style={{ padding: '0.2rem 0.6rem', fontSize: '0.7rem' }}
+                >
+                  sq/m
+                </button>
+                <button
+                  className={`${styles.pill} ${unit === 'sqft' ? styles.pillActive : ''}`}
+                  onClick={() => setUnit('sqft')}
+                  style={{ padding: '0.2rem 0.6rem', fontSize: '0.7rem' }}
+                >
+                  sq/ft
+                </button>
+              </div>
+            </div>
+            <input
+              className={styles.postcodeInput}
+              type="number"
+              placeholder={`e.g. 150`}
+              value={area}
+              onChange={e => setArea(e.target.value)}
+              min={1}
+            />
+          </div>
+
+          <div className={styles.priceResult}>
+            <span className={styles.priceLabel}>Estimated Price:</span>
+            <span className={styles.price}>{animCommPrice ? `£${animCommPrice}` : '—'}</span>
+          </div>
+
+          <p className={styles.priceSubtext}>Commercial EPC (SBEM) · Includes assessor visit and lodgement</p>
+
+          <Link href={`/book?${commBookingParams}`} className={styles.calcCta}>
+            Book Assessment →
+          </Link>
+        </>
+      )}
 
       <p className={styles.noHidden}>No hidden fees. No surprise charges.</p>
     </div>

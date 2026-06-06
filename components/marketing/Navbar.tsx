@@ -181,6 +181,7 @@ export default function Navbar() {
             )}
           </div>
 
+          <Link href="/for/agents" className={styles.link}>For Agents</Link>
           <Link href="/prices" className={styles.link}>Pricing</Link>
           <Link href="/blog" className={styles.link}>Blog</Link>
           <Link href="/faq" className={styles.link}>FAQ</Link>
@@ -216,6 +217,7 @@ export default function Navbar() {
           </div>
           <div className={styles.mobileGroup}>
             <span className={styles.mobileGroupHeading}>Links</span>
+            <Link href="/for/agents" onClick={closeAll}>For Agents</Link>
             <Link href="/prices" onClick={closeAll}>Pricing</Link>
             <Link href="/blog" onClick={closeAll}>Blog</Link>
             <Link href="/faq" onClick={closeAll}>FAQ</Link>

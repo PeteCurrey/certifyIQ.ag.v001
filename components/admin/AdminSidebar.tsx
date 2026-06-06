@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3, MapPin, AlertTriangle, Inbox, Globe } from 'lucide-react'
+import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3, MapPin, AlertTriangle, Inbox, Globe, Building2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import styles from './AdminSidebar.module.css'
 
@@ -49,6 +49,7 @@ export default function AdminSidebar() {
     menuItems.splice(6, 0, { name: 'Team Directory', href: '/aos/team', icon: Users })
     menuItems.splice(7, 0, { name: 'Revenue', href: '/aos/revenue', icon: BarChart3 })
     menuItems.splice(8, 0, { name: 'Website Content', href: '/aos/website', icon: Globe })
+    menuItems.splice(9, 0, { name: 'Agent Accounts', href: '/aos/agents', icon: Building2 })
   }
 
   return (

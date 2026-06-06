@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/aos/', '/portal/'],
     },
-    sitemap: 'https://certifyiq.co.uk/sitemap.xml',
+    sitemap: 'https://avorria.co.uk/sitemap.xml',
   }
 }

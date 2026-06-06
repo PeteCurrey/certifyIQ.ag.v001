@@ -1,0 +1,20 @@
+{
+  "crons": [
+    {
+      "path": "/api/crm/alto/sync",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/crm/epc-recheck",
+      "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/crm/vendor-chase",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/invoicing/generate",
+      "schedule": "0 0 1 * *"
+    }
+  ]
+}

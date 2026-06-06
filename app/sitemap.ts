@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   const supabase = createClient(DB_URL, DB_KEY)
   
-  const baseUrl = 'https://certifyiq.co.uk'
+  const baseUrl = 'https://avorria.co.uk'
 
   // Core static routes
   const routes = [

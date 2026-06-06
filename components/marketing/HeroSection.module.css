@@ -138,8 +138,40 @@
   font-family: var(--font-mono);
   font-size: 1rem;
   color: var(--accent-lime);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   letter-spacing: 0.02em;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 1.5rem;
+  background: var(--bg-surface-elevated);
+  padding: 0.35rem;
+  border-radius: 10px;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  background: transparent;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tabActive {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .field {

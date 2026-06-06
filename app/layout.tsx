@@ -3,8 +3,8 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Avorria — UK EPC Assessments | Chesterfield & Derbyshire',
-    template: '%s | Avorria',
+    default: 'Avorria — EPC Assessments | Chesterfield & Derbyshire',
+    template: 'Avorria | %s',
   },
   description: 'Fast, transparent, fully accredited Energy Performance Certificates for homeowners, landlords and estate agents. Certificate issued within 24 hours of assessment.',
   keywords: ['EPC', 'Energy Performance Certificate', 'Chesterfield', 'Derbyshire', 'RdSAP 10', 'domestic energy assessor'],

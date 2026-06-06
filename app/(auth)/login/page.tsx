@@ -8,7 +8,7 @@ import styles from './login.module.css'
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState<'customer' | 'assessor'>('customer')
+  const [role, setRole] = useState<'customer' | 'agent' | 'assessor'>('customer')
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -46,6 +46,8 @@ export default function LoginPage() {
             return
           }
           router.push('/aos')
+        } else if (role === 'agent') {
+          router.push('/agent/dashboard')
         } else {
           // Customer login
           router.push('/portal')
@@ -77,6 +79,13 @@ export default function LoginPage() {
             onClick={() => setRole('customer')}
           >
             Customer
+          </button>
+          <button
+            type="button"
+            className={`${styles.tab} ${role === 'agent' ? styles.tabActive : ''}`}
+            onClick={() => setRole('agent')}
+          >
+            Agent
           </button>
           <button
             type="button"
@@ -122,14 +131,23 @@ export default function LoginPage() {
         </form>
 
         <div className={styles.footer}>
-          {role === 'customer' ? (
+          {role === 'customer' && (
             <p>
               New customer?{' '}
               <Link href="/register" className={styles.link}>
                 Create an account
               </Link>
             </p>
-          ) : (
+          )}
+          {role === 'agent' && (
+            <p>
+              New agency?{' '}
+              <Link href="/register?type=agency" className={styles.link}>
+                Create an account
+              </Link>
+            </p>
+          )}
+          {role === 'assessor' && (
             <p className={styles.assessorNote}>
               Accredited assessors only. Contact admin for registrations.
             </p>

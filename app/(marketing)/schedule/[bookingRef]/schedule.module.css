@@ -1,0 +1,233 @@
+.hero {
+  min-height: 100vh;
+  background: var(--bg-obsidian);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 540px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.brand h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dot { color: var(--accent-lime); }
+
+.progressBar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.progressStep {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--bg-surface-elevated);
+  transition: background 0.3s;
+}
+
+.progressStep.done {
+  background: var(--accent-lime);
+}
+
+.stepTitle {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.stepSubtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+  line-height: 1.5;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldFull {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.input, .select {
+  background: var(--bg-obsidian);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.input:focus, .select:focus {
+  outline: none;
+  border-color: var(--accent-lime);
+}
+
+.timeSlots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.slot {
+  padding: 0.625rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-obsidian);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.slot:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.slotActive {
+  border-color: var(--accent-lime);
+  background: rgba(155, 255, 89, 0.08);
+  color: var(--accent-lime);
+  font-weight: 600;
+}
+
+.nextBtn {
+  width: 100%;
+  background: var(--accent-lime);
+  color: var(--bg-obsidian);
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.nextBtn:hover {
+  background: #aaff6b;
+  transform: translateY(-1px);
+}
+
+.nextBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(155, 255, 89, 0.1);
+  border: 2px solid var(--accent-lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.successTitle {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0 0 0.75rem;
+}
+
+.successDesc {
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.6;
+  margin: 0 0 2rem;
+}
+
+.calLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.calBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-obsidian);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.calBtn:hover {
+  border-color: var(--text-secondary);
+  background: var(--bg-surface-elevated);
+}
+
+.paidBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(155, 255, 89, 0.1);
+  color: var(--accent-lime);
+  border: 1px solid rgba(155, 255, 89, 0.2);
+  border-radius: 8px;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
