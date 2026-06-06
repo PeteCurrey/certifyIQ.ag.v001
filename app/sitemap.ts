@@ -27,11 +27,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/blog',
     '/services',
     '/tools',
+    '/locations/london/commercial-epc',
+    '/locations/london/tm44',
+    '/locations/london/city-of-london/commercial-epc',
+    '/locations/london/canary-wharf/commercial-epc',
+    '/locations/london/westminster/commercial-epc',
+    '/locations/london/city-of-london/tm44',
+    '/locations/london/canary-wharf/tm44',
+    '/locations/london/westminster/tm44',
   ].map(route => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : route === '/landlord-compliance' || route === '/epc-register' ? 0.9 : 0.8,
+    priority: route === '' ? 1 : route.startsWith('/locations/london') ? 0.8 : route === '/landlord-compliance' || route === '/epc-register' ? 0.9 : 0.8,
   }))
 
   // Location EPC SEO pages
