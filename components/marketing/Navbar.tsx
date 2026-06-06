@@ -131,6 +131,16 @@ export default function Navbar() {
                         <span className={styles.menuDesc}>Blower door testing for non-domestic buildings.</span>
                       </div>
                     </Link>
+                    <div className={styles.menuDivider}>─ Commercial coverage ─</div>
+                    <div className={styles.cityLinksGrid}>
+                      <Link href="/commercial/london" onClick={closeAll}>London</Link>
+                      <Link href="/commercial/manchester" onClick={closeAll}>Manchester</Link>
+                      <Link href="/commercial/birmingham" onClick={closeAll}>Birmingham</Link>
+                      <Link href="/commercial/sheffield" onClick={closeAll}>Sheffield</Link>
+                      <Link href="/commercial/leeds" onClick={closeAll}>Leeds</Link>
+                      <Link href="/commercial/nottingham" onClick={closeAll}>Nottingham</Link>
+                      <Link href="/commercial/derby" onClick={closeAll}>Derby</Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -182,6 +192,7 @@ export default function Navbar() {
           </div>
 
           <Link href="/for/agents" className={styles.link}>For Agents</Link>
+          <Link href="/for/enterprise" className={styles.link}>Enterprise</Link>
           <Link href="/prices" className={styles.link}>Pricing</Link>
           <Link href="/blog" className={styles.link}>Blog</Link>
           <Link href="/faq" className={styles.link}>FAQ</Link>
@@ -218,6 +229,7 @@ export default function Navbar() {
           <div className={styles.mobileGroup}>
             <span className={styles.mobileGroupHeading}>Links</span>
             <Link href="/for/agents" onClick={closeAll}>For Agents</Link>
+            <Link href="/for/enterprise" onClick={closeAll}>Enterprise</Link>
             <Link href="/prices" onClick={closeAll}>Pricing</Link>
             <Link href="/blog" onClick={closeAll}>Blog</Link>
             <Link href="/faq" onClick={closeAll}>FAQ</Link>

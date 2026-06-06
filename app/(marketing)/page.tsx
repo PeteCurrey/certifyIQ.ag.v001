@@ -1,6 +1,7 @@
 import HeroSection from '@/components/marketing/HeroSection'
 import HowItWorks from '@/components/marketing/HowItWorks'
 import WhoNeedsEPC from '@/components/marketing/WhoNeedsEPC'
+import CorporateSections from '@/components/marketing/CorporateSections'
 import AIToolsShowcase from '@/components/marketing/AIToolsShowcase'
 import SocialProof from '@/components/marketing/SocialProof'
 import PricingOverview from '@/components/marketing/PricingOverview'
@@ -20,6 +21,7 @@ export default function HomePage() {
       <HeroSection />
       <HowItWorks />
       <WhoNeedsEPC />
+      <CorporateSections />
       <AIToolsShowcase />
       <SocialProof />
       <PricingOverview />
@@ -29,3 +31,4 @@ export default function HomePage() {
     </>
   )
 }
+
