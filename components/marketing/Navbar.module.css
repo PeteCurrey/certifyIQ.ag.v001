@@ -111,8 +111,8 @@
 
 /* ─── CTA BUTTON ─── */
 .cta {
-  background: #9BFF59;
-  color: #080D18;
+  background: var(--accent-lime);
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.9rem;
   padding: 0.5rem 1.125rem;
@@ -123,7 +123,7 @@
 }
 
 .cta:hover {
-  background: #b2ff80;
+  background: #115E59;
   transform: translateY(-1px);
 }
 
@@ -403,3 +403,13 @@
 .cityLinksGrid a:hover {
   color: #0F766E;
 }
+
+/* ─── HOME PRE-SCROLL OVERRIDES ─── */
+.homePreScroll .logoText { color: #18181B; }
+.homePreScroll .link { color: #52525B; font-weight: 600; }
+.homePreScroll .link:hover { color: #18181B; }
+.homePreScroll .dropdownTrigger { color: #52525B; font-weight: 600; }
+.homePreScroll .dropdownTrigger:hover, .homePreScroll .dropdownTrigger.active { color: #18181B; }
+.homePreScroll .burger span { background: #18181B; }
+.homePreScroll .linkPortal { color: #18181B; border-color: #18181B; }
+.homePreScroll .linkPortal:hover { background: rgba(0,0,0,0.05); color: #18181B; border-color: #18181B; }

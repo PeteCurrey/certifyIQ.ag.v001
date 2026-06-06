@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Home, HardHat, Wind, Building2, Factory, BarChart3, Lightbulb, Search, Zap } from 'lucide-react'
 import styles from './Navbar.module.css'
@@ -12,6 +13,8 @@ interface DropdownItem {
 }
 
 export default function Navbar() {
+  const pathname = usePathname()
+  const isHome = pathname === '/'
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
@@ -69,7 +72,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${isHome && !scrolled ? styles.homePreScroll : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} onClick={closeAll}>
 
