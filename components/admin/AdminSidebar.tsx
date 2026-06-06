@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3, MapPin, AlertTriangle } from 'lucide-react'
+import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3, MapPin, AlertTriangle, Inbox, Globe } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import styles from './AdminSidebar.module.css'
 
@@ -44,9 +44,11 @@ export default function AdminSidebar() {
 
   if (isSuperAdmin) {
     menuItems.splice(1, 0, { name: 'Central Dispatch', href: '/aos/dispatch', icon: MapPin })
-    menuItems.splice(4, 0, { name: 'QA Alerts (AI)', href: '/aos/qa-alerts', icon: AlertTriangle })
-    menuItems.splice(5, 0, { name: 'Team Directory', href: '/aos/team', icon: Users })
-    menuItems.splice(6, 0, { name: 'Revenue', href: '/aos/revenue', icon: BarChart3 })
+    menuItems.splice(4, 0, { name: 'Leads CRM', href: '/aos/leads', icon: Inbox })
+    menuItems.splice(5, 0, { name: 'QA Alerts (AI)', href: '/aos/qa-alerts', icon: AlertTriangle })
+    menuItems.splice(6, 0, { name: 'Team Directory', href: '/aos/team', icon: Users })
+    menuItems.splice(7, 0, { name: 'Revenue', href: '/aos/revenue', icon: BarChart3 })
+    menuItems.splice(8, 0, { name: 'Website Content', href: '/aos/website', icon: Globe })
   }
 
   return (

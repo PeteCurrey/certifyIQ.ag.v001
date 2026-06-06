@@ -4,7 +4,7 @@ import Link from 'next/link'
 import StatusBadge from '@/components/ui/StatusBadge'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
 import { createClient } from '@/lib/supabase/client'
-import { Calendar, ClipboardList, DollarSign, Eye, Play, Plus, ShieldCheck, ShieldAlert, TriangleAlert } from 'lucide-react'
+import { Calendar, ClipboardList, DollarSign, Eye, Play, Plus, ShieldCheck, ShieldAlert, TriangleAlert, Inbox } from 'lucide-react'
 import styles from './admin.module.css'
 
 interface Booking {
@@ -46,10 +46,17 @@ interface DeveloperStats {
   recentProjects: Array<{ id: string; project_type: string; town: string; postcode: string; created_at: string }>
 }
 
+interface LeadStats {
+  total: number
+  newLeads: number
+  recentLeads: Array<{ id: string; name: string; company: string; enquiry_type: string; created_at: string; status: string }>
+}
+
 export default function AdminDashboard() {
   const [bookings, setBookings] = useState<Booking[]>([])
   const [complianceStats, setComplianceStats] = useState<ComplianceStats | null>(null)
   const [developerStats, setDeveloperStats] = useState<DeveloperStats | null>(null)
+  const [leadStats, setLeadStats] = useState<LeadStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [isSuperAdmin, setIsSuperAdmin] = useState(false)
@@ -69,8 +76,10 @@ export default function AdminDashboard() {
           .select('is_super_admin')
           .eq('auth_user_id', user.id)
           .single()
+        let isSuper = false
         if (curAssessor?.is_super_admin) {
           setIsSuperAdmin(true)
+          isSuper = true
         }
 
         // Fetch all bookings (since assessors can see all bookings)
@@ -111,6 +120,20 @@ export default function AdminDashboard() {
            const total = developerData.length
            const highRisk = developerData.filter((p: any) => p.developer_compliance_reports?.[0]?.risk_score === 'HIGH').length
            setDeveloperStats({ total, highRisk, recentProjects: developerData.slice(0, 5) })
+        }
+
+        if (isSuper) {
+          const { data: leadsData } = await supabase
+            .from('leads')
+            .select('id, name, company, enquiry_type, status, created_at')
+            .order('created_at', { ascending: false })
+            .limit(50)
+
+          if (leadsData) {
+            const total = leadsData.length
+            const newLeads = leadsData.filter((l: any) => l.status === 'new').length
+            setLeadStats({ total, newLeads, recentLeads: leadsData.slice(0, 5) })
+          }
         }
 
       } catch (err: any) {
@@ -194,6 +217,95 @@ export default function AdminDashboard() {
           <p className={styles.metricLabel}>Excluding cancelled orders</p>
         </div>
       </div>
+
+      {/* Leads & Enquiries Section */}
+      {isSuperAdmin && leadStats && (
+        <div className={styles.jobsCard} style={{ marginTop: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <h3 className={styles.sectionTitle} style={{ marginBottom: 0 }}>Recent Leads & Enquiries</h3>
+            <Link
+              href="/aos/leads"
+              style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none', fontFamily: 'var(--font-mono)' }}
+            >
+              → Open CRM
+            </Link>
+          </div>
+
+          <div className={styles.metricsRow} style={{ marginBottom: '1.5rem' }}>
+             <div className={styles.metricCard}>
+              <div className={styles.metricHeader}>
+                <Inbox className={styles.metricIcon} style={{ color: 'var(--accent-lime)' }} />
+                <span>Total Leads</span>
+              </div>
+              <div className={styles.metricValue}>{leadStats.total}</div>
+              <p className={styles.metricLabel}>All website enquiries</p>
+            </div>
+            <div className={styles.metricCard}>
+              <div className={styles.metricHeader}>
+                <TriangleAlert className={styles.metricIcon} style={{ color: '#F5A623' }} />
+                <span>New Leads</span>
+              </div>
+              <div className={styles.metricValue} style={{ color: '#F5A623' }}>{leadStats.newLeads}</div>
+              <p className={styles.metricLabel}>Awaiting contact</p>
+            </div>
+          </div>
+          
+           {leadStats.recentLeads.length > 0 && (
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Lead Name</th>
+                    <th>Type</th>
+                    <th>Date Received</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leadStats.recentLeads.map((l: any) => (
+                    <tr key={l.id}>
+                      <td>
+                        <div className={styles.propCell}>
+                          <strong>{l.name}</strong>
+                          <span>{l.company || 'No Company'}</span>
+                        </div>
+                      </td>
+                      <td>{l.enquiry_type}</td>
+                      <td style={{ fontSize: '0.8rem', color: '#8BA3BF', fontFamily: 'var(--font-mono)' }}>
+                        {new Date(l.created_at).toLocaleDateString('en-GB')}
+                      </td>
+                       <td>
+                        <span style={{
+                          display: 'inline-block',
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: '4px',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          background: l.status === 'new' ? 'rgba(245,166,35,0.1)' : l.status === 'converted' ? 'rgba(155,255,89,0.1)' : 'rgba(255,255,255,0.05)',
+                          color: l.status === 'new' ? '#F5A623' : l.status === 'converted' ? 'var(--accent-lime)' : '#8BA3BF',
+                          textTransform: 'capitalize'
+                        }}>
+                          {l.status}
+                        </span>
+                      </td>
+                      <td>
+                        <Link
+                          href={`/aos/leads`}
+                          style={{ fontSize: '0.8rem', color: 'var(--accent-lime)', textDecoration: 'none' }}
+                        >
+                          View CRM →
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Landlord Compliance Section */}
       {complianceStats && (
