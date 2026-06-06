@@ -6,7 +6,6 @@ import styles from '../../london-location.module.css'
 export const metadata: Metadata = {
   title: 'Commercial EPC City of London | Square Mile Energy Assessors | Avorria',
   description: 'Accredited Commercial EPCs in the City of London (EC1, EC2, EC3, EC4). Banking premises, corporate offices, heritage livery halls, and retail units. Specialist SBEM assessors from £185+VAT.',
-  keywords: ['Commercial EPC City of London', 'NDEA EC2', 'EPC Square Mile', 'Commercial energy assessment EC1', 'Non domestic EPC EC4', 'City of London office EPC', 'SBEM assessment City of London'],
   alternates: { canonical: 'https://avorria.co.uk/locations/london/city-of-london/commercial-epc' },
   openGraph: {
     title: 'Commercial EPC City of London | Avorria',

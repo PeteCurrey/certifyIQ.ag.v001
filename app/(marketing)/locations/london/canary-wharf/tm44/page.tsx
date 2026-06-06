@@ -6,7 +6,6 @@ import styles from '../../london-location.module.css'
 export const metadata: Metadata = {
   title: 'TM44 Air Conditioning Inspection Canary Wharf | Avorria',
   description: 'Statutory TM44 air conditioning inspections for commercial tower buildings in Canary Wharf & Docklands (E14). Chiller plant, VRF & BMS systems. CIBSE-registered assessors based at 1 Canada Square.',
-  keywords: ['TM44 Canary Wharf', 'Air conditioning inspection E14', 'AC inspection Docklands', 'TM44 assessment E14', 'Chiller plant TM44 London', 'VRF inspection Canary Wharf'],
   alternates: { canonical: 'https://avorria.co.uk/locations/london/canary-wharf/tm44' },
   openGraph: {
     title: 'TM44 Inspection Canary Wharf | Avorria — Based at 1 Canada Square',

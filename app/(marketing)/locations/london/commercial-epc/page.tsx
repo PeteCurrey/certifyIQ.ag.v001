@@ -6,7 +6,6 @@ import styles from '../london-location.module.css'
 export const metadata: Metadata = {
   title: 'Commercial EPC London | Non-Domestic Energy Assessors | Avorria',
   description: 'Accredited Commercial EPC assessments (NDEA Levels 3 & 4) across Greater London. Office towers, retail units, government buildings, and industrial premises. From £185+VAT with 24-hr turnaround.',
-  keywords: ['Commercial EPC London', 'NDEA London', 'Non domestic energy assessment London', 'Commercial energy performance certificate London', 'SBEM assessment London', 'Canary Wharf Commercial EPC', 'City of London EPC'],
   alternates: { canonical: 'https://avorria.co.uk/locations/london/commercial-epc' },
   openGraph: {
     title: 'Commercial EPC London | Avorria',

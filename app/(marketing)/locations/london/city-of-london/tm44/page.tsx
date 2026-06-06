@@ -6,7 +6,6 @@ import styles from '../../london-location.module.css'
 export const metadata: Metadata = {
   title: 'TM44 Air Conditioning Inspection City of London | Avorria',
   description: 'Statutory TM44 AC inspections for banking offices, trading floors, and corporate headquarters in the City of London (EC1-EC4). CIBSE-registered assessors. Fast turnaround, competitive pricing.',
-  keywords: ['TM44 City of London', 'Air conditioning inspection EC2', 'AC compliance EC1', 'TM44 Square Mile', 'Trading floor AC inspection', 'EPBD City of London', 'TM44 EC4'],
   alternates: { canonical: 'https://avorria.co.uk/locations/london/city-of-london/tm44' },
   openGraph: {
     title: 'TM44 Inspection City of London | Avorria',

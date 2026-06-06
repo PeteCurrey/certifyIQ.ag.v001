@@ -6,7 +6,6 @@ import styles from '../../london-location.module.css'
 export const metadata: Metadata = {
   title: 'Commercial EPC Westminster | Government & Heritage Buildings | Avorria',
   description: 'Accredited Commercial EPCs in Westminster (SW1, WC2, W1). Government departments, Whitehall offices, prestige retail, and heritage buildings. Specialist assessors from £185+VAT.',
-  keywords: ['Commercial EPC Westminster', 'EPC SW1', 'Non domestic EPC Westminster', 'Government building EPC London', 'Heritage commercial EPC Westminster', 'Display Energy Certificate Westminster', 'NDEA Westminster'],
   alternates: { canonical: 'https://avorria.co.uk/locations/london/westminster/commercial-epc' },
   openGraph: {
     title: 'Commercial EPC Westminster | Avorria',

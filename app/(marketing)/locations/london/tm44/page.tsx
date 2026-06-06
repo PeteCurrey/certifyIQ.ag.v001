@@ -6,7 +6,6 @@ import styles from '../london-location.module.css'
 export const metadata: Metadata = {
   title: 'TM44 Air Conditioning Inspection London | Avorria',
   description: 'Legally mandated TM44 air conditioning inspections for commercial and public buildings across Greater London. Accredited AC energy assessors covering all boroughs. Fast turnaround & competitive pricing.',
-  keywords: ['TM44 London', 'Air conditioning inspection London', 'EPBD compliance London', 'TM44 assessment Greater London', 'Canary Wharf TM44', 'City of London AC inspection'],
   alternates: { canonical: 'https://avorria.co.uk/locations/london/tm44' },
   openGraph: {
     title: 'TM44 AC Inspection London | Avorria',

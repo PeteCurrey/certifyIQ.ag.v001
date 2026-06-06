@@ -32,7 +32,6 @@ export async function generateMetadata({ params }: LocationPageProps): Promise<M
   return {
     title: `${pageData.page_title} | Avorria`,
     description: `Accredited energy performance certificate (EPC) assessor in ${pageData.town}, ${pageData.county} (${pageData.postcode_prefix}). Assessments from £65. Fast 24-hour turnaround.`,
-    keywords: [`EPC ${pageData.town}`, `Energy Assessor ${pageData.town}`, `EPC Certificate ${pageData.postcode_prefix}`],
   }
 }
 

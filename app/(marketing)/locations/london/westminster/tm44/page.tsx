@@ -6,7 +6,6 @@ import styles from '../../london-location.module.css'
 export const metadata: Metadata = {
   title: 'TM44 Air Conditioning Inspection Westminster | Government & Heritage | Avorria',
   description: 'Statutory TM44 air conditioning inspections for government departments, heritage offices, luxury hotels, and commercial premises in Westminster (SW1, WC2, W1). Accredited CIBSE assessors.',
-  keywords: ['TM44 Westminster', 'Air conditioning inspection SW1', 'Government building TM44', 'TM44 WC2', 'Heritage building AC inspection Westminster', 'EPBD Westminster', 'TM44 Whitehall'],
   alternates: { canonical: 'https://avorria.co.uk/locations/london/westminster/tm44' },
   openGraph: {
     title: 'TM44 Inspection Westminster | Avorria',
