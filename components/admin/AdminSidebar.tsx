@@ -42,7 +42,7 @@ export default function AdminSidebar() {
     { name: 'Central Dispatch', href: '/aos/dispatch', icon: MapPin, permissionKey: 'bookings' },
     { name: 'Assessments', href: '/aos/assessments', icon: ClipboardList, permissionKey: 'bookings' },
     { name: 'Leads CRM', href: '/aos/leads', icon: Inbox, permissionKey: 'quotes' },
-    { name: 'QA Alerts (AI)', href: '/aos/qa-alerts', icon: AlertTriangle, permissionKey: 'users' },
+    { name: 'QA Alerts (AI)', href: '/aos/qa-alerts', icon: AlertTriangle, permissionKey: 'qa' },
     { name: 'Team Directory', href: '/aos/team', icon: Users, permissionKey: 'users' },
     { name: 'User Management', href: '/aos/users', icon: Users, permissionKey: 'users' },
     { name: 'Revenue', href: '/aos/revenue', icon: BarChart3, permissionKey: 'analytics' },

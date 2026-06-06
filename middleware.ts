@@ -71,6 +71,8 @@ export async function middleware(request: NextRequest) {
         permissionKey = 'users'
       } else if (moduleName === 'website') {
         permissionKey = 'content'
+      } else if (moduleName === 'qa-alerts') {
+        permissionKey = 'qa'
       } else if (moduleName === 'agents') {
         permissionKey = 'integrations'
       } else if (

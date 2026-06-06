@@ -12,6 +12,7 @@ export const MODULE_PERMISSIONS: Record<string, UserRole[]> = {
   'integrations':     ['super_admin'],
   'settings':         ['super_admin', 'admin'],
   'users':            ['super_admin'],
+  'qa':               ['super_admin', 'admin'],
 };
 
 export function hasPermission(role: UserRole, moduleName: string): boolean {
