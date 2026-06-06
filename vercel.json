@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/crm/alto/sync",
-      "schedule": "*/15 * * * *"
+      "schedule": "0 8 * * *"
     },
     {
       "path": "/api/crm/epc-recheck",
