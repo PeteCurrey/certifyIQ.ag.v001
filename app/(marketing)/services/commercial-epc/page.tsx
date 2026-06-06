@@ -24,6 +24,7 @@ export default function CommercialEpcPage() {
   const [phone, setPhone] = useState('')
   const [hasExistingEpc, setHasExistingEpc] = useState(false)
   const [notes, setNotes] = useState('')
+  const [paymentMethod, setPaymentMethod] = useState('card')
   
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -58,7 +59,7 @@ export default function CommercialEpcPage() {
         number_of_floors: parseInt(floors, 10),
         existing_epc: hasExistingEpc,
         specialInstructions: `Existing EPC: ${hasExistingEpc ? 'Yes' : 'No'}. Notes: ${notes}. Floors: ${floors}`,
-        paymentMethod: 'sandbox'
+        paymentMethod: paymentMethod === 'bacs' ? 'bacs' : 'sandbox'
       }
 
       const res = await fetch('/api/bookings', {
@@ -442,6 +443,36 @@ export default function CommercialEpcPage() {
                 className="input"
                 style={{ resize: 'vertical' }}
               ></textarea>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Payment Method</label>
+              <div className={styles.radioGrid}>
+                <div>
+                  <input
+                    type="radio"
+                    id="pay-card"
+                    name="paymentMethod"
+                    value="card"
+                    checked={paymentMethod === 'card'}
+                    onChange={() => setPaymentMethod('card')}
+                    className={styles.radioInput}
+                  />
+                  <label htmlFor="pay-card" className={styles.radioLabel}>Card (online)</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="pay-bacs"
+                    name="paymentMethod"
+                    value="bacs"
+                    checked={paymentMethod === 'bacs'}
+                    onChange={() => setPaymentMethod('bacs')}
+                    className={styles.radioInput}
+                  />
+                  <label htmlFor="pay-bacs" className={styles.radioLabel}>BACS / Invoice</label>
+                </div>
+              </div>
             </div>
 
             {error && <p style={{ color: 'var(--accent-red)', marginBottom: '16px' }}>{error}</p>}

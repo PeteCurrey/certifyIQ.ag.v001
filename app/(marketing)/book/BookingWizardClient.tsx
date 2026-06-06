@@ -58,6 +58,7 @@ export default function BookingWizardClient() {
   const [hasExistingEpc, setHasExistingEpc] = useState(false)
   const [commercialLevel, setCommercialLevel] = useState(3)
   const [isQuoteRequired, setIsQuoteRequired] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'bacs'>('card')
 
   // SAP
   const [sapPropertyType, setSapPropertyType] = useState('New house')
@@ -246,10 +247,49 @@ export default function BookingWizardClient() {
     }
   }
 
-  // ─── Stripe payment ────────────────────────────────────────────────────────
-  const handleStripeCheckout = async () => {
+  // ─── Stripe & BACS payment ───────────────────────────────────────────────
+  const handleCheckout = async () => {
     setLoading(true)
     setErrorMsg(null)
+
+    if (paymentMethod === 'bacs') {
+      try {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            serviceCategory, fullName, email, phone, customerType,
+            companyName: customerType === 'agent' ? companyName : null,
+            addressLine1, addressLine2, town, county, postcode,
+            propertyType, bedCount, preferredDate, preferredTimeSlot,
+            priceGbp: price.toString(),
+            specialInstructions,
+            paymentMethod: 'bacs',
+            buildingUseType, floorArea, numberOfFloors, hasExistingEpc, commercialLevel,
+            sapPropertyType, plotCount, sapStage, targetStartDate,
+            airTestPropertyType, airTestConstructionType, airTestFloorArea, hasDesignSap, designAirTarget
+          })
+        })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data.error || 'Failed to create booking')
+        
+        // Trigger BACS invoice creation
+        if (data.bookingId) {
+          await fetch('/api/invoicing/bacs/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bookingId: data.bookingId })
+          })
+        }
+        
+        router.push(`/book/success?booking_id=${data.bookingId || ''}&method=bacs`)
+      } catch (err: any) {
+        setErrorMsg(err.message)
+        setLoading(false)
+      }
+      return
+    }
+
     try {
       const res = await fetch('/api/stripe/booking-checkout', {
         method: 'POST',
@@ -641,10 +681,21 @@ export default function BookingWizardClient() {
                     <input id="company" type="text" className={styles.input} placeholder="e.g. Smiths Estate Agents" value={companyName} onChange={e => setCompanyName(e.target.value)} />
                   </div>
                 )}
+                
+                {serviceCategory !== 'domestic' && !isQuoteRequired && (
+                  <div className={styles.field}>
+                    <label className={styles.label}>Payment Method</label>
+                    <div className={styles.radioGrid}>
+                      <button type="button" className={`${styles.radioPill} ${paymentMethod === 'card' ? styles.radioPillActive : ''}`} onClick={() => setPaymentMethod('card')}>Pay by Card</button>
+                      <button type="button" className={`${styles.radioPill} ${paymentMethod === 'bacs' ? styles.radioPillActive : ''}`} onClick={() => setPaymentMethod('bacs')}>Pay by BACS / Invoice</button>
+                    </div>
+                  </div>
+                )}
+
                 <div className={styles.navRow}>
                   <button type="button" onClick={prevStep} className={styles.backButtonAction}>← Back</button>
                   <button type="button" onClick={nextStep} className={styles.nextButton} disabled={loading}>
-                    {loading ? <LoadingSpinner size={18} /> : isQuoteRequired ? 'Submit Request →' : 'Review & Pay →'}
+                    {loading ? <LoadingSpinner size={18} /> : isQuoteRequired ? 'Submit Request →' : 'Review & Confirm →'}
                   </button>
                 </div>
               </div>
@@ -673,14 +724,18 @@ export default function BookingWizardClient() {
 
                 <button
                   type="button"
-                  onClick={handleStripeCheckout}
+                  onClick={handleCheckout}
                   className={styles.payButton}
                   disabled={loading}
                 >
-                  {loading ? <LoadingSpinner size={20} /> : `Pay £${price}.00 with Stripe →`}
+                  {loading ? <LoadingSpinner size={20} /> : paymentMethod === 'bacs' ? `Confirm & Generate Invoice for £${price}.00 →` : `Pay £${price}.00 with Stripe →`}
                 </button>
 
-                <p className={styles.secureNote}>🔒 Payments processed securely by Stripe. We never store your card details.</p>
+                <p className={styles.secureNote}>
+                  {paymentMethod === 'bacs' 
+                    ? '📋 A VAT invoice will be emailed to you with our BACS payment details.'
+                    : '🔒 Payments processed securely by Stripe. We never store your card details.'}
+                </p>
 
                 <div className={styles.navRow}>
                   <button type="button" onClick={prevStep} className={styles.backButtonAction} disabled={loading}>← Back</button>
