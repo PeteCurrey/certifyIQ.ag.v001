@@ -1,0 +1,223 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--accent-lime, #9BFF59);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: block;
+}
+
+.header h2 {
+  font-family: var(--font-headings, sans-serif);
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin: 0.25rem 0 0 0;
+}
+
+.exportBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color, #1e293b);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.exportBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-lime);
+}
+
+.filterCard {
+  background: #090f1e;
+  border: 1px solid var(--border-color, #1e293b);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 180px;
+  flex: 1;
+}
+
+.formGroup label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.formGroup input,
+.formGroup select {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color, #1e293b);
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 0.65rem;
+  font-size: 0.9rem;
+  outline: none;
+  font-family: inherit;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  border-color: var(--accent-lime);
+}
+
+.resetBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.7rem;
+  transition: color 0.2s;
+  font-family: var(--font-mono);
+}
+
+.resetBtn:hover {
+  color: var(--text-primary);
+}
+
+.tableCard {
+  background: linear-gradient(145deg, #0d1527 0%, #030712 100%);
+  border: 1px solid var(--border-color, #1e293b);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.table th {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color, #1e293b);
+  color: var(--text-secondary);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color, #1e293b);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.rowExpandable {
+  cursor: pointer;
+}
+
+.rowExpandable:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.timestamp {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  color: #8BA3BF;
+}
+
+.userCell {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.actionBadge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.expandedRow td {
+  background: #040815;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color, #1e293b);
+}
+
+.diffContainer {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.diffBox {
+  flex: 1;
+  min-width: 280px;
+  background: #02040b;
+  border: 1px solid #142035;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.diffBox h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.diffBox pre {
+  margin: 0;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.error {
+  color: #ff5c5c;
+  padding: 1.5rem;
+  background: rgba(255,92,92,0.05);
+  border: 1px solid rgba(255,92,92,0.1);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}

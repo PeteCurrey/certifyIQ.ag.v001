@@ -28,23 +28,21 @@ export default function AdminLoginPage() {
         throw new Error(error.message)
       }
 
-      // Check if user is assessor
-      // In this setup, we verify if they can access assessor tables
-      const { data: assessor, error: assessorErr } = await supabase
-        .from('assessors')
-        .select('id, is_active')
-        .eq('auth_user_id', data.user?.id)
+      // Check if user exists in aos_users and is active
+      const { data: aosUser, error: aosUserErr } = await supabase
+        .from('aos_users')
+        .select('role, status')
+        .eq('email', email)
         .maybeSingle()
 
-      if (assessorErr || !assessor) {
-        // If not found in assessors, sign out and show error
+      if (aosUserErr || !aosUser) {
         await supabase.auth.signOut()
-        throw new Error('Access Denied: You do not have an active assessor profile.')
+        throw new Error('Access Denied: You do not have an active console profile.')
       }
 
-      if (!assessor.is_active) {
+      if (aosUser.status !== 'active') {
         await supabase.auth.signOut()
-        throw new Error('Access Denied: Your assessor account is inactive.')
+        throw new Error(`Access Denied: Your console account status is: ${aosUser.status}.`)
       }
 
       router.replace('/aos')

@@ -4,15 +4,18 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease, box-shadow 0.3s ease;
   border-bottom: 1px solid transparent;
   background: transparent;
 }
 
+/* ─── SCROLLED STATE ─── light frosted glass */
 .scrolled {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid #E4E4E7;
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
 }
 
 .inner {
@@ -24,6 +27,7 @@
   justify-content: space-between;
 }
 
+/* ─── LOGO ─── */
 .logo {
   display: flex;
   align-items: center;
@@ -31,23 +35,30 @@
   text-decoration: none;
 }
 
-
-
+/* Pre-scroll: white logo text */
 .logoText {
   font-family: 'Syne', sans-serif;
   font-weight: 600;
   font-size: 1.375rem;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+/* Scrolled: dark logo text */
+.scrolled .logoText {
   color: #18181B;
 }
 
+/* ─── DESKTOP LINKS ─── */
 .links {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
+/* Pre-scroll: white links */
 .link {
-  color: #52525B;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
@@ -55,50 +66,79 @@
 }
 
 .link:hover {
+  color: #ffffff;
+}
+
+/* Scrolled: dark links */
+.scrolled .link {
+  color: #52525B;
+}
+
+.scrolled .link:hover {
   color: #18181B;
 }
 
+/* ─── PORTAL LINK (My Account) ─── */
+/* Pre-scroll: white outlined */
 .linkPortal {
-  color: #52525B;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
-  border: 1px solid #E4E4E7;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 0.4rem 0.875rem;
   border-radius: 6px;
   transition: all 0.2s;
 }
 
 .linkPortal:hover {
-  border-color: #18181B;
-  color: #18181B;
+  border-color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
+/* Scrolled: dark outlined */
+.scrolled .linkPortal {
+  color: #52525B;
+  border-color: #E4E4E7;
+}
+
+.scrolled .linkPortal:hover {
+  border-color: #18181B;
+  color: #18181B;
+  background: transparent;
+}
+
+/* ─── CTA BUTTON ─── */
 .cta {
-  background: #0F766E;
-  color: #FFFFFF;
-  font-weight: 600;
+  background: #9BFF59;
+  color: #080D18;
+  font-weight: 700;
   font-size: 0.9rem;
   padding: 0.5rem 1.125rem;
   border-radius: 8px;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.15s;
   text-align: center;
 }
 
 .cta:hover {
-  background: #115E59;
+  background: #b2ff80;
+  transform: translateY(-1px);
 }
 
-/* Dropdowns */
+/* Scrolled CTA stays the same (already high contrast) */
+
+/* ─── DROPDOWN TRIGGERS ─── */
 .dropdownContainer {
   position: relative;
 }
 
+/* Pre-scroll: white text */
 .dropdownTrigger {
   background: none;
   border: none;
-  color: #52525B;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -112,6 +152,16 @@
 
 .dropdownTrigger:hover,
 .dropdownTrigger.active {
+  color: #ffffff;
+}
+
+/* Scrolled: dark text */
+.scrolled .dropdownTrigger {
+  color: #52525B;
+}
+
+.scrolled .dropdownTrigger:hover,
+.scrolled .dropdownTrigger.active {
   color: #18181B;
 }
 
@@ -125,7 +175,7 @@
   transform: rotate(180deg);
 }
 
-/* Standard Dropdown Menu */
+/* ─── STANDARD DROPDOWN ─── */
 .dropdownMenu {
   position: absolute;
   top: 100%;
@@ -143,7 +193,7 @@
   animation: fadeIn 0.2s ease-out;
 }
 
-/* Mega Dropdown Menu */
+/* ─── MEGA DROPDOWN ─── */
 .megaMenu {
   position: absolute;
   top: 100%;
@@ -217,7 +267,7 @@
   line-height: 1.3;
 }
 
-/* Burger Button */
+/* ─── BURGER BUTTON ─── */
 .burger {
   display: none;
   flex-direction: column;
@@ -228,15 +278,22 @@
   padding: 4px;
 }
 
+/* Pre-scroll: white bars */
 .burger span {
   display: block;
   width: 24px;
   height: 2px;
-  background: #18181B;
+  background: #ffffff;
   border-radius: 2px;
+  transition: background 0.3s ease;
 }
 
-/* Mobile Menu */
+/* Scrolled: dark bars */
+.scrolled .burger span {
+  background: #18181B;
+}
+
+/* ─── MOBILE MENU ─── */
 .mobileMenu {
   display: none;
   flex-direction: column;
@@ -296,22 +353,25 @@
   background: #F4F4F5;
 }
 
+/* ─── ANIMATIONS ─── */
 @keyframes fadeIn {
   from { opacity: 0; transform: translate(-50%, 0.75rem); }
-  to { opacity: 1; transform: translate(-50%, 0.5rem); }
+  to   { opacity: 1; transform: translate(-50%, 0.5rem); }
 }
 
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-1rem); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ─── RESPONSIVE ─── */
 @media (max-width: 992px) {
-  .links { display: none; }
+  .links  { display: none; }
   .burger { display: flex; }
   .mobileMenu { display: flex; }
 }
 
+/* ─── DIVIDERS & CITY LINKS ─── */
 .menuDivider {
   font-family: 'Syne', sans-serif;
   font-size: 0.65rem;
@@ -343,4 +403,3 @@
 .cityLinksGrid a:hover {
   color: #0F766E;
 }
-
