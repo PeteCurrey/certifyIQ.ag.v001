@@ -63,17 +63,28 @@ function PriceCalculator() {
     return () => clearInterval(t)
   }, [propType, beds])
 
-  // Commercial price animation
+  // Commercial price — banded pricing table (exc. VAT)
+  // Up to 100m²: £185  |  101-250: £275  |  251-500: £375
+  // 501-750: £475  |  751-1000: £595  |  1000+: Quote
   useEffect(() => {
     const numericArea = parseFloat(area)
     if (isNaN(numericArea) || numericArea <= 0) {
       setCommPrice(null)
+      setAnimCommPrice(null)
       return
     }
     const areaSqm = unit === 'sqft' ? numericArea / 10.764 : numericArea
-    // Example formula: £150 base + £0.50 per sqm (min 150)
-    const newPrice = Math.max(150, Math.round(150 + areaSqm * 0.50))
+
+    let newPrice: number | null
+    if (areaSqm <= 100)       newPrice = 185
+    else if (areaSqm <= 250)  newPrice = 275
+    else if (areaSqm <= 500)  newPrice = 375
+    else if (areaSqm <= 750)  newPrice = 475
+    else if (areaSqm <= 1000) newPrice = 595
+    else                       newPrice = null  // Quote on request
+
     setCommPrice(newPrice)
+    if (newPrice === null) { setAnimCommPrice(null); return }
 
     let start = animCommPrice ?? newPrice
     const steps = 20
@@ -82,7 +93,7 @@ function PriceCalculator() {
     const t = setInterval(() => {
       step++
       setAnimCommPrice(Math.round(start + diff * step))
-      if (step >= steps) { clearInterval(t); setAnimCommPrice(newPrice) }
+      if (step >= steps) { clearInterval(t); setAnimCommPrice(newPrice as number) }
     }, 20)
     return () => clearInterval(t)
   }, [area, unit])
@@ -213,13 +224,24 @@ function PriceCalculator() {
 
           <div className={styles.priceResult}>
             <span className={styles.priceLabel}>Estimated Price:</span>
-            <span className={styles.price}>{animCommPrice ? `£${animCommPrice}` : '—'}</span>
+            {commPrice === null && parseFloat(area) > 1000 ? (
+              <span className={styles.price} style={{ fontSize: '1rem', color: 'var(--accent-amber)' }}>Quote on request</span>
+            ) : (
+              <span className={styles.price}>
+                {animCommPrice ? `£${animCommPrice}` : '—'}
+                {animCommPrice && <span style={{ fontSize: '0.75rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '4px' }}>+VAT</span>}
+              </span>
+            )}
           </div>
 
-          <p className={styles.priceSubtext}>Commercial EPC (SBEM) · Includes assessor visit and lodgement</p>
+          {commPrice === null && parseFloat(area) > 1000 ? (
+            <p className={styles.priceSubtext}>Level 3 buildings over 1,000m² · Level 4 &amp; 5 — bespoke quote within 2 hrs</p>
+          ) : (
+            <p className={styles.priceSubtext}>Commercial EPC (SBEM Level 3) · Includes assessor visit and Landmark lodgement · exc. VAT</p>
+          )}
 
           <Link href={`/book?${commBookingParams}`} className={styles.calcCta}>
-            Book Assessment →
+            {commPrice === null && parseFloat(area) > 1000 ? 'Request a quote →' : 'Book Assessment →'}
           </Link>
         </>
       )}
