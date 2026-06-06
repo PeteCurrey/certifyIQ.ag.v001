@@ -7,7 +7,6 @@ export const metadata: Metadata = {
     template: 'Avorria | %s',
   },
   description: 'Fast, transparent, fully accredited Energy Performance Certificates for homeowners, landlords and estate agents. Certificate issued within 24 hours of assessment.',
-  keywords: ['EPC', 'Energy Performance Certificate', 'Chesterfield', 'Derbyshire', 'RdSAP 10', 'domestic energy assessor'],
   openGraph: {
     type: 'website',
     locale: 'en_GB',
