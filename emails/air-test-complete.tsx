@@ -151,7 +151,7 @@ export function AirTestCompleteEmail({
         If you have any questions about these test results, please contact your testing engineer.
         <br /><br />
         Best regards,<br />
-        <strong>The CertifyIQ Team</strong>
+        <strong>The Avorria Team</strong>
       </p>
     </div>
   );

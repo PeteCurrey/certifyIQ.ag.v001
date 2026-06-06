@@ -121,7 +121,7 @@ export function PeaCompleteEmail({
         If you have any questions or require modifications to the design specification in your report, please let us know.
         <br /><br />
         Best regards,<br />
-        <strong>The CertifyIQ Team</strong>
+        <strong>The Avorria Team</strong>
       </p>
     </div>
   );

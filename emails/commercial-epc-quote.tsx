@@ -43,7 +43,7 @@ export function CommercialEpcQuoteEmail({
       </h1>
       
       <p style={{ fontSize: '16px', lineHeight: '1.5', color: '#4b5563' }}>
-        Thank you for requesting a commercial EPC quote with CertifyIQ. We have assessed your property details and generated your quote below.
+        Thank you for requesting a commercial EPC quote with Avorria. We have assessed your property details and generated your quote below.
       </p>
 
       <div style={{
@@ -126,7 +126,7 @@ export function CommercialEpcQuoteEmail({
         If you have any questions or need to make adjustments to this quote, please contact our commercial team.
         <br /><br />
         Best regards,<br />
-        <strong>The CertifyIQ Team</strong>
+        <strong>The Avorria Team</strong>
       </p>
     </div>
   );

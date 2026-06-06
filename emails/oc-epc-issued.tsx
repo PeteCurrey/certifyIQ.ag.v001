@@ -115,10 +115,10 @@ export function OcEpcIssuedEmail({
       </div>
 
       <p style={{ fontSize: '14px', color: '#64748b', marginTop: '24px', borderTop: '1px solid #e5e7eb', paddingTop: '20px' }}>
-        Thank you for choosing CertifyIQ for your new build compliance. We look forward to working with you on future projects.
+        Thank you for choosing Avorria for your new build compliance. We look forward to working with you on future projects.
         <br /><br />
         Best regards,<br />
-        <strong>The CertifyIQ Team</strong>
+        <strong>The Avorria Team</strong>
       </p>
     </div>
   );
