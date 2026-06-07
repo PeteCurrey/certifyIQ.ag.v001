@@ -6,6 +6,12 @@ import styles from './enterprise.module.css'
 import EnterpriseForm from './EnterpriseForm'
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://avorria.co.uk/for/enterprise',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/for/enterprise',
+  },
   title: 'Avorria Enterprise | EPC & Compliance for Property Management Firms',
   description: 'Portfolio-level commercial EPC, TM44 and MEES compliance for property management consultancies. Dedicated account management, bulk pricing, and portfolio reporting.',
 }

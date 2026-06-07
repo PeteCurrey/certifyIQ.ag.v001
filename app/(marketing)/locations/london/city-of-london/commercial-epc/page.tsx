@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'Commercial EPC City of London | Square Mile Energy Assessors | Avorria',
+  title: 'Commercial EPC City of London | Square Mile Energy Assessors',
   description: 'Accredited Commercial EPCs in the City of London (EC1, EC2, EC3, EC4). Banking premises, corporate offices, heritage livery halls, and retail units. Specialist SBEM assessors from £185+VAT.',
   alternates: { canonical: 'https://avorria.co.uk/locations/london/city-of-london/commercial-epc' },
   openGraph: {
-    title: 'Commercial EPC City of London | Avorria',
+    title: 'Commercial EPC City of London',
     description: 'Fast, accredited Commercial EPCs across EC1-EC4. Banking headquarters, offices, heritage livery halls. Level 3 & 4 NDEA assessors. From £185+VAT.',
     url: 'https://avorria.co.uk/locations/london/city-of-london/commercial-epc',
     images: [{ url: 'https://avorria.co.uk/london_city_skyline.png', width: 1200, height: 630 }],

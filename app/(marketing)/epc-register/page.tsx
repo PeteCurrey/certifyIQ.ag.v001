@@ -2,14 +2,22 @@ import type { Metadata } from 'next'
 import LookupClient from './LookupClient'
 
 export const metadata: Metadata = {
-  title: 'Avorria — EPC Register Search Platform',
-  description: 'Search the official UK Government EPC Register by postcode. Find current energy ratings, expiry dates, AI-driven insights, and improvement potential for any property.',
+  alternates: {
+    canonical: 'https://avorria.co.uk/epc-register',
+  },
+  title: 'EPC Register Search',
+  description: 'Search the official UK Government EPC Register by postcode. Find current energy ratings, expiry dates, and improvement recommendations for any property in England & Wales.',
   openGraph: {
-    title: 'EPC Register Search Platform — Avorria',
+    url: 'https://avorria.co.uk/epc-register',
+    title: 'EPC Register Search | Avorria',
     description: 'Free EPC register search with actionable insights for England & Wales.',
   },
 }
 
-export default function EPCLookupPage() {
-  return <LookupClient />
+export default function EPCLookupPage({
+  searchParams,
+}: {
+  searchParams: { postcode?: string }
+}) {
+  return <LookupClient defaultPostcode={searchParams.postcode || ''} />
 }

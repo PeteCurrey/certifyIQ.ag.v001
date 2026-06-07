@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london/london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'Commercial EPC Nottingham | Accredited NDEA Assessors | Avorria',
+  title: 'Commercial EPC Nottingham | Accredited NDEA Assessors',
   description: 'Fast, accredited Commercial EPC assessments in Nottingham for offices, retail, and industrial premises. Level 3 & 4 NDEA qualified. From £150+VAT with 24-hr turnaround.',
   alternates: { canonical: 'https://avorria.co.uk/locations/nottingham/commercial-epc' },
   openGraph: {
-    title: 'Commercial EPC Nottingham | Avorria',
+    title: 'Commercial EPC Nottingham',
     description: 'Accredited Non-Domestic EPCs in Nottingham. Level 3 & 4 qualified assessors covering NG1–NG25 and Nottinghamshire.',
     url: 'https://avorria.co.uk/locations/nottingham/commercial-epc',
   },
@@ -40,7 +40,7 @@ export default function NottinghamCommercialEpcPage() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'Avorria Nottingham Commercial Energy Assessors',
-    'telephone': '01246 000000',
+    'telephone': '{SITE_CONFIG.phone}',
     'email': 'info@avorria.co.uk',
     'address': {
       '@type': 'PostalAddress',

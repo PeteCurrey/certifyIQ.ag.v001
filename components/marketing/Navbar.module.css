@@ -123,7 +123,7 @@
 }
 
 .cta:hover {
-  background: #115E59;
+  background: #0a4f48;
   transform: translateY(-1px);
 }
 
@@ -406,10 +406,12 @@
 
 /* ─── HOME PRE-SCROLL OVERRIDES ─── */
 .homePreScroll .logoText { color: #18181B; }
-.homePreScroll .link { color: #52525B; font-weight: 600; }
-.homePreScroll .link:hover { color: #18181B; }
-.homePreScroll .dropdownTrigger { color: #52525B; font-weight: 600; }
-.homePreScroll .dropdownTrigger:hover, .homePreScroll .dropdownTrigger.active { color: #18181B; }
+.homePreScroll .link { color: #18181B; font-weight: 600; }
+.homePreScroll .link:hover { color: #000000; }
+.homePreScroll .dropdownTrigger { color: #18181B; font-weight: 600; }
+.homePreScroll .dropdownTrigger:hover, .homePreScroll .dropdownTrigger.active { color: #000000; }
 .homePreScroll .burger span { background: #18181B; }
 .homePreScroll .linkPortal { color: #18181B; border-color: #18181B; }
 .homePreScroll .linkPortal:hover { background: rgba(0,0,0,0.05); color: #18181B; border-color: #18181B; }
+.homePreScroll .cta { background: #0F766E; color: #ffffff; }
+.homePreScroll .cta:hover { background: #0a4f48; }

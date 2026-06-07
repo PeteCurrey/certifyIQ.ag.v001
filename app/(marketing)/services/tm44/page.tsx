@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Breadcrumbs from '@/components/seo/Breadcrumbs'
+import { ServiceSchema } from '@/components/seo/ServiceSchema'
 import styles from '../services.module.css'
 
 const BUILDING_TYPES = [
@@ -97,12 +99,23 @@ export default function TM44Page() {
 
   return (
     <div className={styles.container} style={{ padding: 0, maxWidth: 'none' }}>
+      <ServiceSchema 
+        name="TM44 Air Conditioning Inspection"
+        description="A legal requirement for any commercial building with air conditioning systems exceeding 12kW combined output."
+        url="/services/tm44"
+      />
       {/* Hero Section */}
       <section 
         className={styles.heroFullScreen}
         style={{ backgroundImage: 'url(/hero_commercial.png)', backgroundColor: '#080D18' }}
       >
         <div className={styles.heroFullScreenInner}>
+          <div style={{ marginBottom: '2rem' }}>
+            <Breadcrumbs crumbs={[
+              { name: 'Commercial', url: '/services/commercial-epc' },
+              { name: 'TM44 Inspections', url: '/services/tm44' }
+            ]} />
+          </div>
           <h1 className={styles.h1} style={{ color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,0.5)', maxWidth: '800px' }}>
             TM44 Air Conditioning Inspections for Commercial Properties
           </h1>

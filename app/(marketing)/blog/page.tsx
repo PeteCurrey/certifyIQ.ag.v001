@@ -5,7 +5,13 @@ import type { Metadata } from 'next'
 import styles from './blog.module.css'
 
 export const metadata: Metadata = {
-  title: 'EPC Blog & Guides | Avorria',
+  alternates: {
+    canonical: 'https://avorria.co.uk/blog',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/blog',
+  },
+  title: 'EPC Blog & Guides',
   description: 'Expert guides on EPCs, energy efficiency, the 2028 landlord regulations, and how to improve your property rating.',
 }
 

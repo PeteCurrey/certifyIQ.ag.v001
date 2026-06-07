@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london/london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'Commercial EPC Sheffield | Accredited NDEA Assessors | Avorria',
+  title: 'Commercial EPC Sheffield | Accredited NDEA Assessors',
   description: 'Fast, accredited Commercial EPC assessments in Sheffield for offices, retail units, and industrial premises. Level 3 & 4 NDEA qualified. From £150+VAT with 24-hr turnaround.',
   alternates: { canonical: 'https://avorria.co.uk/locations/sheffield/commercial-epc' },
   openGraph: {
-    title: 'Commercial EPC Sheffield | Avorria',
+    title: 'Commercial EPC Sheffield',
     description: 'Accredited Non-Domestic EPCs in Sheffield. Level 3 & 4 qualified assessors covering S1–S35 and South Yorkshire.',
     url: 'https://avorria.co.uk/locations/sheffield/commercial-epc',
   },
@@ -40,7 +40,7 @@ export default function SheffieldCommercialEpcPage() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'Avorria Sheffield Commercial Energy Assessors',
-    'telephone': '01246 000000',
+    'telephone': '{SITE_CONFIG.phone}',
     'email': 'info@avorria.co.uk',
     'address': {
       '@type': 'PostalAddress',

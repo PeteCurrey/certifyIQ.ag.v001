@@ -2,7 +2,13 @@ import type { Metadata } from 'next'
 import WizardClient from './WizardClient'
 
 export const metadata: Metadata = {
-  title: 'Compliance Wizard | Avorria',
+  alternates: {
+    canonical: 'https://avorria.co.uk/developer/wizard',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/developer/wizard',
+  },
+  title: 'Compliance Wizard',
   description: 'Plan your development project compliance.',
 }
 

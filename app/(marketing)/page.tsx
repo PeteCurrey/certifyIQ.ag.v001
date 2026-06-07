@@ -8,10 +8,17 @@ import PricingOverview from '@/components/marketing/PricingOverview'
 import TrustSection from '@/components/marketing/TrustSection'
 import AgentBand from '@/components/marketing/AgentBand'
 import LandlordBand from '@/components/marketing/LandlordBand'
+import { SITE_CONFIG } from '@/lib/site-config'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Avorria — EPC Assessments | Chesterfield & Derbyshire',
+  alternates: {
+    canonical: 'https://avorria.co.uk',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk',
+  },
+  title: 'EPC Assessments | Chesterfield & Derbyshire',
   description: 'Fast, transparent, fully accredited Energy Performance Certificates. Book online from £65. Certificate issued within 24 hours.',
 }
 
@@ -26,7 +33,10 @@ export default function HomePage() {
         "name": "Avorria",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://avorria.co.uk/search?q={search_term_string}",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://avorria.co.uk/epc-register?postcode={search_term_string}"
+          },
           "query-input": "required name=search_term_string"
         }
       },
@@ -38,7 +48,7 @@ export default function HomePage() {
         "logo": "https://avorria.co.uk/logo.png",
         "image": "https://avorria.co.uk/hero_commercial.png",
         "description": "Fast, transparent, fully accredited Energy Performance Certificates for commercial and domestic properties.",
-        "telephone": "01246 000000",
+        "telephone": SITE_CONFIG.phone,
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Chesterfield",

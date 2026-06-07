@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'Commercial EPC London | Non-Domestic Energy Assessors | Avorria',
+  title: 'Commercial EPC London | Non-Domestic Energy Assessors',
   description: 'Accredited Commercial EPC assessments (NDEA Levels 3 & 4) across Greater London. Office towers, retail units, government buildings, and industrial premises. From £185+VAT with 24-hr turnaround.',
   alternates: { canonical: 'https://avorria.co.uk/locations/london/commercial-epc' },
   openGraph: {
-    title: 'Commercial EPC London | Avorria',
+    title: 'Commercial EPC London',
     description: 'Fast, accredited Non-Domestic EPCs across Greater London. Level 3 & 4 qualified assessors available same-week.',
     url: 'https://avorria.co.uk/locations/london/commercial-epc',
     images: [{ url: 'https://avorria.co.uk/london_city_skyline.png', width: 1200, height: 630 }],

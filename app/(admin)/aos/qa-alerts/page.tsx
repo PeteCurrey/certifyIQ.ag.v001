@@ -45,7 +45,7 @@ export default function QaAlertsPage() {
     async function fetchLogs() {
       setLoading(true)
       const { data, error } = await supabase
-        .from('audit_log')
+        .from('aos_audit_log')
         .select(`
           id, booking_id, assessor_id, overall_status, audit_result, created_at,
           bookings ( booking_ref, properties(address_line_1, town, postcode) ),

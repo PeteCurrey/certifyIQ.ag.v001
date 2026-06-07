@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london/london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'Commercial EPC Derby | Accredited NDEA Assessors | Avorria',
+  title: 'Commercial EPC Derby | Accredited NDEA Assessors',
   description: 'Fast, accredited Commercial EPC assessments in Derby for offices, retail, and industrial premises. Level 3 & 4 NDEA qualified. From £150+VAT with 24-hr turnaround.',
   alternates: { canonical: 'https://avorria.co.uk/locations/derby/commercial-epc' },
   openGraph: {
-    title: 'Commercial EPC Derby | Avorria',
+    title: 'Commercial EPC Derby',
     description: 'Accredited Non-Domestic EPCs in Derby. Level 3 & 4 qualified assessors covering DE1–DE24 and Derbyshire.',
     url: 'https://avorria.co.uk/locations/derby/commercial-epc',
   },
@@ -40,7 +40,7 @@ export default function DerbyCommercialEpcPage() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'Avorria Derby Commercial Energy Assessors',
-    'telephone': '01246 000000',
+    'telephone': '{SITE_CONFIG.phone}',
     'email': 'info@avorria.co.uk',
     'address': {
       '@type': 'PostalAddress',

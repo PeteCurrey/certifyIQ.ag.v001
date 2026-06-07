@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3, MapPin, AlertTriangle, Inbox, Globe, Building2 } from 'lucide-react'
+import { LayoutDashboard, Calendar, ClipboardList, Settings, LogOut, Users, BarChart3, MapPin, AlertTriangle, Inbox, Globe, Building2, Search } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { hasPermission, UserRole } from '@/lib/aos/permissions'
 import styles from './AdminSidebar.module.css'
@@ -47,6 +47,7 @@ export default function AdminSidebar() {
     { name: 'User Management', href: '/aos/users', icon: Users, permissionKey: 'users' },
     { name: 'Revenue', href: '/aos/revenue', icon: BarChart3, permissionKey: 'analytics' },
     { name: 'Website Content', href: '/aos/website', icon: Globe, permissionKey: 'content' },
+    { name: 'SEO Tools', href: '/aos/seo', icon: Search, permissionKey: 'seo' },
     { name: 'Agent Accounts', href: '/aos/agents', icon: Building2, permissionKey: 'integrations' },
     { name: 'Settings', href: '/aos/settings', icon: Settings, permissionKey: 'settings' },
   ]

@@ -4,7 +4,13 @@ import type { Metadata } from 'next'
 import styles from './prices.module.css'
 
 export const metadata: Metadata = {
-  title: 'EPC Pricing | Avorria',
+  alternates: {
+    canonical: 'https://avorria.co.uk/prices',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/prices',
+  },
+  title: 'EPC Pricing',
   description: 'Transparent, fixed-price EPC assessments from £65. No hidden fees. Includes assessor visit, national registration and 10-year validity.',
 }
 

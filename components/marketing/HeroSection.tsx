@@ -267,7 +267,7 @@ export default function HeroSection() {
           </p>
           <div className={styles.ctas}>
             <Link href="/book" className={styles.ctaPrimary} id="hero-cta-book">Book your EPC — from £65</Link>
-            <Link href="/lookup" className={styles.ctaGhost} id="hero-cta-lookup">Check existing EPC</Link>
+            <Link href="/epc-register" className={styles.ctaGhost} id="hero-cta-lookup">Check existing EPC</Link>
           </div>
           <div className={styles.trustBar}>
             <span>✓ Elmhurst Energy accredited</span>

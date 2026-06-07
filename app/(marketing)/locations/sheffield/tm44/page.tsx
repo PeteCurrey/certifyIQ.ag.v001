@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london/london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'TM44 Air Conditioning Inspection Sheffield | Avorria',
+  title: 'TM44 Air Conditioning Inspection Sheffield',
   description: 'Accredited TM44 air conditioning inspections in Sheffield and South Yorkshire. Avoid the £300 fine. We cover offices, retail, and industrial premises. Book online.',
   alternates: { canonical: 'https://avorria.co.uk/locations/sheffield/tm44' },
   openGraph: {
-    title: 'TM44 Sheffield | Air Conditioning Inspections | Avorria',
+    title: 'TM44 Sheffield | Air Conditioning Inspections',
     description: 'Accredited TM44 inspections for Sheffield commercial premises with AC systems over 12kW. Fixed pricing, 5-year compliance certificate.',
     url: 'https://avorria.co.uk/locations/sheffield/tm44',
   },
@@ -47,7 +47,7 @@ export default function SheffieldTM44Page() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'Avorria TM44 Inspections Sheffield',
-    'telephone': '01246 000000',
+    'telephone': '{SITE_CONFIG.phone}',
     'email': 'info@avorria.co.uk',
     'address': {
       '@type': 'PostalAddress',

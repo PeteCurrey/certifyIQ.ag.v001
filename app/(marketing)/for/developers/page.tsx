@@ -5,7 +5,13 @@ import EnquiryForm from '../EnquiryForm'
 import styles from '../for.module.css'
 
 export const metadata: Metadata = {
-  title: 'Avorria — For Developers | SAP Calculations & Air Testing',
+  alternates: {
+    canonical: 'https://avorria.co.uk/for/developers',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/for/developers',
+  },
+  title: 'For Developers | SAP Calculations & Air Testing',
   description: 'Fast, Elmhurst-accredited Part L compliance for homebuilders and developers. On-construction SAP, PEAs, and air tightness testing.',
 }
 

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { Home, HardHat, Wind, Building2, Factory, BarChart3, Lightbulb, Search, Zap } from 'lucide-react'
+import { Home, HardHat, Wind, Building2, Factory, BarChart3, Lightbulb, Search, Zap, Clock, FileText } from 'lucide-react'
 import styles from './Navbar.module.css'
 
 interface DropdownItem {
@@ -134,15 +134,28 @@ export default function Navbar() {
                         <span className={styles.menuDesc}>Blower door testing for non-domestic buildings.</span>
                       </div>
                     </Link>
-                    <div className={styles.menuDivider}>─ Commercial coverage ─</div>
+                    <Link href="/services/tm44" className={styles.menuItem} onClick={closeAll}>
+                      <Clock className={styles.menuIcon} size={20} />
+                      <div>
+                        <span className={styles.menuTitle}>TM44 Inspection</span>
+                        <span className={styles.menuDesc}>Mandatory AC system assessments.</span>
+                      </div>
+                    </Link>
+                    <Link href="/services/display-energy-certificate" className={styles.menuItem} onClick={closeAll}>
+                      <FileText className={styles.menuIcon} size={20} />
+                      <div>
+                        <span className={styles.menuTitle}>Display Energy Certificate</span>
+                        <span className={styles.menuDesc}>DECs for public buildings over 250m².</span>
+                      </div>
+                    </Link>
+                    <div className={styles.menuDivider}>─ Commercial TM44 Coverage ─</div>
                     <div className={styles.cityLinksGrid}>
-                      <Link href="/commercial/london" onClick={closeAll}>London</Link>
-                      <Link href="/commercial/manchester" onClick={closeAll}>Manchester</Link>
-                      <Link href="/commercial/birmingham" onClick={closeAll}>Birmingham</Link>
-                      <Link href="/commercial/sheffield" onClick={closeAll}>Sheffield</Link>
-                      <Link href="/commercial/leeds" onClick={closeAll}>Leeds</Link>
-                      <Link href="/commercial/nottingham" onClick={closeAll}>Nottingham</Link>
-                      <Link href="/commercial/derby" onClick={closeAll}>Derby</Link>
+                      <Link href="/tm44/london" onClick={closeAll}>London</Link>
+                      <Link href="/tm44/manchester" onClick={closeAll}>Manchester</Link>
+                      <Link href="/tm44/birmingham" onClick={closeAll}>Birmingham</Link>
+                      <Link href="/tm44/leeds" onClick={closeAll}>Leeds</Link>
+                      <Link href="/tm44/sheffield" onClick={closeAll}>Sheffield</Link>
+                      <Link href="/tm44/bristol" onClick={closeAll}>Bristol</Link>
                     </div>
                   </div>
                 </div>
@@ -221,6 +234,8 @@ export default function Navbar() {
             <Link href="/services/new-build-epc" onClick={closeAll}>New Build EPC & SAP</Link>
             <Link href="/services/air-tightness" onClick={closeAll}>Air Tightness Testing</Link>
             <Link href="/services/commercial-epc" onClick={closeAll}>Commercial EPC</Link>
+            <Link href="/services/tm44" onClick={closeAll}>TM44 Inspection</Link>
+            <Link href="/services/display-energy-certificate" onClick={closeAll}>DEC (Public Buildings)</Link>
           </div>
           <div className={styles.mobileGroup}>
             <span className={styles.mobileGroupHeading}>Tools</span>

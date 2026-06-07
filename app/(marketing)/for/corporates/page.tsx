@@ -5,7 +5,13 @@ import EnquiryForm from '../EnquiryForm'
 import styles from '../for.module.css'
 
 export const metadata: Metadata = {
-  title: 'Avorria — For Corporates | Commercial EPCs & SBEM calculations',
+  alternates: {
+    canonical: 'https://avorria.co.uk/for/corporates',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/for/corporates',
+  },
+  title: 'For Corporates | Commercial EPCs & SBEM calculations',
   description: 'Enterprise portfolio energy assessments. Multi-site commercial EPCs (Level 3-5), MEES advisory audits, and SBEM calculations.',
 }
 

@@ -4,7 +4,13 @@ import { Sparkles, FileText, Upload, ChevronRight, Shield, Zap, TrendingUp } fro
 import styles from '../ai-analyser/analyser.module.css' // Reuse the same premium styles
 
 export const metadata = {
-  title: 'AI EPC Explainer & Certificate Analyser | Avorria',
+  alternates: {
+    canonical: 'https://avorria.co.uk/tools/epc-explainer',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/tools/epc-explainer',
+  },
+  title: 'AI EPC Explainer & Certificate Analyser',
   description: 'Upload your Energy Performance Certificate (EPC) and get an instant, plain-English explanation of your rating, risks, and improvement costs using AI.',
 }
 

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: LocationPageProps): Promise<M
 
   if (!pageData) {
     return {
-      title: 'EPC Assessor | Avorria',
+      title: 'EPC Assessor',
       description: 'Accredited energy performance assessments.',
     }
   }
@@ -59,7 +59,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
     '@type': 'LocalBusiness',
     'name': `Avorria ${town}`,
     'image': 'https://certifyiq.co.uk/logo.png',
-    'telephone': '01246 000 000',
+    'telephone': '{SITE_CONFIG.phone}',
     'email': 'info@certifyiq.co.uk',
     'address': {
       '@type': 'PostalAddress',
@@ -108,7 +108,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
           >
             Book your EPC in {town} →
           </Link>
-          <Link href="/lookup" className={styles.ctaSecondary}>
+          <Link href="/epc-register" className={styles.ctaSecondary}>
             Check Existing EPC
           </Link>
         </div>

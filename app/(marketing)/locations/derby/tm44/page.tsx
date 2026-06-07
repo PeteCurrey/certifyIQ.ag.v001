@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london/london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'TM44 Air Conditioning Inspection Derby | Avorria',
+  title: 'TM44 Air Conditioning Inspection Derby',
   description: 'Accredited TM44 air conditioning inspections in Derby and Derbyshire. Local assessors — no travel surcharge. Avoid the £300 fine. Book online.',
   alternates: { canonical: 'https://avorria.co.uk/locations/derby/tm44' },
   openGraph: {
-    title: 'TM44 Derby | Air Conditioning Inspections | Avorria',
+    title: 'TM44 Derby | Air Conditioning Inspections',
     description: 'Accredited TM44 inspections for Derby commercial premises with AC systems over 12kW. Fixed pricing, 5-year compliance certificate. Local assessors.',
     url: 'https://avorria.co.uk/locations/derby/tm44',
   },
@@ -47,7 +47,7 @@ export default function DerbyTM44Page() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'Avorria TM44 Inspections Derby',
-    'telephone': '01246 000000',
+    'telephone': '{SITE_CONFIG.phone}',
     'email': 'info@avorria.co.uk',
     'address': {
       '@type': 'PostalAddress',

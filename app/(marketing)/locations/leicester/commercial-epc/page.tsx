@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london/london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'Commercial EPC Leicester | Accredited NDEA Assessors | Avorria',
+  title: 'Commercial EPC Leicester | Accredited NDEA Assessors',
   description: 'Fast, accredited Commercial EPC assessments in Leicester for offices, retail, and industrial premises. Level 3 & 4 NDEA qualified. From £150+VAT with 24-hr turnaround.',
   alternates: { canonical: 'https://avorria.co.uk/locations/leicester/commercial-epc' },
   openGraph: {
-    title: 'Commercial EPC Leicester | Avorria',
+    title: 'Commercial EPC Leicester',
     description: 'Accredited Non-Domestic EPCs in Leicester. Level 3 & 4 qualified assessors covering LE1–LE19 and Leicestershire.',
     url: 'https://avorria.co.uk/locations/leicester/commercial-epc',
   },
@@ -40,7 +40,7 @@ export default function LeicesterCommercialEpcPage() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'Avorria Leicester Commercial Energy Assessors',
-    'telephone': '01246 000000',
+    'telephone': '{SITE_CONFIG.phone}',
     'email': 'info@avorria.co.uk',
     'address': {
       '@type': 'PostalAddress',

@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london/london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'TM44 Air Conditioning Inspection Leicester | Avorria',
+  title: 'TM44 Air Conditioning Inspection Leicester',
   description: 'Accredited TM44 air conditioning inspections in Leicester and Leicestershire. Avoid the £300 fine. Covering LE1–LE19. Book online for same-week availability.',
   alternates: { canonical: 'https://avorria.co.uk/locations/leicester/tm44' },
   openGraph: {
-    title: 'TM44 Leicester | Air Conditioning Inspections | Avorria',
+    title: 'TM44 Leicester | Air Conditioning Inspections',
     description: 'Accredited TM44 inspections for Leicester commercial premises with AC systems over 12kW. Fixed pricing, 5-year compliance certificate.',
     url: 'https://avorria.co.uk/locations/leicester/tm44',
   },
@@ -47,7 +47,7 @@ export default function LeicesterTM44Page() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'Avorria TM44 Inspections Leicester',
-    'telephone': '01246 000000',
+    'telephone': '{SITE_CONFIG.phone}',
     'email': 'info@avorria.co.uk',
     'address': {
       '@type': 'PostalAddress',

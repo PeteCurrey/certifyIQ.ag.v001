@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from '../../london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'TM44 Air Conditioning Inspection Canary Wharf | Avorria',
+  title: 'TM44 Air Conditioning Inspection Canary Wharf',
   description: 'Statutory TM44 air conditioning inspections for commercial tower buildings in Canary Wharf & Docklands (E14). Chiller plant, VRF & BMS systems. CIBSE-registered assessors based at 1 Canada Square.',
   alternates: { canonical: 'https://avorria.co.uk/locations/london/canary-wharf/tm44' },
   openGraph: {

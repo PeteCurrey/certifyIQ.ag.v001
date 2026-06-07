@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'Commercial EPC Westminster | Government & Heritage Buildings | Avorria',
+  title: 'Commercial EPC Westminster | Government & Heritage Buildings',
   description: 'Accredited Commercial EPCs in Westminster (SW1, WC2, W1). Government departments, Whitehall offices, prestige retail, and heritage buildings. Specialist assessors from £185+VAT.',
   alternates: { canonical: 'https://avorria.co.uk/locations/london/westminster/commercial-epc' },
   openGraph: {
-    title: 'Commercial EPC Westminster | Avorria',
+    title: 'Commercial EPC Westminster',
     description: 'Accredited Commercial EPCs for government offices, heritage buildings, luxury hotels, and prime retail in Westminster SW1. Expert NDEA assessors from £185+VAT.',
     url: 'https://avorria.co.uk/locations/london/westminster/commercial-epc',
     images: [{ url: 'https://avorria.co.uk/london_westminster_offices.png', width: 1200, height: 630 }],

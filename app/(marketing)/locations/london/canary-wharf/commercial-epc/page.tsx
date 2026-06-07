@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from '../../london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'Commercial EPC Canary Wharf & Docklands | NDEA Level 4 | Avorria',
+  title: 'Commercial EPC Canary Wharf & Docklands | NDEA Level 4',
   description: 'Accredited NDEA Level 3 & 4 Commercial EPCs for office towers, financial headquarters, and multi-tenant developments in Canary Wharf & Docklands (E14). From £185+VAT. Avorria is based at 1 Canada Square.',
   alternates: { canonical: 'https://avorria.co.uk/locations/london/canary-wharf/commercial-epc' },
   openGraph: {

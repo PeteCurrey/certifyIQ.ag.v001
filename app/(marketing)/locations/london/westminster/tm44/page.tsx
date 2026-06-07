@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'TM44 Air Conditioning Inspection Westminster | Government & Heritage | Avorria',
+  title: 'TM44 Air Conditioning Inspection Westminster | Government & Heritage',
   description: 'Statutory TM44 air conditioning inspections for government departments, heritage offices, luxury hotels, and commercial premises in Westminster (SW1, WC2, W1). Accredited CIBSE assessors.',
   alternates: { canonical: 'https://avorria.co.uk/locations/london/westminster/tm44' },
   openGraph: {
-    title: 'TM44 Inspection Westminster | Avorria',
+    title: 'TM44 Inspection Westminster',
     description: 'Statutory TM44 AC inspections for government offices, heritage buildings, and luxury hotels in Westminster SW1. Accredited assessors, Landmark lodgement included.',
     url: 'https://avorria.co.uk/locations/london/westminster/tm44',
     images: [{ url: 'https://avorria.co.uk/london_westminster_offices.png', width: 1200, height: 630 }],

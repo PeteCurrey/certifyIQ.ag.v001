@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Breadcrumbs from '@/components/seo/Breadcrumbs'
+import { ServiceSchema } from '@/components/seo/ServiceSchema'
 import styles from '../services.module.css'
 
 export default function DecPage() {
@@ -72,12 +74,23 @@ export default function DecPage() {
 
   return (
     <div className={styles.container} style={{ padding: 0, maxWidth: 'none' }}>
+      <ServiceSchema 
+        name="Display Energy Certificates (DEC)"
+        description="A legal requirement for public buildings over 250m² that are frequently visited by the public."
+        url="/services/display-energy-certificate"
+      />
       {/* Hero Section */}
       <section 
         className={styles.heroFullScreen}
         style={{ backgroundImage: 'url(/hero_commercial.png)', backgroundColor: '#080D18' }}
       >
         <div className={styles.heroFullScreenInner}>
+          <div style={{ marginBottom: '2rem' }}>
+            <Breadcrumbs crumbs={[
+              { name: 'Commercial', url: '/services/commercial-epc' },
+              { name: 'Display Energy Certificate', url: '/services/display-energy-certificate' }
+            ]} />
+          </div>
           <h1 className={styles.h1} style={{ color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,0.5)', maxWidth: '800px' }}>
             Display Energy Certificates (DEC)
           </h1>

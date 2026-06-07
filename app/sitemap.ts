@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@supabase/supabase-js'
+import { tm44Cities } from '@/lib/tm44-cities'
 
 export const revalidate = 86400 // Revalidate daily
 
@@ -26,6 +27,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/glossary',
     '/blog',
     '/services',
+    '/services/domestic-epc',
+    '/services/commercial-epc',
+    '/services/new-build-epc',
+    '/services/air-tightness',
+    '/services/tm44',
+    '/services/display-energy-certificate',
     '/tools',
     '/locations/london/commercial-epc',
     '/locations/london/tm44',
@@ -47,7 +54,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : route.startsWith('/locations/london') ? 0.8 : route === '/landlord-compliance' || route === '/epc-register' ? 0.9 : 0.8,
+    priority: route === '' ? 1.0 : route.startsWith('/locations/london') ? 0.8 : route === '/landlord-compliance' || route === '/epc-register' ? 0.9 : 0.8,
+  }))
+
+  // TM44 City routes
+  const tm44CityRoutes = Object.keys(tm44Cities).map(city => ({
+    url: `${baseUrl}/tm44/${city}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
   }))
 
   // Location EPC SEO pages
@@ -89,5 +104,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  return [...routes, ...epcRoutes, ...complianceRoutes, ...developerRoutes]
+  // Blog routes
+  const { data: blogPosts } = await supabase
+    .from('blog_posts')
+    .select('slug, updated_at, published_at')
+    .eq('published', true)
+
+  const blogRoutes = (blogPosts || []).map((post: any) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.updated_at ? new Date(post.updated_at) : new Date(post.published_at),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  return [...routes, ...tm44CityRoutes, ...epcRoutes, ...complianceRoutes, ...developerRoutes, ...blogRoutes]
 }

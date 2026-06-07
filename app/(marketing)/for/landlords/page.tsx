@@ -5,7 +5,13 @@ import EnquiryForm from '../EnquiryForm'
 import styles from '../for.module.css'
 
 export const metadata: Metadata = {
-  title: 'Avorria — For Landlords & Property Managers | MEES Compliance',
+  alternates: {
+    canonical: 'https://avorria.co.uk/for/landlords',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/for/landlords',
+  },
+  title: 'For Landlords & Property Managers | MEES Compliance',
   description: 'Stay MEES compliant. EPC portfolio management for landlords and residential managers. Unlock bulk discount rates and upgrade advisory reports.',
 }
 

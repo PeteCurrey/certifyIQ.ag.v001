@@ -3,7 +3,13 @@ import Link from 'next/link'
 import styles from './developer.module.css'
 
 export const metadata: Metadata = {
-  title: 'Property Developer Compliance Wizard | Avorria',
+  alternates: {
+    canonical: 'https://avorria.co.uk/developer',
+  },
+  openGraph: {
+    url: 'https://avorria.co.uk/developer',
+  },
+  title: 'Property Developer Compliance Wizard',
   description: 'The UK\'s most useful new build compliance planning tool. Instantly identify required reports, testing, and compliance services for your development project.',
 }
 

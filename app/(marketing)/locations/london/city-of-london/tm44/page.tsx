@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../../london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'TM44 Air Conditioning Inspection City of London | Avorria',
+  title: 'TM44 Air Conditioning Inspection City of London',
   description: 'Statutory TM44 AC inspections for banking offices, trading floors, and corporate headquarters in the City of London (EC1-EC4). CIBSE-registered assessors. Fast turnaround, competitive pricing.',
   alternates: { canonical: 'https://avorria.co.uk/locations/london/city-of-london/tm44' },
   openGraph: {
-    title: 'TM44 Inspection City of London | Avorria',
+    title: 'TM44 Inspection City of London',
     description: 'Statutory TM44 AC inspections for banking headquarters, offices, and trading floors across EC1-EC4. CIBSE-registered assessors. Landmark lodgement included.',
     url: 'https://avorria.co.uk/locations/london/city-of-london/tm44',
     images: [{ url: 'https://avorria.co.uk/london_city_skyline.png', width: 1200, height: 630 }],

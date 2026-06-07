@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../london-location.module.css'
 
 export const metadata: Metadata = {
-  title: 'TM44 Air Conditioning Inspection London | Avorria',
+  title: 'TM44 Air Conditioning Inspection London',
   description: 'Legally mandated TM44 air conditioning inspections for commercial and public buildings across Greater London. Accredited AC energy assessors covering all boroughs. Fast turnaround & competitive pricing.',
   alternates: { canonical: 'https://avorria.co.uk/locations/london/tm44' },
   openGraph: {
-    title: 'TM44 AC Inspection London | Avorria',
+    title: 'TM44 AC Inspection London',
     description: 'Statutory TM44 inspections for all cooling systems over 12kW across Greater London. CIBSE-registered assessors. Certificate lodged to Landmark database.',
     url: 'https://avorria.co.uk/locations/london/tm44',
     images: [{ url: 'https://avorria.co.uk/canary_wharf_towers.png', width: 1200, height: 630 }],
