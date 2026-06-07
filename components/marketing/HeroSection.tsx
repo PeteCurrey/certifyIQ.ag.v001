@@ -252,16 +252,42 @@ function PriceCalculator() {
 }
 
 export default function HeroSection() {
+  const ROTATING_WORDS = ["home's", "business", "commercial building", "public building"]
+  const [wordIndex, setWordIndex] = useState(0)
+  const [isFading, setIsFading] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFading(true)
+      setTimeout(() => {
+        setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length)
+        setIsFading(false)
+      }, 400)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section className={styles.hero}>
-      {/* Background image */}
-      <div className={styles.bgImage} aria-hidden="true" />
+      {/* Background video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className={styles.bgVideo}
+        poster="/hero-bg.jpg"
+      >
+        <source src="/hero-video.mp4" type="video/mp4" />
+      </video>
       {/* Light overlay */}
       <div className={styles.overlay} aria-hidden="true" />
       <div className={styles.inner}>
         <div className={styles.left}>
           <span className={styles.eyebrow}>RdSAP 10 Certified Assessors · Chesterfield &amp; Derbyshire</span>
-          <h1 className={styles.h1}>Your home's energy<br />certificate, sorted.</h1>
+          <h1 className={styles.h1}>
+            Your <span className={`${styles.rotatingWord} ${isFading ? styles.fadeOut : styles.fadeIn}`}>{ROTATING_WORDS[wordIndex]}</span> energy<br />certificate, sorted.
+          </h1>
           <p className={styles.sub}>
             Fully accredited Energy Performance Certificates for homeowners, landlords and estate agents across Chesterfield &amp; Derbyshire. Certificate issued within 24 hours of your assessment.
           </p>

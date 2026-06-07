@@ -5,10 +5,10 @@ let dailyRequestCount = 0
 let countResetDate = new Date().toDateString()
 
 function getAuthHeader(): string {
-  const email = process.env.EPC_API_EMAIL
   const key = process.env.EPC_API_KEY
-  if (!email || !key) return ''
-  return 'Basic ' + Buffer.from(`${email}:${key}`).toString('base64')
+  if (!key) return ''
+  // The new API uses Bearer token, not Basic auth
+  return `Bearer ${key}`
 }
 
 function normalisePostcode(pc: string): string {
@@ -42,28 +42,31 @@ export async function GET(request: NextRequest) {
   // MODE B: Fetch full certificate detail
   if (lmk) {
     incrementCounter()
-    const endpoint = type === 'non-domestic'
-      ? `https://epc.opendatacommunities.org/api/v1/non-domestic/certificate/${encodeURIComponent(lmk)}`
-      : `https://epc.opendatacommunities.org/api/v1/domestic/certificate/${encodeURIComponent(lmk)}`
+    // New API has a unified endpoint for both domestic and non-domestic certificates
+    const endpoint = `https://api.get-energy-performance-data.communities.gov.uk/api/certificate?certificate_number=${encodeURIComponent(lmk)}`
 
     try {
       const res = await fetch(endpoint, {
         headers: { Accept: 'application/json', Authorization: auth },
         next: { revalidate: 3600 }, // cache 1 hour
       })
-      if (res.status === 401) {
-        console.error('[EPC API] Unauthorized — check EPC_API_EMAIL and EPC_API_KEY')
-        return NextResponse.json({ error: 'EPC register not configured' }, { status: 503 })
+      if (res.status === 401 || res.status === 403) {
+        console.error('[EPC API] Unauthorized — check EPC_API_KEY')
+        return NextResponse.json({ error: 'EPC register not configured or invalid key' }, { status: 503 })
       }
       if (!res.ok) {
         return NextResponse.json({ error: 'Certificate not found' }, { status: 404 })
       }
-      const data = await res.json()
+      const rawData = await res.json()
+      // The new API returns {"data": { ... }}
+      const data = rawData.data || rawData
 
       // Fetch recommendations if domestic
       let recommendations = []
       if (type !== 'non-domestic') {
-        const recEndpoint = `https://epc.opendatacommunities.org/api/v1/domestic/recommendations/${encodeURIComponent(lmk)}`
+        // The new API might have a different endpoint for recommendations or include it.
+        // As per docs, it might be /api/domestic-recommendations
+        const recEndpoint = `https://api.get-energy-performance-data.communities.gov.uk/api/domestic-recommendations/search?certificate_number=${encodeURIComponent(lmk)}`
         try {
           incrementCounter()
           const recRes = await fetch(recEndpoint, {
@@ -72,7 +75,7 @@ export async function GET(request: NextRequest) {
           })
           if (recRes.ok) {
             const recData = await recRes.json()
-            recommendations = recData.rows || []
+            recommendations = recData.data || []
           }
         } catch (e) {
           console.error('[EPC API] Failed to fetch recommendations', e)
@@ -101,11 +104,11 @@ export async function GET(request: NextRequest) {
 
   const params = new URLSearchParams({
     postcode: normPostcode,
-    size: '25',
+    page_size: '25', // The new API uses page_size
   })
   if (address) params.set('address', address)
 
-  const domesticUrl = `https://epc.opendatacommunities.org/api/v1/domestic/search?${params}`
+  const domesticUrl = `https://api.get-energy-performance-data.communities.gov.uk/api/domestic/search?${params}`
 
   try {
     const domesticRes = await fetch(domesticUrl, {
@@ -113,34 +116,43 @@ export async function GET(request: NextRequest) {
       next: { revalidate: 900 }, // cache 15 min
     })
 
-    if (domesticRes.status === 401) {
-      console.error('[EPC API] Unauthorized — check EPC_API_EMAIL and EPC_API_KEY')
-      return NextResponse.json({ error: 'EPC register not configured' }, { status: 503 })
+    if (domesticRes.status === 401 || domesticRes.status === 403) {
+      console.error('[EPC API] Unauthorized — check EPC_API_KEY')
+      return NextResponse.json({ error: 'EPC register not configured or invalid key' }, { status: 503 })
     }
     if (domesticRes.status === 400) {
       return NextResponse.json({ error: 'Invalid postcode format' }, { status: 400 })
     }
-    if (!domesticRes.ok) {
-      return NextResponse.json({ domestic: [], nonDomestic: [], total: 0 })
+    
+    let domesticRows: any[] = []
+    if (domesticRes.ok) {
+      const domesticData = await domesticRes.json()
+      // New API returns an array or an object with error. If error, data.error exists.
+      if (Array.isArray(domesticData.data)) {
+        domesticRows = domesticData.data
+      } else if (Array.isArray(domesticData)) {
+        domesticRows = domesticData
+      }
     }
-
-    const domesticData = await domesticRes.json()
-    const domesticRows: any[] = domesticData.rows || []
 
     // If no domestic results, also try non-domestic
     let nonDomesticRows: any[] = []
     if (domesticRows.length === 0) {
       incrementCounter()
-      const nonDomParams = new URLSearchParams({ postcode: normPostcode, size: '10' })
+      const nonDomParams = new URLSearchParams({ postcode: normPostcode, page_size: '10' })
       if (address) nonDomParams.set('address', address)
       try {
         const ndRes = await fetch(
-          `https://epc.opendatacommunities.org/api/v1/non-domestic/search?${nonDomParams}`,
+          `https://api.get-energy-performance-data.communities.gov.uk/api/non-domestic/search?${nonDomParams}`,
           { headers: { Accept: 'application/json', Authorization: auth }, next: { revalidate: 900 } }
         )
         if (ndRes.ok) {
           const ndData = await ndRes.json()
-          nonDomesticRows = ndData.rows || []
+          if (Array.isArray(ndData.data)) {
+            nonDomesticRows = ndData.data
+          } else if (Array.isArray(ndData)) {
+            nonDomesticRows = ndData
+          }
         }
       } catch {
         // Non-domestic search failed silently

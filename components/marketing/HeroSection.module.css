@@ -7,14 +7,17 @@
   padding-top: 80px;
 }
 
-/* Full-screen background photo */
-.bgImage {
+/* Full-screen background video */
+.bgVideo {
   position: absolute;
-  inset: 0;
-  background-image: url('/hero-bg.jpg');
-  background-size: cover;
-  background-position: center 40%;
-  background-repeat: no-repeat;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translateX(-50%) translateY(-50%);
+  object-fit: cover;
   z-index: 0;
 }
 
@@ -67,6 +70,21 @@
   line-height: 1.05;
   margin-bottom: 1.5rem;
 }
+
+.rotatingWord {
+  display: inline-block;
+  color: var(--accent-lime);
+  transition: opacity 0.4s ease-in-out;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.fadeOut {
+  opacity: 0;
+}
+
 
 .sub {
   font-size: 1.125rem;
