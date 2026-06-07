@@ -237,11 +237,15 @@ function AosMobileContent() {
 
   const handleSubmit = async () => {
     const supabase = createClient()
-    await supabase.from('bookings').update({
-      assessor_status: 'submitted_qa',
-      status: 'assessment_complete',
-      assessor_status_updated_at: new Date().toISOString()
-    }).eq('id', activeJobId || 'j1').catch(() => {})
+    try {
+      await supabase.from('bookings').update({
+        assessor_status: 'submitted_qa',
+        status: 'assessment_complete',
+        assessor_status_updated_at: new Date().toISOString()
+      }).eq('id', activeJobId || 'j1')
+    } catch {
+      // Ignore — submission errors are non-blocking on mobile
+    }
     setSubmitDone(true)
   }
 

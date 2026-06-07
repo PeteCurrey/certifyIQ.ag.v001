@@ -24,7 +24,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const project = report.developer_projects
 
     // Render the React-PDF document to a Node stream
-    const stream = await renderToStream(React.createElement(ComplianceReportPDF, { project, report }))
+    const stream = await renderToStream(React.createElement(ComplianceReportPDF, { project, report }) as any)
 
     // Convert the stream into a web ReadableStream for NextResponse
     const webStream = new ReadableStream({
